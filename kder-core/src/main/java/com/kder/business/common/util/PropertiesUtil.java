@@ -40,13 +40,13 @@ public class PropertiesUtil {
             throw new RuntimeException("catalina.home 为空");
         }
 
-        catalinaHome = catalinaHome + "/conf/dce.properties";
+        catalinaHome = catalinaHome + "/conf/kder.properties";
         logger.info("属性catalina.home" + catalinaHome);
         try (BufferedInputStream br = new BufferedInputStream(new FileInputStream(catalinaHome))){
             configProperties.load(br);
         } catch (IOException e) {
-            logger.error("hehenian.properties 加载失败");
-            throw new RuntimeException("hehenian.properties 加载失败");
+            logger.error("kder.properties 加载失败");
+            throw new RuntimeException("kder.properties 加载失败");
         }
 
     }
