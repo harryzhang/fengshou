@@ -54,6 +54,7 @@
 	<task:executor id="taskExecutor" pool-size="10" />
 
 	<import resource="classpath*:/config/dk-session.xml" />
+	<import resource="classpath*:/config/spring-redis.xml" />
 	<import resource="classpath*:/config/dubbo-kder-consumer.xml" />
 
 </beans>

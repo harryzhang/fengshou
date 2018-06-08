@@ -19,9 +19,12 @@ import com.alibaba.fastjson.JSON;
 import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.DataEncrypt;
-import com.kder.business.entity.user.UserDo;
+import com.kder.business.common.util.MD5Encrypt;
+import com.kder.business.entity.user.People;
+import com.kder.business.entity.user.PeopleExample;
 import com.kder.business.service.dict.IDictService;
 import com.kder.business.service.user.IUserService;
+import com.kder.web.contants.WebContants;
 import com.kder.web.util.TokenUtil;
 
 /** 
@@ -48,7 +51,7 @@ public class UserController extends BaseController {
      * @return  
      */
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public Result<?> reg(@Validated UserDo userDo,BindingResult bindingResult) {
+    public Result<?> reg(@Validated People userDo,BindingResult bindingResult) {
         logger.info("用户注册");
 
         //参数校验
@@ -81,25 +84,41 @@ public class UserController extends BaseController {
         password = DataEncrypt.encrypt(password);
         
         logger.info("用户登录, userName:" + userName + "; password:" + password);
-        UserDo userDo = userService.getUser(userName);
-        Assert.notNull(userDo, "用户不存在");
-
         
-        if (!userName.equals(userDo.getUserName()) || !password.equals(userDo.getUserPassword())) {
+        PeopleExample example = new PeopleExample();
+        example.createCriteria().andPeoplePhoneEqualTo(userName);
+		List<People> userLst = userService.selectByExample(example);
+        Assert.notEmpty(userLst, "用户不存在");
+
+
+        People userDo = userLst.get(0);
+        
+        password = MD5Encrypt.getMessageDigest(password);
+        if (!userName.equals(userDo.getPeoplePhone()) || !password.equals(userDo.getPeoplePassword())) {
             return Result.failureResult("用户名或者密码不正确");
         }
 
-        if (userDo.getStatus().intValue() != 0) {
+        if (userDo.getPeopleState().intValue() != 0) {
             return Result.failureResult("当前用户已被锁定,不允许登录!");
         }
-        String token = TokenUtil.createToken(userDo.getId());
+        
+        maintainSession(userDo);
+        String token = TokenUtil.createToken(userDo.getPeopleId());
         Map<String, Object> map = new HashMap<>();
         map.put("token", token);
-        map.put("userId", userDo.getId());
+        map.put("userId", userDo.getPeopleId());
         return Result.successResult("登录成功", map);
     }
 
     /**
+     * 维护session
+     * @param userDo
+     */
+    private void maintainSession(People userDo) {
+		this.getRequest().getSession().setAttribute(WebContants.session_user, userDo);
+	}
+
+	/**
      * 注销
      * @param request
      * @param response

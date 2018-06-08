@@ -23,7 +23,7 @@
         <constructor-arg name="database" value="${redis.database}" type="int" />-->
     </bean>
 
-	<bean id="jedisClient" class="com.dce.business.common.redis.JedisClient">
+	<bean id="jedisClient" class="com.kder.business.common.redis.JedisClient">
 		<property name="jedisPool" ref="jedisPool" />
 		<property name="serverName" value="${redis.host}" />
 	</bean>

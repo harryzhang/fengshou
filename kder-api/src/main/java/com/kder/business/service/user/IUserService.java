@@ -1,46 +1,49 @@
 package com.kder.business.service.user;
 
 import java.util.List;
-import java.util.Map;
 
 import com.kder.business.common.result.Result;
-import com.kder.business.entity.user.UserDo;
+import com.kder.business.entity.user.People;
+import com.kder.business.entity.user.PeopleExample;
 
 public interface IUserService {
 
-    /** 
-     * 根据用户名查用户
-     * @param userName
-     * @return  
-     */
-    UserDo getUser(String userName);
+	int countByExample(PeopleExample example);
 
-    /**
-     * 查询用户 
-     * @param userId
-     * @return  
-     */
-    UserDo getUser(Integer userId);
+	
+	int deleteByExample(PeopleExample example);
 
-    /**
-     * 用户注册 
-     * @param userDo
-     * @return  
-     */
-    Result<?> reg(UserDo userDo);
+	
+	int deleteByPrimaryKey(Integer peopleId);
 
-   
+	
+	int insert(People record);
 
-    List<UserDo> selectUser(Map<String, Object> params);
+	
+	int insertSelective(People record);
 
-    Result<?> update(UserDo userDo);
+	List<People> selectByExample(PeopleExample example);
 
-	/** 
-     * 查询分页
-     * @param params
-     * @return  
-     */
-    List<UserDo> selectPage(Map<String, Object> params);
-  
-    
+	
+	People selectByPrimaryKey(Integer peopleId);
+
+	
+	int updateByExampleSelective(People record,PeopleExample example);
+
+	
+	int updateByExample(People record,PeopleExample example);
+
+	
+	int updateByPrimaryKeySelective(People record);
+
+	
+	int updateByPrimaryKey(People record);
+
+
+	/**
+	 * 用户注册
+	 * @param userDo
+	 * @return
+	 */
+	Result<?> reg(People userDo);
 }
