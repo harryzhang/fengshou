@@ -75,10 +75,10 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result<?> login() {
+    	
+    	String userName = getString("userName");
+    	String password = getString("password");
         //String mobile = getString("mobile");
-        String userName = getString("userName");
-        String password = getString("password");
-
         Assert.hasText(userName, "请输入用户名");
         Assert.hasText(password, "请输入密码");
         password = DataEncrypt.encrypt(password);

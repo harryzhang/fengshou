@@ -41,9 +41,9 @@
 	</bean>
 
 	
-	<!-- 
-	<bean id="exceptionHandler" class="com.kder.business.common.exception.DCEExceptionHandler"/>
-	 -->
+	<!-- -->
+	<bean id="exceptionHandler" class="com.kder.business.common.exception.KderGlobalExceptionHandler"/>
+	 
 	  
 	<!-- 获取bean -->
     <bean id="springBeanUtil" class="com.kder.web.util.SpringBeanUtil"></bean>
