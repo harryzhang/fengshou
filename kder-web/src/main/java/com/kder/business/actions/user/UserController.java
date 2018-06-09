@@ -81,7 +81,7 @@ public class UserController extends BaseController {
         //String mobile = getString("mobile");
         Assert.hasText(userName, "请输入用户名");
         Assert.hasText(password, "请输入密码");
-        password = DataEncrypt.encrypt(password);
+        //password = DataEncrypt.encrypt(password);
         
         logger.info("用户登录, userName:" + userName + "; password:" + password);
         

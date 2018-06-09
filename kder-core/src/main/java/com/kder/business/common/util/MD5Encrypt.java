@@ -52,4 +52,8 @@ public class MD5Encrypt {
         }
         return des;
     }
+    
+    public static void main(String[] args) {
+    	System.out.println(MD5Encrypt.getMessageDigest("123456"));
+	}
 }
