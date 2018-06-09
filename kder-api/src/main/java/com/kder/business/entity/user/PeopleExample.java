@@ -155,7 +155,7 @@ public class PeopleExample implements Serializable {
      *
      * @mbggenerated Sat Jun 09 01:47:56 CST 2018
      */
-    protected abstract static class GeneratedCriteria {
+    protected abstract static class GeneratedCriteria implements Serializable  {
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -973,7 +973,7 @@ public class PeopleExample implements Serializable {
      *
      * @mbggenerated do_not_delete_during_merge Sat Jun 09 01:47:56 CST 2018
      */
-    public static class Criteria extends GeneratedCriteria {
+    public static class Criteria extends GeneratedCriteria  implements Serializable {
 
         protected Criteria() {
             super();
@@ -986,7 +986,7 @@ public class PeopleExample implements Serializable {
      *
      * @mbggenerated Sat Jun 09 01:47:56 CST 2018
      */
-    public static class Criterion {
+    public static class Criterion implements Serializable {
         private String condition;
 
         private Object value;
