@@ -1,6 +1,8 @@
 package com.kder.business.common.result;
 
-public final class Result<T> {
+import java.io.Serializable;
+
+public final class Result<T> implements Serializable {
     public final static String successCode = "0"; //为0成功，其他失败
     public final static String failureCode = "1"; //通过失败编码    
     
