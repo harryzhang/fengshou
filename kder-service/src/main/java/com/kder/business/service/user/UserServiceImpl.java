@@ -85,6 +85,8 @@ public class UserServiceImpl implements IUserService {
 		
 		logger.info("regUser:", userDo);
 		userDo.setPeopleState(0);
+		userDo.setPeopleAppId(1);
+		
 		PeopleExample example = new PeopleExample();
 		example.createCriteria().andPeoplePhoneEqualTo(userDo.getPeoplePhone());
 		List<People> pList = userDao.selectByExample(example );
