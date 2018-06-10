@@ -35,4 +35,6 @@
     <!-- 用户服务 -->
     <dubbo:service interface="com.kder.business.service.user.IUserService" ref="userService" />
     <dubbo:service interface="com.kder.business.service.dict.IDictService" ref="dictService" />
+    <dubbo:service interface="com.kder.business.service.sms.ISmsService" ref="smsService" />
+    
 </beans>
