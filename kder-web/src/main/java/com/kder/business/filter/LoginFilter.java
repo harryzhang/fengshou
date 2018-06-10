@@ -68,7 +68,8 @@ public class LoginFilter extends OncePerRequestFilter {
     private boolean isNotFilterUri(String uri) {
         List<String> list = Arrays.asList(new String[] { "/user/login", 
         												 "/user/reg", 
-        												 "/validatecode/", 
+        												 "/validatecode/",
+        												 "/privatecust/", 
         												 "/sms" });
         for (String str : list) {
             if (uri.indexOf(str) != -1) {

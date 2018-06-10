@@ -18,6 +18,13 @@ public class TokenUtil {
     public static final Long TOKEN_TIMEOUT_TIME = 300 * 60L; // token失效时间，单位秒
     private static final String TOKEN_PREFIX = "token#";
 
+    
+    public static String getTokenNoSave() {
+        String str = UUID.randomUUID().toString();
+        String token = new String(Base64.encodeBase64(str.getBytes()));
+        return token;
+    }
+    
     public static String createToken(Integer userId) {
         String str = UUID.randomUUID().toString() + userId;
         String token = new String(Base64.encodeBase64(str.getBytes()));

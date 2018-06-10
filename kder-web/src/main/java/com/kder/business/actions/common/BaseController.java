@@ -65,4 +65,19 @@ public class BaseController {
 		Assert.isTrue(StringUtils.equalsIgnoreCase(WebContants.validateCode+page+code, sessionCode), "错误的验证码");
 		return Result.successResult("验证通过");
 	}
+    
+    protected void saveToken(String token) {
+		this.getRequest().getSession().setAttribute(WebContants.session_token, token);
+	}
+    
+    protected boolean checkToken(String token) {
+    	if(StringUtils.isBlank(token)){
+			return false;
+		}
+    	String oldToken = (String)this.getRequest().getSession().getAttribute(WebContants.session_token);
+    	if(StringUtils.isBlank(oldToken)){
+			return false;
+		}
+    	return token.equals(oldToken);
+	}
 }

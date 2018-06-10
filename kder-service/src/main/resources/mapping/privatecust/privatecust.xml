@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kder.business.dao.privatecust.PrivateCustDao">
+  <resultMap id="BaseResultMap" type="com.kder.business.entity.privatecust.PrivateCustDo">
+  
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" parameterType="Long" resultMap="BaseResultMap">
+    select  *
+    from ct_private_cust
+    where id = #{id,jdbcType=Long}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    
+    delete from ct_private_cust
+    where id = #{id,jdbcType=Long}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.kder.business.entity.privatecust.PrivateCustDo"
+      useGeneratedKeys="true" keyProperty="id">
+   
+    insert into ct_private_cust
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="phone != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        now(),
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.kder.business.entity.privatecust.PrivateCustDo">
+    
+    update ct_private_cust
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=Long}
+  </update>
+  
+</mapper>
