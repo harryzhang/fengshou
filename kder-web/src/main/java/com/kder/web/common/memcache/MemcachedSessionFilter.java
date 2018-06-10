@@ -41,6 +41,7 @@ public class MemcachedSessionFilter extends OncePerRequestFilter {
             sessionFromCookie = false;
         }
         String sessionId = mixSessionId(sessionIdInCookie);
+        System.out.println("===================session id in cookie:"+sessionIdInCookie);
         HttpSession session = sessionManager.getSession(sessionId);
         if (session == null) {
             String newSessionId = RandomStringUtils.randomAlphanumeric(20);
@@ -52,6 +53,8 @@ public class MemcachedSessionFilter extends OncePerRequestFilter {
             sessionCookie.setDomain(sessionManager.getCookieDomain());
             res.addCookie(sessionCookie);
         } else {
+        	System.out.println("===================get session from sessionManager:"+sessionIdInCookie);
+        	
             if (!sessionFromCookie) {// session id from url  , set cookie
                 Cookie sessionCookie = new Cookie(sessionKey, sessionId);
                 sessionCookie.setPath(cookiePath);

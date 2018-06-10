@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import com.kder.business.common.util.MD5Encrypt;
 import com.kder.business.entity.user.People;
 import com.kder.business.entity.user.PeopleExample;
 import com.kder.business.service.dict.IDictService;
+import com.kder.business.service.sms.ISmsService;
 import com.kder.business.service.user.IUserService;
 import com.kder.web.contants.WebContants;
 import com.kder.web.util.TokenUtil;
@@ -42,30 +44,50 @@ public class UserController extends BaseController {
     private IUserService userService;
   
     @Resource
-    private IDictService dictService;
+    private ISmsService smsService;
 
     /** 
-     * 用户注册
+     * 用户注册前端参数：                   phone: '',
+     *                     code: '',
+     *                     indentify: '',
+     *                     psw: '',
+     *                     confirmPsw: ''
      * @param userDo
      * @param bindingResult
      * @return  
      */
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public Result<?> reg(@Validated People userDo,BindingResult bindingResult) {
+    public Result<?> reg() {
+    	
         logger.info("用户注册");
 
-        //参数校验
-        if (bindingResult.hasErrors()) {
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            logger.info("用户注册，参数校验错误：" + JSON.toJSONString(errors));
-            return Result.failureResult(errors.get(0).getDefaultMessage());
-        }
+        String phone = getString("phone");
+        String code = getString("code");
+        String indentify = getString("indentify");
+        String psw = getString("psw");
+        String confirmPsw = getString("confirmPsw");
+        String validPage = getString("page");
+        
+        Assert.hasText(phone, "手机号不能为空");
+        Assert.hasText(psw,"密码不能为空");
+        
+        Assert.isTrue(smsService.checkSms(phone, validPage, indentify),"手机验证码不正确");
+        Result ret = this.checkValidateCode();
+        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        Assert.isTrue(StringUtils.equals(psw, confirmPsw),"两次密码不一致");
+        
+        
+        People userDo = new People();
+        userDo.setPeoplePhone(phone);
+        userDo.setPeoplePassword(MD5Encrypt.getMessageDigest(psw));
         
         Result<?> result = userService.reg(userDo);
 
         logger.info("用户注册结果:" + JSON.toJSONString(result));
         return result;
     }
+    
+    
 
     /**
      * 登录 
@@ -82,6 +104,9 @@ public class UserController extends BaseController {
         Assert.hasText(userName, "请输入用户名");
         Assert.hasText(password, "请输入密码");
         //password = DataEncrypt.encrypt(password);
+        
+        Result ret = this.checkValidateCode();
+        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
         
         logger.info("用户登录, userName:" + userName + "; password:" + password);
         
@@ -131,7 +156,8 @@ public class UserController extends BaseController {
         logger.info("用户注销, userId:" + userId);
 
         TokenUtil.deleteToken(userId);
-
+        this.getRequest().getSession().removeAttribute(WebContants.session_user);
+        this.getRequest().getSession().invalidate();
         return Result.successResult("注销成功");
     }
 

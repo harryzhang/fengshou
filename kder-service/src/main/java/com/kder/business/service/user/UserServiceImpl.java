@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
@@ -80,10 +82,19 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public Result<?> reg(People userDo) {
+		
 		logger.info("regUser:", userDo);
+		userDo.setPeopleState(0);
+		PeopleExample example = new PeopleExample();
+		example.createCriteria().andPeoplePhoneEqualTo(userDo.getPeoplePhone());
+		List<People> pList = userDao.selectByExample(example );
+		if(pList != null && !pList.isEmpty()){
+			throw new BusinessException("注册失败用户已存在", "user.reg001");
+		}
+		
 		int ret = userDao.insertSelective(userDo);
 		if(ret < 1){
-			throw new BusinessException("reg error", "user.reg001");
+			throw new BusinessException("注册失败", "user.reg002");
 		}
 		return Result.successResult("注册成功",userDao);
 	}
