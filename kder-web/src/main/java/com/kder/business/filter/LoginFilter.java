@@ -68,27 +68,8 @@ public class LoginFilter extends OncePerRequestFilter {
     private boolean isNotFilterUri(String uri) {
         List<String> list = Arrays.asList(new String[] { "/user/login", 
         												 "/user/reg", 
-        												 "/user/list", 
-        												 "/bank/list",
-        												 "/award/query",
-        												 "/award/save",
-        												 "/eth/accounts",
-        												 "/eth/platform/accounts",
-        												 "/eth/platform/accounts/default",
-        												 "/eth/queryPlatFormEth",
-        												 "/eth/tranPlatFormEth",
-        												 "/eth/setCenterAcc",
-        												 "/eth/getCenterAcc",
-        												 "/user/toLevel",
-        												 "/user/setUserLevel",
-        												 "/eth/listWithdraw",
-        												 "/eth/auditWithdraw",
-        												 "/eth/queryEth",
-        												 "/eth/export",
-        												 "/order/export",
-        												 "/order/selectOrderForReport",
-        												 "/user/calStaticByAdmin",
-        												 "/account/create" });
+        												 "/validatecode/", 
+        												 "/sms" });
         for (String str : list) {
             if (uri.indexOf(str) != -1) {
                 return true;
