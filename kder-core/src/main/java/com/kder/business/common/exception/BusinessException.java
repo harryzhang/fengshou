@@ -5,6 +5,8 @@ public class BusinessException extends RuntimeException {
     private static final long serialVersionUID = 4569122779352371325L;
     private String errorCode;
 
+    private String message;
+    
     public BusinessException() {
         super();
     }
@@ -16,6 +18,7 @@ public class BusinessException extends RuntimeException {
      */
     public BusinessException(String message) {
         super(message);
+        this.message = message;
     }
 
     /**
@@ -27,6 +30,7 @@ public class BusinessException extends RuntimeException {
     public BusinessException(String message, String errorCode) {
         super(message);
         this.errorCode = errorCode;
+        this.message = message;
     }
 
     /**
@@ -39,6 +43,7 @@ public class BusinessException extends RuntimeException {
     public BusinessException(String message, Throwable cause, String errorCode) {
         super(message, cause);
         this.errorCode = errorCode;
+        this.message = message;
     }
 
     /**
@@ -59,4 +64,11 @@ public class BusinessException extends RuntimeException {
         return errorCode;
     }
 
+    /**
+     * @return message
+     */
+    @Override
+    public String getMessage() {
+        return this.message;
+    }
 }

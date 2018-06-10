@@ -57,7 +57,7 @@ public class BaseController {
 		String code = getString("code");
 		Assert.hasText(code,"验证码不能为空");
 		String page = getString("page");
-		Assert.hasText(code,"缺少page参数");
+		Assert.hasText(page,"缺少page参数");
 		
 		HttpSession session = this.getRequest().getSession();
 		String sessionCode = (String) session.getAttribute(WebContants.validateCode);

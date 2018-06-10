@@ -49,7 +49,7 @@ public class ValidateCodeController  extends BaseController {
 		
 		HttpSession session = request.getSession();
 
-		ValidateCodeGenetor vCode = new ValidateCodeGenetor(120,40,5,100);
+		ValidateCodeGenetor vCode = new ValidateCodeGenetor(90,40,5,100);
 		logger.info("验证码："+vCode.getCode());
 		session.setAttribute(WebContants.validateCode, WebContants.validateCode+page+vCode.getCode());
 		vCode.write(response.getOutputStream());

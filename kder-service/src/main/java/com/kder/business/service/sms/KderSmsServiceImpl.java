@@ -29,7 +29,7 @@ public class KderSmsServiceImpl implements KderSmsService {
 	    Map<String, String> params = new HashMap<String, String>();
 		params.put("username", userName);
 		params.put("password", pwd.trim());
-		params.put("content", "您的验证码为："+content+",30分钟内有效。为了您的账户安全，请勿将验证码告知他人。如非本人操作，请联系加斯链客服");
+		params.put("content", "您的验证码为："+content+",30分钟内有效。为了您的账户安全，请勿将验证码告知他人。如非本人操作，请联系客服");
 		params.put("mobile",mobile);
 	    String result =  HttpUtil.httpPost("http://47.98.61.138:9001/smsSend.do", params);
 	    System.out.println(result);
