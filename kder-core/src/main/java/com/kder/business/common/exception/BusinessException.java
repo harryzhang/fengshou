@@ -1,6 +1,6 @@
 package com.kder.business.common.exception;
 
-public class BusinessException extends RuntimeException {
+public class BusinessException extends RuntimeException  {
 
     private static final long serialVersionUID = 4569122779352371325L;
     private String errorCode;

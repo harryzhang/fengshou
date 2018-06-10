@@ -98,7 +98,7 @@ public class UserServiceImpl implements IUserService {
 		if(ret < 1){
 			throw new BusinessException("注册失败", "user.reg002");
 		}
-		return Result.successResult("注册成功",userDao);
+		return Result.successResult("注册成功",userDo);
 	}
 
     
