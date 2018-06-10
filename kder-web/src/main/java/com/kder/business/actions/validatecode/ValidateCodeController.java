@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kder.business.actions.common.BaseController;
+import com.kder.business.actions.user.UserController;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ValidateCodeGenetor;
 import com.kder.web.contants.WebContants;
@@ -24,6 +26,7 @@ import com.kder.web.contants.WebContants;
 @RequestMapping("/validatecode")
 public class ValidateCodeController  extends BaseController {
 
+	 private final static Logger logger = Logger.getLogger(ValidateCodeController.class);
 	
 	/**
 	 * 响应验证码页面
@@ -47,6 +50,7 @@ public class ValidateCodeController  extends BaseController {
 		HttpSession session = request.getSession();
 
 		ValidateCodeGenetor vCode = new ValidateCodeGenetor(120,40,5,100);
+		logger.info("验证码："+vCode.getCode());
 		session.setAttribute(WebContants.validateCode, WebContants.validateCode+page+vCode.getCode());
 		vCode.write(response.getOutputStream());
 	}

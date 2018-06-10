@@ -1,22 +1,24 @@
 package com.kder.business.actions.common;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.kder.business.actions.user.UserController;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.StringUtil;
 import com.kder.business.entity.user.People;
 import com.kder.web.contants.WebContants;
-import com.kder.web.util.TokenUtil;
 
 public class BaseController {
 
+	private final static Logger logger = Logger.getLogger(BaseController.class);
+	
     protected String getString(String name) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String paraVal = request.getParameter(name);
@@ -59,6 +61,7 @@ public class BaseController {
 		
 		HttpSession session = this.getRequest().getSession();
 		String sessionCode = (String) session.getAttribute(WebContants.validateCode);
+		logger.info("验证码："+sessionCode+":"+WebContants.validateCode+page+code);
 		Assert.isTrue(StringUtils.equalsIgnoreCase(WebContants.validateCode+page+code, sessionCode), "错误的验证码");
 		return Result.successResult("验证通过");
 	}
