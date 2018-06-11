@@ -17,6 +17,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.alibaba.fastjson.JSON;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
+import com.kder.business.entity.user.People;
+import com.kder.web.contants.WebContants;
 import com.kder.web.util.TokenUtil;
 
 public class LoginFilter extends OncePerRequestFilter {
@@ -34,6 +36,10 @@ public class LoginFilter extends OncePerRequestFilter {
                 return;
             }
 
+            People userDo = (People) session.getAttribute(WebContants.session_user);
+            Assert.notNull(userDo, "用户未登录");
+            
+            /*
             String ts = request.getParameter(TokenUtil.TS);
             String sign = request.getParameter(TokenUtil.SIGN);
             String userId = request.getParameter(TokenUtil.USER_ID);
@@ -42,13 +48,15 @@ public class LoginFilter extends OncePerRequestFilter {
             Assert.notNull(userId, "用户未登录");
             Assert.notNull(ts, "用户未登录");
             Assert.notNull(sign, "用户未登录");
-
+            
+            
             //token判断，不加uri加签
             if (!TokenUtil.checkToken("", Integer.valueOf(userId), ts, sign)) {
                 //未登录
                 print(response, "-1", "登录已过期，请重新登录");
                 return;
             }
+            */
 
             filterChain.doFilter(request, response);
         } catch (IllegalArgumentException | BusinessException e) {
