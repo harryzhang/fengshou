@@ -1,5 +1,7 @@
 package com.kder.business.service.privatecust;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	
 	@Override
 	public int create(PrivateCustDo privateCust) {
+		privateCust.setCreateTime(new Date());
 		return privateCustDao.insertSelective(privateCust);
 	}
 

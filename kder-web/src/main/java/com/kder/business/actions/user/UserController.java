@@ -88,6 +88,27 @@ public class UserController extends BaseController {
     }
     
     
+    /** 
+     * 检查用户是否登录
+     * @param userDo
+     * @param bindingResult
+     * @return  
+     */
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+    public Result<?> checkLogin() {
+
+        People userDo = (People) this.getRequest().getSession().getAttribute(WebContants.session_user);
+        if(userDo == null){
+        	return Result.failureResult("未登录");
+        }
+        String token = TokenUtil.createToken(userDo.getPeopleId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        map.put("loginUser", userDo);
+        return Result.successResult("登录成功", map);
+    
+    }
+    
 
     /**
      * 登录 
