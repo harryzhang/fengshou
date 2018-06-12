@@ -77,6 +77,7 @@ public class LoginFilter extends OncePerRequestFilter {
         List<String> list = Arrays.asList(new String[] { "/user/login", 
         												 "/user/reg", 
         												 "/user/checkLogin",
+        												 "/user/logout",
         												 "/validatecode/",
         												 "/privatecust/", 
         												 "/sms" });
