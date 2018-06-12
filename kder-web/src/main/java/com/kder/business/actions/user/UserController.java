@@ -182,5 +182,94 @@ public class UserController extends BaseController {
         return Result.successResult("注销成功");
     }
 
+    
+    
+    /**
+     * 根据原密码修改密码 
+     * @param request
+     * @param response
+     * @return  
+     */
+    @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
+    public Result<?> changePwd() {
+    	
+    	String oldPwd = getString("oldPwd");
+    	String newPwd = getString("newPwd");
+    	String confirmNewPwd = getString("confirmNewPwd");
+        Assert.hasText(newPwd, "请输入新密码");
+        Assert.hasText(oldPwd, "请输入原密码");
+        //Result ret = this.checkValidateCode();
+        //Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        
+        Assert.isTrue(newPwd.equals(confirmNewPwd),"两次输入的密码不一致");
+        
+        logger.info("根据原密码修改密码 , newPwd:" + newPwd + "; oldPwd:" + oldPwd);
+        
+        Integer userId = this.getUserId();
+        Assert.notNull(userId, "未登录");
+        
+        People userDo = userService.selectByPrimaryKey(userId);
+        Assert.notNull(userDo, "用户不存在");
+        
+        oldPwd = MD5Encrypt.getMessageDigest(oldPwd);
+        if (!oldPwd.equals(userDo.getPeoplePassword())) {
+            return Result.failureResult("原密码不正确");
+        }
+
+        newPwd = MD5Encrypt.getMessageDigest(newPwd);
+        userDo.setPeoplePassword(newPwd);
+        userService.updateByPrimaryKey(userDo);
+        
+        String token = TokenUtil.createToken(userDo.getPeopleId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        return Result.successResult("密码修改成功", map);
+    }
+    
+    
+    /**
+     * 忘记密码 
+     * @param request
+     * @param response
+     * @return  
+     */
+    @RequestMapping(value = "/forgetPwd", method = RequestMethod.POST)
+    public Result<?> forgetPwd() {
+    	
+        logger.info("忘记密码 ");
+
+        String phone = getString("phone");
+        String code = getString("code");
+        String indentify = getString("indentify");
+        String psw = getString("psw");
+        String confirmPsw = getString("confirmPsw");
+        String validPage = getString("page");
+        
+        Assert.hasText(phone, "手机号不能为空");
+        Assert.hasText(psw,"密码不能为空");
+        
+        Assert.isTrue(smsService.checkSms(phone, validPage, indentify),"手机验证码不正确");
+        Result ret = this.checkValidateCode();
+        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        Assert.isTrue(StringUtils.equals(psw, confirmPsw),"两次密码不一致");
+        
+        
+
+        PeopleExample example = new PeopleExample();
+        example.createCriteria().andPeoplePhoneEqualTo(phone);
+		List<People> userLst = userService.selectByExample(example);
+        Assert.notEmpty(userLst, "用户不存在");
+
+
+        People userDo = userLst.get(0);
+        psw = MD5Encrypt.getMessageDigest(psw);
+        userDo.setPeoplePassword(psw);
+        int retUpdate= userService.updateByPrimaryKey(userDo);
+        if(retUpdate==0){
+        	return Result.successResult("密码修改成功");
+        }else{
+        	return Result.failureResult("密码修改失败");
+        }
+    }
   
 }
