@@ -60,7 +60,7 @@ public class SmsServiceImpl implements ISmsService{
 			String smscode = IdentifyCodeGenerator.generateIdentifyCode(4);
 			logger.debug("发送手机号码：{}",mobile);
 			String smsTemplate = getSmsTemplateByPage(page);
-			String smsSendBizId = kderSmsImpl.smsSend(smscode, mobile,smsTemplate);
+			String smsSendBizId = kderSmsImpl.smsSend( mobile,smscode,smsTemplate);
 			logger.debug("send:"+smsSendBizId);
 			
 			SmsDo record = new SmsDo();
