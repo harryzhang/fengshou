@@ -59,21 +59,40 @@ public class SmsServiceImpl implements ISmsService{
 		try {
 			String smscode = IdentifyCodeGenerator.generateIdentifyCode(4);
 			logger.debug("发送手机号码：{}",mobile);
-			String smsSend = kderSmsImpl.smsSend(smscode, mobile);
-			logger.debug("send:"+smsSend);
-			if(smsSend.length()>4){
-				SmsDo record = new SmsDo();
-				record.setRecievers(mobile);
-				record.setMessage(smscode);
-				record.setBusinessType(page);
-				smsDao.insertSelective(record);
-			}else{
-				 new BusinessException("发送失败");
-			}
+			String smsTemplate = getSmsTemplateByPage(page);
+			String smsSendBizId = kderSmsImpl.smsSend(smscode, mobile,smsTemplate);
+			logger.debug("send:"+smsSendBizId);
+			
+			SmsDo record = new SmsDo();
+			record.setRecievers(mobile);
+			record.setMessage(smscode);
+			record.setBusinessType(page);
+			record.setSendId(smsSendBizId);
+			smsDao.insertSelective(record);
+			
 		} catch (Throwable e) {
 			logger.error(e.getMessage());
 			throw new BusinessException("发送失败");
 		}		
+	}
+	
+	private String getSmsTemplateByPage(String page){
+		if("register".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_REG;
+		}
+		if("login".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_LOGIN;
+		}
+		if("changePage".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_CHANGE_PWD;
+		}
+		if("changeInfo".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_CHANGE_INFO;
+		}
+		if("cert".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_CERT;
+		}
+		return "";
 	}
 	
 	@Override

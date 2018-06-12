@@ -2,7 +2,6 @@ package com.kder.business.service.sms;
 
 public interface KderSmsService {
 
-	public abstract String smsSend( String content,
-			String mobile) throws Throwable;
+	String smsSend( String mobile,String content,String smsTemplate) throws Exception;
 
 }

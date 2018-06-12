@@ -10,9 +10,9 @@ public interface ISmsService {
 	 */
 	void send(Integer userId, String page);
 
-	public abstract boolean checkSms(String mobile, String page, String smsCode);
+	boolean checkSms(String mobile, String page, String smsCode);
 
-	public abstract void send(String mobile, String page);
+	void send(String mobile, String page);
 
 	/**
 	 * 验证短信验证码
