@@ -1,0 +1,296 @@
+/* 列表页 */
+.list-filter{background: #fff;padding: 25px 0;margin-top: 20px;}
+.list-filter dt,
+.list-filter dd{float: left;}
+.list-filter dt{width: 6em;color: #999}
+.list-filter dd{width: 7em;white-space: nowrap;overflow: hidden;}
+.list-filter dl{line-height: 40px;padding: 0 50px;}
+.list-filter dl>dd:nth-child(2){width: 4em;}
+.list-filter dl .on{color: #D39D68}
+
+.products-list{margin-top: 20px;background: #fff;padding-top: 25px;padding-bottom: 25px;}
+.products-list-item {padding: 5px;border: 1px solid #EBEBEB;width: 1120px;margin: 0 auto 25px;transition: box-shadow .3s;}
+.products-list-item:hover{box-shadow: 0 1px 8px rgba(0, 0, 0, .1),0 -1px 8px rgba(0, 0, 0, .1);}
+.products-list-item .img{width: 300px;height: 200px;float: left;}
+.product-list-item-desc{float: left;margin-left: 20px;width: 530px;position: relative;}
+.product-list-item-desc .min-logo{width: 93px;height: 39px;background: url('../images/logo_min.png');position: absolute;right: 10px;top: 10px;}
+.product-list-item-desc h2{font-size: 24px;padding: 10px 0;}
+.product-list-item-desc table{width: 100%;}
+.product-list-item-desc table td{padding-bottom: 8px;}
+.products-list-item .btn-wrap{height: 180px;float: left;border-left: 1px solid #EBEBEB;width: 230px;margin-top: 10px;padding-left: 20px;}
+.products-list-item .product-price{color: #A17E41;font-size: 30px;padding: 10px 0;}
+.products-list-item .product-price sub{font-size: 14px;position: relative;top: -9px;}
+.products-list-item .detail-btn{width: 225px;height: 40px;font-size: 18px;color: #fff;background: #A17E41;text-align: center;line-height: 40px;display: block;margin: 0 0 10px 0;}
+.products-list-item .detail-btn:hover,
+.product-info .choose-attrs-submit a:hover{background: #816231}
+.el-pagination .btn-prev,
+.el-pagination .btn-next{padding: 0 10px!important;}
+
+/* 详情页 */
+.product-detail{background: #fff;margin-top: 20px;}
+.product-detail .product-img{width: 350px;height: 300px;float: left;margin: 40px 30px 0 40px;}
+
+.product-info{float: left;padding-top: 40px;width: 740px;}
+.product-info .title{font-size: 24px;border-bottom:1px solid #EBEBEB;padding-bottom: 20px;}
+.product-info dt,.product-info dd{float: left;height: 28px;line-height: 28px;}
+.product-info dt{padding-right: 15px;}
+.product-info dl{padding-top: 15px;font-size: 16px;}
+.product-info dd a{display: inline-block;width:80px;height: 26px;line-height: 26px;border: 1px solid #D7D7D7;text-align: center;margin-right: 8px;transition: none;}
+.product-info dd a.on{border: 1px solid #A17E41;color: #A17E41;background: url('../images/selected.png') 100% 100% no-repeat;}
+.product-info dd .product-info-price{color: #A17E41;font-size: 30px;}
+.product-info dd .product-info-price sub{font-size: 14px;position: relative;top: -9px;}
+.product-info .choose-attrs-submit{padding-top: 18px;}
+.product-info .choose-attrs-submit a{display: inline-block;width: 225px;height: 40px;font-size: 18px;color: #fff;background: #A17E41;text-align: center;line-height: 40px;margin: 0 0 10px 0;text-align: center;}
+
+.product-article .content{margin: 50px 40px 0;padding-bottom: 50px;color: #333;}
+.product-article-keys{width: 730px;margin: 0 auto;font-size: 28px;color: #999;}
+.product-article-keys i{display: inline-block;width: 60px;height: 60px;background-image: url('../images/pt_icon.png');position: relative;bottom: -18px;}
+.product-article-keys i.i2{background-position: 0 -60px;}
+.product-article-keys i.i3{background-position: 0 -120px;}
+.product-article-keys i.i4{background-position: 0 -180px;}
+.product-article-keys li{margin-bottom: 10px;}
+
+.product-tab-wrapper{height: 60px;margin: 0 40px;}
+.fixed .product-tab{position: fixed;z-index: 100;box-shadow: 0 2px 5px rgba(0, 0, 0, .1);}
+.product-tab{height: 60px;border: 1px solid #EBEBEB;background: #fff;top: 0;width: 1118px;}
+.product-tab li{height: 40px;margin-top: 10px;line-height: 40px;width: 170px;text-align: center;float: left;font-size: 16px;color: #444;border-right: 1px solid #ebebeb;cursor: pointer;position: relative;}
+.product-tab li:hover{color: #A17E41;}
+.product-tab li.on::after{content: '';display: block;width: 100%;height: 4px;background: #A17E41;left: 0;bottom: -11px;position: absolute;}
+.product-article{background: #fff;padding-top: 30px;}
+.product-article h2{text-align: center;font-size: 40px;padding: 60px 0 30px;}
+
+.table-info-wrapper{background: #F4F8FB;margin: 0 auto;margin-top: 50px;padding-bottom: 50px;width: 935px;}
+.table-info-wrapper table{display: block;font-size: 18px;color: #666;width: 720px;margin: 0 auto;}
+.table-info-wrapper table td,
+.table-info-wrapper table th{padding: 10px 20px;text-align: center;border: 1px solid #ebebeb;}
+.table-info-wrapper table th{padding: 20px;}
+.table-info-wrapper table th{background: #416EA5;color: #fff;}
+
+.product-article .meta-table{width: 690px;margin: 0 auto 30px;font-size: 18px;}
+.product-article .meta-table td{background: #EDEEF0;border: 2px solid #FFF7FF;padding: 16px 30px;}
+.product-article .meta-table tr td:nth-child(2){background: #F09135;color: #fff;}
+
+.blue-content{background: #F4F8FB;width: 935px;margin: 0 auto;padding-bottom: 50px;}
+
+.process-list{padding-bottom: 50px;}
+.process-list ul{width: 630px;margin: 0 auto;border-left: 2px dashed #3B69A4;padding: 20px 0;}
+.process-list ul li{font-size: 24px;position: relative;padding: 10px 0 10px 80px;}
+.process-list ul li i{display: block;position: absolute;width: 80px;height: 80px;background-image: url('../images/process-list.png');left: -40px;top: 50%;margin-top: -40px;}
+.process-list ul li i.i2{background-position: 0 -80px;}
+.process-list ul li i.i3{background-position: 0 -160px;}
+.process-list ul li i.i4{background-position: 0 -240px;}
+
+.iabout-us{width: 936px;height: 620px;margin: 0 auto;background-image: url('../images/product_detail/d_4.jpg');}
+.iabout-us .text-content{width: 700px;position: relative;top: 58px;height: 485px;background: #fff;margin: 0 auto;border-top-right-radius: 12px;border-top-left-radius: 12px;overflow: hidden;}
+.iabout-us .text-content h3{background: #668BB7;color: #fff;height: 70px;line-height: 70px;text-align: center;font-size: 26px;font-weight: bold;}
+.iabout-us .text-content p{font-size: 24px;padding: 40px;text-align: justify;}
+
+/* 注册 */
+.register-container{background: #fff;padding-bottom: 120px;}
+.form-title{font-size: 18px;text-align: center;padding: 50px 0 30px;text-indent: -60px;}
+.register-container .el-input{width: 350px;}
+.register-container .el-form{width: 600px;margin: 0 auto;}
+
+/*登陆*/
+.login-wrapper{height: 589px;background: url('../images/login_banner.jpg') 50% 50%;position: relative;}
+.login-form{width: 336px;height: 333px;border: 1px solid #C2C3C4;background: #fff;position: absolute;top: 50%;margin-top: -165px;left: 50%;margin-left: 150px;}
+.login-form .title{font-size: 18px;height: 40px;line-height: 40px;padding-left: 18px;border-bottom: 1px solid #C2C3C4;}
+.login-form .bd{margin: 0 15px;}
+.login-form .item{height: 40px;border: 1px solid #BDBDBD;margin-top: 18px;
+display: flex;position: relative;}
+.login-form .item i{display: block;float: left;width: 40px;height: 40px;background-image: url('../images/login_icon.png');border-right: 1px solid #BDBDBD;}
+.login-form .item i.phone{background-position: 0 0;}
+.login-form .item i.psw{background-position: 0 -40px;}
+.login-form .item i.code{background-position: 0 -80px;}
+.login-form .item.on{border: 1px solid #63BEE8;}
+.login-form .item.on i{border-right: 1px solid #63BEE8;}
+.login-form .item.on i.phone{background-position: -40px 0;}
+.login-form .item.on i.psw{background-position: -40px -40px;}
+.login-form .item.on i.code{background-position: -40px -80px;}
+.login-form .item input{display: block;flex: 1;border: none;height: 40px;margin-left: 10px;width: 100%;}
+.login-form .item img{position: absolute;width: 104px;height: 42px;left: 200px;top: -1px;cursor: pointer;}
+.login-form .item-text{padding: 10px 0;}
+.login-form .item-btn .el-button{width: 100%;margin-top: 8px;}
+
+.success-wrapper{background: #fff;padding: 120px 0 300px;}
+.success-wrapper table{margin: 0 auto;width: 350px;}
+.success-wrapper h2{font-size: 22px;padding-bottom: 8px;}
+.success-wrapper a{text-decoration: underline;}
+
+/* 个人中心 */
+.side-nav{width: 240px;background: #fff;float: left;padding-bottom: 9999px;margin-bottom: -9999px;}
+.side-nav .user-info{text-align: center;padding: 25px 0 10px;}
+.side-nav .user-info img{width: 90px;height: 90px;border-radius: 45px;}
+.side-nav .user-info p{padding: 10px 0;}
+.side-nav dl{border-top: 1px solid #EBEBEB;padding: 8px 0;}
+.side-nav dt{padding-left: 32px;color: #636363;font-size: 16px;line-height: 36px;}
+.side-nav i{display: inline-block;width: 25px;height: 25px;background-image: url('../images/side_nav.png');position: relative;bottom: -6px;}
+.side-nav i.i2{background-position: 0 -25px;}
+.side-nav i.i3{background-position: 0 -50px;}
+.side-nav dd a{display: block;padding-left: 62px;line-height: 32px;font-size: 15px;color: #9C9C9C;position: relative;}
+.side-nav dd a::after{content:'';display: block;position: absolute;right: 60px;top: 13px;width: 6px;height: 6px;border-top: 1px solid #9C9C9C;border-right: 1px solid #9C9C9C;-webkit-transform:rotate(45deg);transform:rotate(45deg);transition: all .3s;}
+.side-nav dd li.on a,.side-nav dd a:hover,.side-nav dd.on a{color: #A17E41}
+.side-nav dd a:hover::after{right: 50px;}
+.side-nav dd li.on a::after{border-top: 1px solid #A17E41;border-right: 1px solid #A17E41;}
+
+.center-content{width: 930px;float: right;background: #fff;padding: 50px 0;padding-bottom: 9999px;margin-bottom: -9999px;}
+.inner-content{margin: 0 50px;}
+.center-title{font-size: 17px;border-bottom: 1px solid #EBEBEB;padding-left: 40px;position: relative;}
+.center-title span{border-bottom: 2px solid #A17E41;padding: 5px 0;display: block;float: left;}
+
+/* 联系人列表 */
+.empty{text-align: center;color: #999;padding: 50px 0;}
+.contact-content table{width: 100%;}
+.contact-content th{text-align: center;color: #999;font-size: 16px;padding: 10px 0;border-bottom: 1px solid #EBEBEB;}
+.contact-content td{text-align: center;padding: 15px 0;border-bottom: 1px solid #EBEBEB;}
+.center-title .right-btn{float: right;font-size: 14px;background: url('../images/add_contact.png') 0 50% no-repeat;padding-left: 25px;}
+
+/* 订单列表 */
+.orders-content .is-active{border-bottom: 2px solid #A17E41;background: #A17E41;color: #fff}
+.orders-content .el-tabs__item{padding-left: 20px!important;font-size: 16px;padding-right: 20px!important;}
+.orders-content .main th{border: 1px solid #F5F5F5;border-top: 10px solid #F3F2F2;border-bottom: 10px solid #F3F2F2;padding: 10px;text-align: center;}
+.orders-content td{padding: 10px;}
+.orders-content .meta td{border-bottom: 1px solid #F3F2F2;}
+.orders-content .meta td:last-child{text-align: center;}
+.orders-content .info td{border-bottom: 1px solid #F3F2F2;text-align: center;padding: 20px 10px;}
+.orders-content .info td:first-child{text-align: left;}
+.orders-content tbody tr:last-child td{border-bottom: 10px solid #F3F2F2;}
+
+
+.empty-order{text-align: center;line-height: 82px;margin: 60px 0;}
+.empty-order i{display: inline-block;width: 82px;height: 82px;background: url('../images/empty_order.png') no-repeat;vertical-align: middle;}
+.empty-order a{text-decoration: underline;}
+
+
+/* 设置页面 */
+.setting-list{margin-top: 50px;}
+.setting-list td{padding-top: 20px;padding-bottom: 20px;border-bottom: 1px solid #EBEBEB;}
+.setting-list .title{width: 120px;padding-left: 80px;padding-right: 80px;font-size: 18px;}
+.setting-list i{display: inline-block;width: 24px;height: 24px;background-image: url('../images/setting_icon.png');vertical-align: middle;position: relative;top: -2px;}
+.setting-list i.email{background-position: 0 -24px;}
+.setting-list i.psw{background-position: 0 -48px;}
+.setting-list .edit{width: 120px;}
+
+/*私人定制*/
+.pri-customer-banner{height: 590px;background: url('../images/pri-customer-banner.jpg') 50% 50% no-repeat;}
+.pri-customer-banner .container{height: 590px;position: relative;}
+.pri-form{width: 336px;position: absolute;right: 0;height: 363px;background: #fff;top: 50%;margin-top: -182px;}
+.pri-form .title{font-size: 18px;padding: 20px;text-align: center;}
+.pri-form .el-radio{padding:12px 46px 0 42px;}
+.pri-title-bar{text-align: center;font-size: 34px;color: #7E7E7E;padding: 50px 0 30px;}
+.pri-service li{width: 280px;background: #fff;float: left;margin-right: 20px;text-align: center;padding: 26px 0;color: #666;transition: all .3s}
+.pri-service li:last-child{margin-right: 0;}
+.pri-service h3{font-size: 18px;padding: 10px 0;}
+.pri-service li:hover{box-shadow: 0 1px 8px rgba(0, 0, 0, .1),0 -1px 8px rgba(0, 0, 0, .1);}
+.service-process{text-align: center;background: #FFEBB6;margin-top: 40px;padding-bottom: 180px;}
+.qa-container{background: #fff;width: 1100px;position: relative;margin: -111px auto 0;}
+.qa-container .pri-title-bar{background: #FBFBFB;padding: 30px 0;}
+.qa-container ul{margin: 0 56px;padding: 30px 0;}
+.qa-container ul li{padding: 30px 0;border-bottom: 1px solid #eee;}
+.qa-container ul li:last-child{border-bottom: none;}
+.qa-container ul h4{color: #27A5FD;font-size: 20px;}
+.qa-container ul p{font-size: 20px;}
+.pri-order-btn{display: block;width: 280px;height: 58px;line-height: 58px;font-size: 18px;color: #fff;margin: 80px auto;background: #A17E41;text-align: center;border-radius: 2px;}
+.pri-order-btn:hover{color: #fff;background: #BC9048;}
+
+/* 填写保单 */
+.policy-container,.pay-container{background: #fff;}
+.policy-form {width: 960px;margin: 0 auto;padding-bottom: 50px;}
+.policy-form .title{text-align: center;font-size: 26px;color: #020202;padding-top: 30px;}
+.policy-form h2{font-size: 18px;height: 45px;line-height: 45px;background: #E3E3E3;padding: 0 20px;margin-top: 20px;}
+.policy-form h2 span{font-size: 14px;padding-left: 16px;}
+.policy-form .el-form{width: 500px;margin-top: 20px;}
+.policy-form .el-form .el-radio-group,
+.policy-form .el-checkbox{padding-top: 12px;}
+.policy-form .el-icon-question{position: absolute;right: -25px;top:50%;margin-top: -9px;cursor: pointer;color: #999;font-size: 18px;}
+/*确认保单*/
+.policy-form h3{height: 42px;line-height: 42px;border-left: 3px solid #A17E41;border-bottom: 1px solid #EBEBEB;font-size: 18px;padding-left: 15px;margin-top: 20px;}
+.policy-list{padding-top: 20px;color: #333;line-height: 32px;padding-left: 18px;font-size: 16px;}
+
+.payment{text-align: right;padding: 50px 50px 0 0;font-size: 16px;}
+.payment ul{display: inline-block;text-align: left;line-height: 26px;}
+.payment ul li{padding-left: 20px;}
+.payment .el-button{padding-left: 40px;padding-right: 40px;}
+.payment .agreement{padding-bottom: 10px;}
+/* 支付 */
+.pay-title{padding: 40px 0;font-size: 20px;}
+.pay-title span{font-size: 18px;}
+.pay-list{padding: 20px;}
+.pay-list li{width: 190px;height: 40px;background-position: 50% 50%;background-repeat: no-repeat;margin: 0 20px 0 0;float: left;border: 1px solid #ccc;cursor: pointer;position: relative;}
+.pay-list li.alipay{background-image: url('../images/alipay.png');}
+.pay-list li.wechatpay{background-image: url('../images/wechatpay.png');}
+.pay-list li.unionpay{background-image: url('../images/unionpay.png');}
+.pay-list li.zspay{background-image: url('../images/zs_pay.png');}
+.pay-list li.gspay{background-image: url('../images/gs_pay.png');}
+.pay-list li.gzpay{background-image: url('../images/zg_pay.png');}
+.pay-list li.jspay{background-image: url('../images/js_pay.png');}
+.policy-form .el-tabs--border-card>.el-tabs__content{padding: 20px;}
+.pay-list li:hover,.pay-list li.active{border:1px solid #A17E41}
+.pay-list li.active::after{content: '';display: block;width: 21px;height: 18px;position: absolute;bottom: -1px;right: -1px;background: url('../images/pay_sel.png');}
+
+/* 理赔 */
+.claims-banner{height: 590px;background: url('../images/claims_banner_bg.jpg') 50% 50%;}
+.claims-banner .container{height: 590px;position: relative;overflow: hidden;}
+.claims-banner .phone{width: 331px;height: 635px;background-image: url('../images/claims_banner_phone.png');position: absolute;bottom: -100px;left: 100px;-webkit-animation: slideIn 1s ease-out forwards;animation: slideIn 1s ease-out forwards;}
+.claims-banner .text{color: #fff;position: absolute;top:200px;right: 60px;width: 600px;text-align: center;-webkit-animation: slideIn 1s ease-out .4s forwards;animation: slideIn 1s ease-out .4s forwards;opacity: 0;}
+.claims-banner .text h2{font-size: 33px;letter-spacing: 5px;}
+.claims-banner .text h2 .cGold{color: #E8B865;}
+.claims-banner .text p span{padding: 0 20px;}
+.claims-banner .text p i{margin-right: 5px;}
+.claims-banner .qrcode{width: 600px;color: #fff;text-align: center;position: absolute;right: 52px;bottom: 100px;-webkit-animation: slideIn 1s ease-out .8s forwards;animation: slideIn 1s ease-out .8s forwards;opacity: 0;}
+.claims-banner .qrcode li{display: inline-block;margin: 0 70px;}
+.claims-banner .qrcode img{padding: 10px;background: #fff;border-radius: 4px;}
+
+@-webkit-keyframes slideIn {
+    0%{
+        -webkit-transform: translate3d(0, 30%, 0);
+                transform: translate3d(0, 30%, 0);
+        opacity: 0;
+    }
+    100%{
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes slideIn {
+    0%{
+        -webkit-transform: translate3d(0, 30%, 0);
+                transform: translate3d(0, 30%, 0);
+        opacity: 0;
+    }
+    100%{
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.claims-steps{background: #F5F5F5;padding:50px 0 100px;}
+.claims-steps ul{text-align: center;}
+.claims-steps ul li{display: inline-block;width: 217px;}
+.claims-steps ul li i{display: inline-block;width: 100px;height: 100px;border: 2px solid #9C9C9C;border-radius: 50%;margin-bottom: 20px;background-image: url('../images/claims-steps.png');background-color: #fff;}
+.claims-steps ul li p{font-size: 16px;}
+.claims-steps ul li i.i1{background-position: -100px 0px;}
+.claims-steps ul li i.i2{background-position: -100px -100px;}
+.claims-steps ul li i.i3{background-position: -100px -200px;}
+.claims-steps ul li i.i4{background-position: -100px -300px;}
+.claims-steps ul li i.i5{background-position: -100px -400px;}
+
+.claims-steps ul li:hover i.i1,
+.claims-steps ul li.on i.i1{background-position: 0 0px;}
+.claims-steps ul li:hover i.i2{background-position: 0 -100px;}
+.claims-steps ul li:hover i.i3{background-position: 0 -200px;}
+.claims-steps ul li:hover i.i4{background-position: 0 -300px;}
+.claims-steps ul li:hover i.i5{background-position: 0 -400px;}
+.claims-steps ul li:hover i,
+.claims-steps ul li.on i.i1{background-color: #A17E41;border: 2px solid #A17E41;}
+.claims-steps ul li:hover,
+.claims-steps ul li.on{color: #A17E41}
+.claims-steps ul li.arrow{width: 20px;height: 50px;font-size: 30px;vertical-align: middle;position: relative;top: -70px;}
+
+.claims-steps-qa{background: #fff;padding-bottom: 150px;}
+.claims-steps-qa table{width: 100%;border: 1px solid #EAEAEA;font-size: 16px;}
+.claims-steps-qa table th{background: #F5F5F5;font-weight: bold;}
+.claims-steps-qa table th{padding: 15px;text-align: center;}
+.claims-steps-qa table td{padding: 20px;text-align: center;border: 1px solid #EAEAEA;}
