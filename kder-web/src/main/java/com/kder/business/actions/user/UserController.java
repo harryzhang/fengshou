@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.kder.business.actions.common.BaseController;
@@ -126,8 +127,11 @@ public class UserController extends BaseController {
         Assert.hasText(password, "请输入密码");
         //password = DataEncrypt.encrypt(password);
         
-        Result ret = this.checkValidateCode();
-        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        String clientType = getString("clientType");
+        if(!"mobile".equalsIgnoreCase(clientType)){
+	        Result ret = this.checkValidateCode();
+	        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        }
         
         logger.info("用户登录, userName:" + userName + "; password:" + password);
         
@@ -156,6 +160,8 @@ public class UserController extends BaseController {
         return Result.successResult("登录成功", map);
     }
 
+    
+    
     /**
      * 维护session
      * @param userDo
@@ -182,6 +188,14 @@ public class UserController extends BaseController {
         return Result.successResult("注销成功");
     }
 
+    
+    
+    
+    @RequestMapping(value = "/toChangePwd", method ={  RequestMethod.GET,RequestMethod.POST })
+    public  ModelAndView  toChangePwd() {
+         ModelAndView mav = new ModelAndView("center/centerModifyPassword");
+         return mav;
+    }
     
     
     /**
@@ -226,6 +240,12 @@ public class UserController extends BaseController {
         return Result.successResult("密码修改成功", map);
     }
     
+    
+    @RequestMapping(value = "/toForgetPwd", method ={  RequestMethod.GET,RequestMethod.POST })
+    public  ModelAndView  toForgetPwd() {
+         ModelAndView mav = new ModelAndView("login/forgetPassword");
+         return mav;
+    }
     
     /**
      * 忘记密码 
