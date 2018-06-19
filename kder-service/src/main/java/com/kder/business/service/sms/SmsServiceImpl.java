@@ -83,6 +83,9 @@ public class SmsServiceImpl implements ISmsService{
 		if("login".equalsIgnoreCase(page)){
 			return SmsTemplate.SMS_TEMPLATE_LOGIN;
 		}
+		if("forget".equalsIgnoreCase(page)){
+			return SmsTemplate.SMS_TEMPLATE_CHANGE_PWD;
+		}
 		if("changePage".equalsIgnoreCase(page)){
 			return SmsTemplate.SMS_TEMPLATE_CHANGE_PWD;
 		}
@@ -105,6 +108,9 @@ public class SmsServiceImpl implements ISmsService{
 	@Override
 	public boolean checkSms(String mobile, String page, String smsCode) {
 		SmsDo smsDo = smsDao.getLastIdentifyCode(mobile,page);
+		if(smsDo == null){
+			return false;
+		}
 		return smsCode.equals(smsDo.getMessage());
 	}
 }
