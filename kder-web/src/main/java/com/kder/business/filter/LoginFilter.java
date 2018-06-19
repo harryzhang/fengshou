@@ -74,6 +74,7 @@ public class LoginFilter extends OncePerRequestFilter {
      * @return  
      */
     private boolean isNotFilterUri(String uri) {
+    	/*
         List<String> list = Arrays.asList(new String[] { "/user/login", 
         												 "/user/reg", 
         												 "/user/checkLogin",
@@ -87,6 +88,8 @@ public class LoginFilter extends OncePerRequestFilter {
             }
         }
         return false;
+        */
+    	return true;
     }
 
     private void print(HttpServletResponse response, String code, String msg) throws IOException {
