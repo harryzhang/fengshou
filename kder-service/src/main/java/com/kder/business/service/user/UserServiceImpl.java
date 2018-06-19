@@ -1,5 +1,6 @@
 package com.kder.business.service.user;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,8 +9,6 @@ import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
@@ -86,6 +85,7 @@ public class UserServiceImpl implements IUserService {
 		logger.info("regUser:", userDo);
 		userDo.setPeopleState(0);
 		userDo.setPeopleAppId(1);
+		userDo.setPeopleDatetime(new Date());
 		
 		PeopleExample example = new PeopleExample();
 		example.createCriteria().andPeoplePhoneEqualTo(userDo.getPeoplePhone());
