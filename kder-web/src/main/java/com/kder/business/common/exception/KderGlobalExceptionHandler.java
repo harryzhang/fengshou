@@ -12,7 +12,7 @@ public class KderGlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
 	@ResponseBody
     public Result<?> handleCustomerException(BusinessException ex) {
-    	System.out.println("global exception");
+    	System.out.println("global BusinessException");
         return Result.failureResult(ex.getMessage());
     }
 
