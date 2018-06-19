@@ -35,8 +35,11 @@ public class SmsController extends BaseController {
         String phone =getString("phone");
         String page = getString("page");
         
-        Result ret = this.checkValidateCode();
-        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        String clientType = getString("clientType");
+        if(!"mobile".equalsIgnoreCase(clientType)){
+	        Result ret = this.checkValidateCode();
+	        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+        }
         
         Result result = Result.successResult("发送成功");
         try{
