@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.kder.business.actions.common.BaseController;
+import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.DataEncrypt;
 import com.kder.business.common.util.MD5Encrypt;
@@ -85,11 +86,16 @@ public class UserController extends BaseController {
         People userDo = new People();
         userDo.setPeoplePhone(phone);
         userDo.setPeoplePassword(MD5Encrypt.getMessageDigest(psw));
-        
-        Result<?> result = userService.reg(userDo);
+        try{
+        	Result<?> result = userService.reg(userDo);
+        	logger.info("用户注册结果:" + JSON.toJSONString(result));
+            return result;
+        }catch(BusinessException e){
+        	Result<?> result = Result.failureResult(e.getMessage());
+        	 return result;
+        }
 
-        logger.info("用户注册结果:" + JSON.toJSONString(result));
-        return result;
+        
     }
     
     
@@ -290,9 +296,9 @@ public class UserController extends BaseController {
         userDo.setPeoplePassword(psw);
         int retUpdate= userService.updateByPrimaryKey(userDo);
         if(retUpdate==0){
-        	return Result.successResult("密码修改成功");
-        }else{
         	return Result.failureResult("密码修改失败");
+        }else{
+        	return Result.successResult("密码修改成功");
         }
     }
   
