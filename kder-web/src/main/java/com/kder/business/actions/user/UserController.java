@@ -73,9 +73,13 @@ public class UserController extends BaseController {
         Assert.hasText(psw,"密码不能为空");
         
         Assert.isTrue(smsService.checkSms(phone, validPage, indentify),"手机验证码不正确");
-        Result ret = this.checkValidateCode();
-        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
-        Assert.isTrue(StringUtils.equals(psw, confirmPsw),"两次密码不一致");
+        
+        String clientType = getString("clientType");
+        if(!"mobile".equalsIgnoreCase(clientType)){
+	        Result ret = this.checkValidateCode();
+	        Assert.isTrue(ret.isSuccess(),"图形验证码不正确");
+	        Assert.isTrue(StringUtils.equals(psw, confirmPsw),"两次密码不一致");
+        }
         
         
         People userDo = new People();
