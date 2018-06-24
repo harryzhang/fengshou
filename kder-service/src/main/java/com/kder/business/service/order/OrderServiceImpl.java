@@ -1,56 +1,103 @@
+/*
+ * Powered By  huangzl QQ: 272950754
+ * Web Site: http://www.hehenian.com
+ * Since 2008 - 2018
+ */
+
 package com.kder.business.service.order;
 
 import java.util.List;
+import java.util.Map;
 
-import javax.annotation.Resource;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kder.business.common.constant.Constants;
+import com.kder.business.common.page.PageDo;
 import com.kder.business.dao.order.CtOrderMapper;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
 
-public class OrderServiceImpl  implements IOrderService{
+/**
+ * @author  huangzl QQ: 272950754
+ * @version 1.0
+ * @since 1.0
+ */
+
+
+@Service("orderService")
+public class OrderServiceImpl implements IOrderService {
+
+	private final Logger logger = Logger.getLogger(this.getClass());
 	
-	@Resource
-	CtOrderMapper orderDao;
-
+	@Autowired
+    private CtOrderMapper  ctOrderDao;
+	
+	
+	/**
+	 * 根据ID 查询
+	 * @parameter id
+	 */
 	@Override
-	public int countByExample(CtOrderExample example) {
-		return orderDao.countByExample(example);
+	public CtOrder getById(Long id){
+	  return ctOrderDao.selectByPrimaryKey(id);
 	}
-
+	
+	/**
+	 *根据条件查询列表
+	 */
 	@Override
-	public int deleteByExample(CtOrderExample example) {
-		return orderDao.deleteByExample(example);
+	public List<CtOrder> selectCtOrder(CtOrderExample example){
+		return ctOrderDao.selectByExample(example);
 	}
-
+	
+	
+	
+	/**
+	 * 更新
+	 */
 	@Override
-	public int deleteByPrimaryKey(Long orderId) {
-		return orderDao.deleteByPrimaryKey(orderId);
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	public int updateCtOrderById(CtOrder newCtOrder){
+		logger.debug("updateCtOrder(CtOrder: "+newCtOrder);
+		return  ctOrderDao.updateByPrimaryKeySelective(newCtOrder);		
 	}
-
+	
+	/**
+	 * 新增
+	 */
 	@Override
-	public int insertSelective(CtOrder record) {
-		return orderDao.insertSelective(record);
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	public int addCtOrder(CtOrder newCtOrder){
+		logger.debug("addCtOrder: "+newCtOrder);
+		return ctOrderDao.insertSelective(newCtOrder);
 	}
-
-	@Override
-	public List<CtOrder> selectByExample(CtOrderExample example) {
-		return orderDao.selectByExample(example);
+	
+	/**
+	 * 分页查询
+	 * @param param
+	 * @param page
+	 * @return
+	 */
+	public PageDo<CtOrder> getOrderPage(Map<String, Object> param, PageDo<CtOrder> page){
+		logger.info("----getCtOrderPage----"+param);
+        param.put(Constants.MYBATIS_PAGE, page);
+        List<CtOrder> list =  ctOrderDao.queryListPage(param);
+        page.setModelList(list);
+        return page;
 	}
-
+	
+	/**
+	 * 删除
+	 */
 	@Override
-	public CtOrder selectByPrimaryKey(Long orderId) {
-		return orderDao.selectByPrimaryKey(orderId);
-	}
-
-	@Override
-	public int updateByExampleSelective(CtOrder record, CtOrderExample example) {
-		return orderDao.updateByExampleSelective(record, example);
-	}
-
-	@Override
-	public int updateByPrimaryKeySelective(CtOrder record) {
-		return orderDao.updateByPrimaryKeySelective(record);
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	public int deleteById(Long id){
+		logger.debug("deleteByIdCtOrder:"+id);
+		return  ctOrderDao.deleteByPrimaryKey(id);		
 	}
 
 }

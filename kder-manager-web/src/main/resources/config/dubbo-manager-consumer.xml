@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <description>dubbo配置 </description>
+    
+    <!-- 提供方应用信息，用于计算依赖关系  -->
+    <dubbo:application name="kder-web" />
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="${dubbo.registry.address}" group="${dubbo.group.name}"  file="${catalina.home}/dubbo-registry/dubbo-kder-registry.properties"/>
+    
+ 
+    <!-- 
+    <bean id="clientLoggerFilter" class="com.hehenian.dubbo.filter.ClientLoggerFilter" />
+     -->	
+    
+    <!-- 
+    <dubbo:monitor protocol="registry" />
+    -->
+     
+    <!-- dubbo消费者 -->
+    <!-- check 缺省值true 启动时检查提供者是否存在，true报错，false忽略 -->
+    <!-- timeout 缺省值1000 远程服务调用超时时间(毫秒)
+    <dubbo:consumer  filter="clientLoggerFilter"  check="false" timeout="30000" retries="0"/>
+     -->
+     
+    <dubbo:consumer   check="false" timeout="30000" retries="0"/>
+     
+	<!-- 用户关系 -->
+    <dubbo:reference id="managerUserService" interface="com.kder.business.service.account.IManagerUserService"  />
+    <dubbo:reference id="moduleService" interface="com.kder.business.service.account.IModuleService"  />
+    <dubbo:reference id="resourceService" interface="com.kder.business.service.account.IAuthorityresourcesService"  />
+    <dubbo:reference id="authoritiesService" interface="com.kder.business.service.account.IAuthoritiesService"  />
+    
+    <dubbo:reference id="dictService" interface="com.kder.business.service.dict.IDictService"  />
+    <dubbo:reference id="policyCompanyService" interface="com.kder.business.service.policycompany.IPolicyCompanyService "  />
+    <dubbo:reference id="privateCustService" interface="com.kder.business.service.privatecust.IPrivateCustService"  />
+    <dubbo:reference id="orderService" interface="com.kder.business.service.order.IOrderService"/>
+     
+</beans>

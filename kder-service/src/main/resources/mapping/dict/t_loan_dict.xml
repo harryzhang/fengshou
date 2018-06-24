@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dce.business.dao.dict.ILoanDictDao">
+<mapper namespace="com.kder.business.dao.dict.ILoanDictDao">
 	<resultMap id="BaseResultMap" type="com.kder.business.entity.dict.LoanDictDo">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<result column="code" jdbcType="VARCHAR" property="code" />
@@ -172,7 +172,7 @@
     
  
    <!-- 用于分页 -->
-	<select id="queryListPage" parameterType="map" resultType="loanDictDo">
+	<select id="queryListPage" parameterType="map" resultType="com.kder.business.entity.dict.LoanDictDo">
 	   select 
 	    <include refid="Base_Column_List" />
 	    from t_loan_dict
@@ -181,10 +181,10 @@
                AND id = #{id}
            </if>
            <if test="code != null">  
-               AND code like #{code}
+               AND code = #{code}
            </if>
            <if test="name != null">  
-               AND name like #{name}
+               AND name = #{name}
            </if>
            <if test="status != null">  
                AND status = #{status}

@@ -1,9 +1,9 @@
 package com.kder.business.service.dict;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.kder.business.common.page.PageDo;
 import com.kder.business.entity.dict.LoanDictDo;
 import com.kder.business.entity.dict.LoanDictDtlDo;
 
@@ -77,10 +77,14 @@ public interface IDictService {
      */
     List<LoanDictDo> selectLoanDictLinkDtl();
     
+ 
+
     /**
-     * 人民币转dce
-     * @param rmb
+     * 分页查询
+     * @param param
+     * @param page
      * @return
      */
-    BigDecimal rmb2Dce(BigDecimal rmb);
+	PageDo<LoanDictDo> getLoanDictPage(Map<String, Object> param,
+			PageDo<LoanDictDo> page);
 }

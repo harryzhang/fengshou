@@ -173,6 +173,7 @@ display: flex;position: relative;}
 
 /*私人定制*/
 .pri-customer-banner{height: 590px;background: url('../images/pri-customer-banner.jpg') 50% 50% no-repeat;}
+.pri-customer-banner2{height: 588px;background: url('../images/cooper_banner.jpg') 50% 50% no-repeat;}
 .pri-customer-banner .container{height: 590px;position: relative;}
 .pri-form{width: 336px;position: absolute;right: 0;height: 363px;background: #fff;top: 50%;margin-top: -182px;}
 .pri-form .title{font-size: 18px;padding: 20px;text-align: center;}
@@ -294,3 +295,15 @@ display: flex;position: relative;}
 .claims-steps-qa table th{background: #F5F5F5;font-weight: bold;}
 .claims-steps-qa table th{padding: 15px;text-align: center;}
 .claims-steps-qa table td{padding: 20px;text-align: center;border: 1px solid #EAEAEA;}
+
+
+/*关于我们*/
+.about-sidenav{width: 240px;float: left;background: #fff;}
+.about-sidenav ul{margin: 0 20px;padding: 20px 0}
+.about-sidenav li{border-bottom: 1px solid #eee;text-align: center;line-height: 40px;}
+.about-sidenav li:last-child{border-bottom: none;}
+.about-sidenav li.on a{color: #A17E41;}
+.about-container{float: right;width: 940px;background: #fff;font-size: 16px;color: #636363;line-height: 2;min-height: 500px;}
+.about-container .title{text-align: center;padding: 40px 0 20px;font-size: 24px;}
+.about-container ul li{line-height: 36px;}
+.about-container h2{padding: 20px 0 10px;font-size: 24px;}

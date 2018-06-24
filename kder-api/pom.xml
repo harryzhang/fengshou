@@ -7,8 +7,8 @@
 		<artifactId>kder</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<artifactId>kder-interface</artifactId>
-	<name>kder-interface</name>
+	<artifactId>kder-api</artifactId>
+	<name>kder-api</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +22,7 @@
 	</dependencies>
 	
 	<build>
-        <finalName>kder-interface</finalName>
+        <finalName>kder-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

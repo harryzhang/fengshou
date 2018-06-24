@@ -15,7 +15,7 @@
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="${dubbo.registry.address}" group="${dubbo.group.name}" file="${catalina.home}/dubbo-registry/dubbo-user-registry.properties"/>
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="${dubbo.port.user}" threadpool="fixed" threads="60"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.port.service}" threadpool="fixed" threads="60"/>
      
      <!-- 
     <bean id="dubboWhiteIp" class="com.hehenian.dubbo.filter.DubboWhiteIp" >
@@ -36,6 +36,8 @@
     <dubbo:service interface="com.kder.business.service.user.IUserService" ref="userService" />
     <dubbo:service interface="com.kder.business.service.dict.IDictService" ref="dictService" />
     <dubbo:service interface="com.kder.business.service.sms.ISmsService" ref="smsService" />
-    <dubbo:service interface="com.kder.business.service.privatecust.IPrivateCustService " ref="privateCustService" />
+    <dubbo:service interface="com.kder.business.service.privatecust.IPrivateCustService" ref="privateCustService" />
+    <dubbo:service interface="com.kder.business.service.policycompany.IPolicyCompanyService" ref="policyCompanyService" />
+    <dubbo:service interface="com.kder.business.service.order.IOrderService" ref="orderService" />
     
 </beans>

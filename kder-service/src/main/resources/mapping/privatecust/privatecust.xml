@@ -120,6 +120,34 @@
     from ct_private_cust
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  
+  <select id="queryListPage" parameterType="Map" resultMap="BaseResultMap">
+		SELECT * 
+		  FROM ct_private_cust
+		  <trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="id != null">  
+				AND id = #{id}
+			</if>
+			<if test="userName != null">  
+				AND user_name like CONCAT('%',#{userName},'%')
+			</if>
+			<if test="phone != null">  
+				AND phone = #{phone}
+			</if>
+			<if test="gender != null">  
+				AND gender = #{gender}
+			</if>
+			<if test="status != null">  
+				AND status = #{status}
+			</if>
+			<if test="createTime != null">  
+				AND create_time = #{createTime}
+			</if>
+         </trim> 
+
+	</select>
+	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
       WARNING - @mbggenerated

@@ -54,7 +54,7 @@ public class PrivateCustController extends BaseController {
         privateCust.setUserName(userName);
         privateCust.setPhone(phone);
         privateCust.setGender(gender);        
-        privateCustService.create(privateCust);
+        privateCustService.addCtPrivateCust(privateCust);
         
         String token = TokenUtil.getTokenNoSave();
         this.saveToken(token);

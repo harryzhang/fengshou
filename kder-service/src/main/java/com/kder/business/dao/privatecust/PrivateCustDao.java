@@ -2,7 +2,10 @@ package com.kder.business.dao.privatecust;
 
 import com.kder.business.entity.privatecust.PrivateCustDo;
 import com.kder.business.entity.privatecust.CtPrivateCustExample;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PrivateCustDao {
@@ -93,4 +96,11 @@ public interface PrivateCustDao {
      * @mbggenerated Mon Jun 11 13:04:06 CST 2018
      */
     int updateByPrimaryKey(PrivateCustDo record);
+
+    /**
+     * 分页查询
+     * @param param
+     * @return
+     */
+	List<PrivateCustDo> queryListPage(Map<String, Object> param);
 }
