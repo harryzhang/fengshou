@@ -41,5 +41,9 @@
     <dubbo:reference id="policyCompanyService" interface="com.kder.business.service.policycompany.IPolicyCompanyService "  />
     <dubbo:reference id="privateCustService" interface="com.kder.business.service.privatecust.IPrivateCustService"  />
     <dubbo:reference id="orderService" interface="com.kder.business.service.order.IOrderService"/>
+    
+    <dubbo:reference  id="orgService"  interface="com.kder.business.service.org.IOrgService"/>
+    <dubbo:reference  id="orderCommissionService" interface="com.kder.business.service.commission.IOrderCommissionService" />
+    
      
 </beans>

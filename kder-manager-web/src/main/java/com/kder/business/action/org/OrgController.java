@@ -5,7 +5,7 @@
  */
 
 
-package com.kder.business.action.order;
+package com.kder.business.action.org;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -37,11 +37,9 @@ import com.kder.business.common.page.PageDo;
 import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
-import com.kder.business.entity.order.CtOrder;
-import com.kder.business.entity.order.CtOrderExample;
-import com.kder.business.entity.privatecust.PrivateCustDo;
-import com.kder.business.service.order.IOrderService;
-import com.kder.business.service.privatecust.IPrivateCustService;
+import com.kder.business.entity.org.OrgDo;
+import com.kder.business.entity.org.OrgExample;
+import com.kder.business.service.org.IOrgService;
 
 
 
@@ -52,12 +50,12 @@ import com.kder.business.service.privatecust.IPrivateCustService;
  */
 
 @Controller
-@RequestMapping("/ctorder")
-public class CtOrderController extends BaseAction{
+@RequestMapping("/org")
+public class OrgController extends BaseAction{
+	//默认多列排序,example: username desc,createTime asc
+	//protected static final String DEFAULT_SORT_COLUMNS = null; 
 	@Resource
-	private IOrderService ctOrderService;
-	@Resource
-	private IPrivateCustService privateCustService;
+	private IOrgService orgService;
 
 	/**
      * 去列表页面
@@ -66,29 +64,29 @@ public class CtOrderController extends BaseAction{
      */
     @RequestMapping("/index")
     public String index(Model model){
-        return "ctorder/listCtOrder";
+        return "org/listOrg";
     }
 	
-	@RequestMapping("/listCtOrder")
-    public void listCtOrder(NewPagination<CtOrder> pagination,
+	@RequestMapping("/listOrg")
+    public void listOrg(NewPagination<OrgDo> pagination,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
-        logger.info("----listCtOrder----");
+        logger.info("----listOrg----");
         try{
-            PageDo<CtOrder> page = PageDoUtil.getPage(pagination);
-            String searchUserName = getString("searchUserName");
+            PageDo<OrgDo> page = PageDoUtil.getPage(pagination);
+            String companyName = getString("searchPolicyName");
             Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(searchUserName)){
-                param.put("userName",searchUserName);
-                model.addAttribute("searchUserName",searchUserName);
+            if(StringUtils.isNotBlank(companyName)){
+                param.put("policyName",companyName);
+                model.addAttribute("searchPolicyName",companyName);
             }
-            String searchRecognizeeName = getString("searchRecognizeeName");
-            if(StringUtils.isNotBlank(searchRecognizeeName)){
-                param.put("recognizeeName", searchRecognizeeName);
-                model.addAttribute("searchRecognizeeName",searchRecognizeeName);
+            String managerName = getString("searManagerName");
+            if(StringUtils.isNotBlank(managerName)){
+                param.put("managerName", managerName);
+                model.addAttribute("searManagerName",managerName);
             }
-            page = ctOrderService.getOrderPage(param, page);
+            page = orgService.getOrgPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);
             pagination = PageDoUtil.getPageValue(pagination, page);
@@ -100,58 +98,23 @@ public class CtOrderController extends BaseAction{
     }
 	
 	
-	
-	/**
-     * 意向订单转订单页面
-     *
-     * @return
-     */
-    @RequestMapping("/convertOrder")
-    public String convertOrder(ModelMap modelMap, 
-    							HttpServletResponse response) {
-        logger.info("----convertOrder----");
-        try{
-        	String privateCustId = this.getString("privateCustId");
-            if(StringUtils.isNotBlank(privateCustId)){
-            	//PrivateCustDo privateCustDo = privateCustService.getById(Long.valueOf(privateCustId));
-            	CtOrderExample example = new CtOrderExample();
-            	example.createCriteria().andPrivateCustIdEqualTo(Long.valueOf(privateCustId));
-            	List<CtOrder> orderLst = ctOrderService.selectCtOrder(example );
-            	CtOrder ctOrder = null;
-            	if(orderLst != null && orderLst.size()>0){
-	                ctOrder = orderLst.get(0);
-            	}else{
-            		ctOrder = new CtOrder();
-	                ctOrder.setPrivateCustId(Long.valueOf(privateCustId));
-            	}
-            	modelMap.addAttribute("ctorder", ctOrder);
-            }
-            return "ctorder/addCtOrder";
-        }catch(Exception e){
-            logger.error("跳转到数据字典编辑页面异常",e);
-            throw new BusinessException("系统繁忙，请稍后再试");
-        }
-
-    }
-	
-	
 	  
     /**
      * 编辑页面
      *
      * @return
      */
-    @RequestMapping("/addCtOrder")
-    public String addCtOrder(String orderId, ModelMap modelMap, HttpServletResponse response) {
-        logger.info("----addCtOrder----");
+    @RequestMapping("/addOrg")
+    public String addOrg(String id, ModelMap modelMap, HttpServletResponse response) {
+        logger.info("----addOrg----");
         try{
-            if(StringUtils.isNotBlank(orderId)){
-                CtOrder CtOrder = ctOrderService.getById(Long.valueOf(orderId));
-                if(null != CtOrder){
-                    modelMap.addAttribute("ctorder", CtOrder);
+            if(StringUtils.isNotBlank(id)){
+                OrgDo orgDo = orgService.getById(Long.valueOf(id));
+                if(null != orgDo){
+                    modelMap.addAttribute("org", orgDo);
                 }
             }
-            return "ctorder/addCtOrder";
+            return "org/addOrg";
         }catch(Exception e){
             logger.error("跳转到数据字典编辑页面异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
@@ -166,26 +129,26 @@ public class CtOrderController extends BaseAction{
      * @author: huangzlmf
      * @date: 2015年4月21日 12:49:05
      */
-    @RequestMapping("/saveCtOrder")
+    @RequestMapping("/saveOrg")
     @ResponseBody
-    public void saveCtOrder(CtOrder CtOrder, 
+    public void saveOrg(OrgDo orgDo, 
     							  HttpServletRequest request, 
     							  HttpServletResponse response) {
-        logger.info("----saveCtOrder------");
+        logger.info("----saveOrg------");
         try{
-            Long id = CtOrder.getOrderId();
+            Long id = orgDo.getId();
             Long userId = new Long(this.getUserId());
             
             int i = 0;
             if (id != null && id.intValue()>0) {
-            	CtOrder.setUpdateBy(userId);
-            	CtOrder.setUpdateTime(new Date());
-                i = ctOrderService.updateCtOrderById(CtOrder);
+            	orgDo.setUpdateBy(userId);
+            	orgDo.setUpdateTime(new Date());
+                i = orgService.updateOrgById(orgDo);
             } else {
-				CtOrder.setCreateBy(userId);
-            	CtOrder.setCreateTime(new Date());
+				orgDo.setCreateBy(userId);
+            	orgDo.setCreateTime(new Date());
             	
-                i = ctOrderService.addCtOrder(CtOrder);
+                i = orgService.addOrg(orgDo);
             }
 
             if (i <= 0) {
@@ -197,7 +160,7 @@ public class CtOrderController extends BaseAction{
             logger.error("保存更新失败",e);
             outPrint(response, this.toJSONString(Result.failureResult("操作失败")));
         }
-        logger.info("----end saveCtOrder--------");
+        logger.info("----end saveOrg--------");
     }
     
 	/**
@@ -207,17 +170,14 @@ public class CtOrderController extends BaseAction{
     public void export(HttpServletResponse response) throws IOException {
         try {
             Long time = System.currentTimeMillis();
-            CtOrderExample example  = new CtOrderExample();
-            String companyName = getString("searchPolicyName");
+            OrgExample example  = new OrgExample();
+            String searchOrgName = getString("searchOrgName");
           
-            if(StringUtils.isNotBlank(companyName)){
-                example.createCriteria().andUserNameLike(companyName);
+            if(StringUtils.isNotBlank(searchOrgName)){
+                example.createCriteria().andOrgNameLike(searchOrgName);
             }
-            String managerName = getString("searManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-            	example.createCriteria().andRecognizeeNameLike(managerName);
-            }
-            List<CtOrder> ctorderLst = ctOrderService.selectCtOrder(example);
+          
+            List<OrgDo> orgLst = orgService.selectOrg(example);
             
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -226,7 +186,7 @@ public class CtOrderController extends BaseAction{
             String[] excelheader = { "保险公司名称", "保险公司简称", "联系人姓名", "联系人手机号码", "跟进单员", "合作状态", "记录状态" };
             excelheaderList.add(0, excelheader);
             String[] excelData = { "policyName", "shortName", "contactName", "contactPhone", "managerName", "partnerStatus", "status" };
-            HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+            HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, orgLst);
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             wb.write(response.getOutputStream());
