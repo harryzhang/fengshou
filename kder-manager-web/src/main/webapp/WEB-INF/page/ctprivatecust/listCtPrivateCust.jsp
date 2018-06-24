@@ -45,7 +45,11 @@
   
 </div>
 
-  <div id="editCtPrivateCustDiv"></div>  
+  <div id="editCtPrivateCustDiv"></div>
+  <!-- 意向单转订单 --> 
+  <div id="editCtOrderDiv"></div>  
+  
+  
 </body>
 
 </html>

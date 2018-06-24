@@ -125,11 +125,15 @@ function to_editctPrivateCust(id){
 	});
 }
 
+/**
+ * 编辑
+ * @param id
+ */
 function convertOrder(id){
 	
-	var url = httpUrl+"/ctprivatecust/addCtPrivateCust.html?&rand=" + Math.random()+"&id="+id;
-	$('#editCtPrivateCustDiv').dialog({
-		title: "新增",
+	var url = httpUrl+"/ctorder/convertOrder.html?&rand=" + Math.random()+"&privateCustId="+id;
+	$('#editCtOrderDiv').dialog({
+		title: "意向单转订单",
 		width: 760,
 		height: 500,
 		closed: false,
@@ -140,39 +144,38 @@ function convertOrder(id){
 		toolbar:[
 				{
 					iconCls:"icon-save",text:"保存",
-					handler:save_CtPrivateCust
+					handler:function(){
+						$.ajax({ 
+			    			url: "<c:url value='/ctorder/saveCtOrder.html'/>", 
+			    			data: $("#editCtOrderForm").serialize(),
+			    			type:"post",
+			    			dataType:"json",
+			    			success: function(ret){
+			    	   	 		if(ret.code==="0"){
+			    	   	 			$.messager.confirm("保存成功",
+			    	   	 				           '是否继续添加？', 
+			    	   	 				           function(r){
+									   	   			   if(r==false){
+									   	   				$("#editCtOrderDiv").dialog("close");
+									   	   			   }
+			    	   						});
+			    	   	 		}else{
+			    	   	 			$.messager.alert("error",ret.msg);
+			    	   	 		}
+			    	      	}
+			    	        });
+					}
 				},
 				{
 					iconCls:"icon-no",text:"关闭",
 					handler:function(){
-						$("#editCtPrivateCustDiv").dialog("close");
+						$("#editCtOrderDiv").dialog("close");
 				}
 		}]
 	});
+
 }
 
-
-function save_CtPrivateCust(){
-	var formdata = $("#editCtPrivateCustForm").serialize();
-	console.info("formdata");
-	console.info(formdata);
-	var  url =httpUrl+"/ctprivatecust/saveCtPrivateCust.html?&rand=" + Math.random();
-	 $.ajax({   
-		 type: 'POST',
-		 dataType: 'json',
-		 url: url,  
-		 data:$("#editCtPrivateCustForm").serialize(),
-		 success: function(data){ 
-			 if(data.code ==="0"){
-				 $("#editCtPrivateCustDiv").dialog("close");
-				 $('tt_CtPrivateCust').datagrid('reload');
-				 $.messager.alert("提示","操作成功","info");
-			 }else{
-				 $.messager.alert("提示","操作失败","error");
-			 }   
-		 } 
-	});
-}
 
 
 function reloadDataGrid()

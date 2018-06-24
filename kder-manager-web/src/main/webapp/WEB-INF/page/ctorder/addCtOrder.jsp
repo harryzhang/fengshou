@@ -17,6 +17,7 @@
 		
 			<table width="100%" border="0" align="center" cellpadding="3">			  
 					<input type="hidden" id="orderId" name="orderId" value="${ctorder.orderId}"/>
+					<input type="hidden" id="privateCustId" name="privateCustId" value="${ctorder.privateCustId}"/>
 					<tr>	
 						<td align="right">
 							<label for="name">保单号</label>

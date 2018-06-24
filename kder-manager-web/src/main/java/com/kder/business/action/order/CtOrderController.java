@@ -39,7 +39,9 @@ import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
+import com.kder.business.entity.privatecust.PrivateCustDo;
 import com.kder.business.service.order.IOrderService;
+import com.kder.business.service.privatecust.IPrivateCustService;
 
 
 
@@ -54,6 +56,8 @@ import com.kder.business.service.order.IOrderService;
 public class CtOrderController extends BaseAction{
 	@Resource
 	private IOrderService ctOrderService;
+	@Resource
+	private IPrivateCustService privateCustService;
 
 	/**
      * 去列表页面
@@ -93,6 +97,39 @@ public class CtOrderController extends BaseAction{
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
         }
+    }
+	
+	
+	
+	/**
+     * 意向订单转订单页面
+     *
+     * @return
+     */
+    @RequestMapping("/convertOrder")
+    public String convertOrder(ModelMap modelMap, 
+    							HttpServletResponse response) {
+        logger.info("----convertOrder----");
+        try{
+        	String privateCustId = this.getString("privateCustId");
+            if(StringUtils.isNotBlank(privateCustId)){
+            	//PrivateCustDo privateCustDo = privateCustService.getById(Long.valueOf(privateCustId));
+            	CtOrderExample example = new CtOrderExample();
+            	example.createCriteria().andPrivateCustIdEqualTo(Long.valueOf(privateCustId));
+            	List<CtOrder> orderLst = ctOrderService.selectCtOrder(example );
+            	if(orderLst != null && orderLst.size()>0){
+	                CtOrder CtOrder = orderLst.get(0);
+	                if(null != CtOrder){
+	                    modelMap.addAttribute("ctorder", CtOrder);
+	                }
+            	}
+            }
+            return "ctorder/addCtOrder";
+        }catch(Exception e){
+            logger.error("跳转到数据字典编辑页面异常",e);
+            throw new BusinessException("系统繁忙，请稍后再试");
+        }
+
     }
 	
 	

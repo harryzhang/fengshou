@@ -150,28 +150,6 @@ function to_editctOrder(id){
 	});
 }
 
-function save_CtOrder(){
-	var formdata = $("#editCtOrderForm").serialize();
-	console.info("formdata");
-	console.info(formdata);
-	var  url =httpUrl+"/ctorder/saveCtOrder.html?&rand=" + Math.random();
-	 $.ajax({   
-		 type: 'POST',
-		 dataType: 'json',
-		 url: url,  
-		 data:$("#editCtOrderForm").serialize(),
-		 success: function(data){ 
-			 if(data.code ==="0"){
-				 $("#editCtOrderDiv").dialog("close");
-				 $('tt_CtOrder').datagrid('reload');
-				 $.messager.alert("提示","操作成功","info");
-			 }else{
-				 $.messager.alert("提示","操作失败","error");
-			 }   
-		 } 
-	});
-}
-
 
 function reloadDataGrid()
 {
