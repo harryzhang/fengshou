@@ -151,6 +151,28 @@ function to_editctOrder(id){
 }
 
 
+function to_export(exportType){
+	
+	var url = httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType;
+	$('#exportCtOrderDiv').dialog({
+		title: "新增",
+		width: 760,
+		height: 500,
+		closed: false,
+		closable:false,
+		cache: false,
+		href: url,
+		modal: true,
+		toolbar:[
+				{
+					iconCls:"icon-no",text:"关闭",
+					handler:function(){
+						$("#editCtOrderDiv").dialog("close");
+				}
+		}]
+	});
+}
+
 function reloadDataGrid()
 {
 	$("tt_CtOrder").datagrid("reload");

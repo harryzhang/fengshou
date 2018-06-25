@@ -33,6 +33,11 @@
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 
 			              <a  href="javascript:void(0)" id="resetButton" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >重置</a>
 				      </td>
+				      <td >
+			              <a  href="javascript:to_export('bj');" id="exportButton_bj" class="easyui-linkbutton" iconCls="icon-search" plain="true">导出保监会</a> 
+			              <a  href="javascript:to_export('bxxh');" id="exportButton_bxxh" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险协会</a>
+			              <a  href="javascript:to_export('bxgs');" id="exportButton_bxgs" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险公司</a>
+				      </td>
 			        </tr>
 			      </table>
 		     </form>
@@ -45,7 +50,9 @@
   
 </div>
 
-  <div id="editCtOrderDiv"></div>  
+  <div id="editCtOrderDiv"></div> 
+  <div id="exportCtOrderDiv"></div> 
+   
 </body>
 
 </html>
