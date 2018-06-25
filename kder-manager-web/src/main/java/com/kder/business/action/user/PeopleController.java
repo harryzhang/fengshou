@@ -5,7 +5,7 @@
  */
 
 
-package com.kder.business.action.commission;
+package com.kder.business.action.user;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -37,9 +37,9 @@ import com.kder.business.common.page.PageDo;
 import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
-import com.kder.business.entity.commission.OrderCommission;
-import com.kder.business.entity.commission.OrderCommissionExample;
-import com.kder.business.service.commission.IOrderCommissionService;
+import com.kder.business.entity.user.People;
+import com.kder.business.entity.user.PeopleExample;
+import com.kder.business.service.user.IUserService;
 
 
 
@@ -50,10 +50,10 @@ import com.kder.business.service.commission.IOrderCommissionService;
  */
 
 @Controller
-@RequestMapping("/ordercommission")
-public class OrderCommissionController extends BaseAction{
+@RequestMapping("/people")
+public class PeopleController extends BaseAction{
 	@Resource
-	private IOrderCommissionService orderCommissionService;
+	private IUserService peopleService;
 
 	/**
      * 去列表页面
@@ -62,29 +62,30 @@ public class OrderCommissionController extends BaseAction{
      */
     @RequestMapping("/index")
     public String index(Model model){
-        return "ordercommission/listOrderCommission";
+        return "people/listPeople";
     }
 	
-	@RequestMapping("/listOrderCommission")
-    public void listOrderCommission(NewPagination<OrderCommission> pagination,
+	@RequestMapping("/listPeople")
+    public void listPeople(NewPagination<People> pagination,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
-        logger.info("----listOrderCommission----");
+        logger.info("----listPeople----");
         try{
-            PageDo<OrderCommission> page = PageDoUtil.getPage(pagination);
-            String searchOrderNo = getString("searchOrderNo");
+            PageDo<People> page = PageDoUtil.getPage(pagination);
             Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(searchOrderNo)){
-                param.put("orderNo",searchOrderNo);
-                model.addAttribute("searchOrderNo",searchOrderNo);
+            String searchUserName = getString("searchUserName");
+            if(StringUtils.isNotBlank(searchUserName)){
+            	param.put("peopleName",searchUserName);
+                model.addAttribute("searchUserName",searchUserName);
             }
-            String managerName = getString("searchManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-                param.put("userName", managerName);
-                model.addAttribute("searchManagerName",managerName);
+            String searchPhone = getString("searchPhone");
+            if(StringUtils.isNotBlank(searchPhone)){
+            	param.put("peoplePhone", searchPhone);
+                model.addAttribute("searchPhone",searchPhone);
             }
-            page = orderCommissionService.getOrderCommissionPage(param, page);
+            
+            page = peopleService.getPeoplePage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);
             pagination = PageDoUtil.getPageValue(pagination, page);
@@ -102,17 +103,17 @@ public class OrderCommissionController extends BaseAction{
      *
      * @return
      */
-    @RequestMapping("/addOrderCommission")
-    public String addOrderCommission(String id, ModelMap modelMap, HttpServletResponse response) {
-        logger.info("----addOrderCommission----");
+    @RequestMapping("/addPeople")
+    public String addPeople(String id, ModelMap modelMap, HttpServletResponse response) {
+        logger.info("----addPeople----");
         try{
             if(StringUtils.isNotBlank(id)){
-                OrderCommission OrderCommission = orderCommissionService.getById(Long.valueOf(id));
-                if(null != OrderCommission){
-                    modelMap.addAttribute("ordercommission", OrderCommission);
+                People People = peopleService.selectByPrimaryKey(Integer.valueOf(id));
+                if(null != People){
+                    modelMap.addAttribute("people", People);
                 }
             }
-            return "ordercommission/addOrderCommission";
+            return "people/addPeople";
         }catch(Exception e){
             logger.error("跳转到数据字典编辑页面异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
@@ -127,26 +128,21 @@ public class OrderCommissionController extends BaseAction{
      * @author: huangzlmf
      * @date: 2015年4月21日 12:49:05
      */
-    @RequestMapping("/saveOrderCommission")
+    @RequestMapping("/savePeople")
     @ResponseBody
-    public void saveOrderCommission(OrderCommission OrderCommission, 
+    public void savePeople(People People, 
     							  HttpServletRequest request, 
     							  HttpServletResponse response) {
-        logger.info("----saveOrderCommission------");
+        logger.info("----savePeople------");
         try{
-            Long id = OrderCommission.getId();
+            Integer id = People.getPeopleId();
             Long userId = new Long(this.getUserId());
             
             int i = 0;
             if (id != null && id.intValue()>0) {
-            	OrderCommission.setUpdateBy(userId);
-            	OrderCommission.setUpdateTime(new Date());
-                i = orderCommissionService.updateOrderCommissionById(OrderCommission);
+                i = peopleService.updateByPrimaryKey(People);
             } else {
-				OrderCommission.setCreateBy(userId);
-            	OrderCommission.setCreateTime(new Date());
-            	
-                i = orderCommissionService.addOrderCommission(OrderCommission);
+                i = peopleService.insertSelective(People);
             }
 
             if (i <= 0) {
@@ -158,7 +154,7 @@ public class OrderCommissionController extends BaseAction{
             logger.error("保存更新失败",e);
             outPrint(response, this.toJSONString(Result.failureResult("操作失败")));
         }
-        logger.info("----end saveOrderCommission--------");
+        logger.info("----end savePeople--------");
     }
     
 	/**
@@ -168,46 +164,26 @@ public class OrderCommissionController extends BaseAction{
     public void export(HttpServletResponse response) throws IOException {
         try {
             Long time = System.currentTimeMillis();
-            OrderCommissionExample example  = new OrderCommissionExample();
-            String searchOderNo = getString("searchOderNo");
-            if(StringUtils.isNotBlank(searchOderNo)){
-                example.createCriteria().andOrderNoLike(searchOderNo);
+            PeopleExample example  = new PeopleExample();
+            String searchUserName = getString("searchUserName");
+          
+            if(StringUtils.isNotBlank(searchUserName)){
+                example.createCriteria().andPeopleNameLike(searchUserName);
             }
-            String managerName = getString("searchManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-            	example.createCriteria().andUserNameLike(managerName);
+            String searchPhone = getString("searchPhone");
+            if(StringUtils.isNotBlank(searchPhone)){
+            	example.createCriteria().andPeoplePhoneEqualTo(searchPhone);
             }
-            List<OrderCommission> ordercommissionLst = orderCommissionService.selectOrderCommission(example);
+            List<People> peopleLst = peopleService.selectByExample(example);
             
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String fileName = URLEncoder.encode(excelHead + date + ".xls", "utf-8");
             List<String[]> excelheaderList = new ArrayList<String[]>();
-            String[] excelheader = { "记录ID", 
-            						 "业务员ID", 
-            						 "订单ID", 
-            						 "业务员姓名", 
-            						 "佣金", 
-            						 "订单编号", 
-            						 "是否有效",
-									 "审批状态",
-									 "审批日期",
-									 "审批人",
-									 "创建人"};
+            String[] excelheader = { "保险公司名称", "保险公司简称", "联系人姓名", "联系人手机号码", "跟进单员", "合作状态", "记录状态" };
             excelheaderList.add(0, excelheader);
-            String[] excelData = { "id", 
-            					   "userId", 
-            					   "orderId", 
-            					   "userName", 
-            					   "commissionAmt", 
-            					   "orderNo", 
-            					   "status",
-								   "auditStatus",
-								   "auditTime",
-								   "auditId",
-								   "createBy"};
-            
-            HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ordercommissionLst);
+            String[] excelData = { "policyName", "shortName", "contactName", "contactPhone", "managerName", "partnerStatus", "status" };
+            HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, peopleLst);
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             wb.write(response.getOutputStream());

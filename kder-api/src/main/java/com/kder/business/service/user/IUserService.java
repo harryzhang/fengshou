@@ -1,7 +1,9 @@
 package com.kder.business.service.user;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kder.business.common.page.PageDo;
 import com.kder.business.common.result.Result;
 import com.kder.business.entity.user.People;
 import com.kder.business.entity.user.PeopleExample;
@@ -46,4 +48,13 @@ public interface IUserService {
 	 * @return
 	 */
 	Result<?> reg(People userDo);
+
+
+	/**
+	 * 分页查询
+	 * @param param
+	 * @param page
+	 * @return
+	 */
+	PageDo<People> getPeoplePage(Map<String, Object> param, PageDo<People> page);
 }

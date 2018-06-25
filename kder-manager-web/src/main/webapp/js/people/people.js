@@ -2,15 +2,15 @@
 $(function(){
 /*#############################################search form begin#################################*/	
 		
-	$("#searchorgForm #searchButton").on("click",function(){
-		$("#tt_Org").datagrid('load',{
-			'searchOrgName': $("#searchorgForm #searchOrgName").val(),
-			'searchOrgCode':$("#searchorgForm #searchOrgCode").val()		
+	$("#searchpeopleForm #searchButton").on("click",function(){
+		$("#tt_People").datagrid('load',{
+			'searchUserName': $("#searchpeopleForm #searchUserName").val(),
+			'searchPhone':$("#searchpeopleForm #searchPhone").val()		
 		});
 	});
 	
-	$("#searchorgForm #resetButton").on("click",function(){
-		$("#searchorgForm").form('reset');
+	$("#searchpeopleForm #resetButton").on("click",function(){
+		$("#searchpeopleForm").form('reset');
 	});
 	
 /*#############################################search form end#################################*/		
@@ -20,8 +20,8 @@ $(function(){
 	var toolbar_tt = [
 					{
 						iconCls:"icon-edit",
-						text:"新增/编辑",
-						handler:to_addorg
+						text:"新增",
+						handler:to_addpeople
 					}
 	          	];
 	
@@ -29,18 +29,19 @@ $(function(){
 /*######################grid columns begin##############################*/
 	var columns_tt = [
       			[	 				
-							{field:'id',title:'id',width:100,hidden:true},						
-								{field:"orgCode",title:"机构编码",width:180,align:"center"},
-								{field:"orgName",title:"组织机构名称",width:180,align:"center"},
-								{field:"parentId",title:"上级组织",width:180,align:"center"},
-								{field:"status",title:"状态",width:180,align:"center"},
-								{field:"createTime",title:"创建日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"createBy",title:"创建人",width:180,align:"center"},
-								{field:"updateTime",title:"更新日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"updateBy",title:"更新人",width:180,align:"center"},
+							{field:'peopleId',title:'peopleId',width:100,hidden:true},						
+								{field:"peoplePhone",title:"手机号码",width:180,align:"center"},
+								{field:"peopleName",title:"用户姓名",width:180,align:"center"},
+								{field:"peopleDatetime",title:"注册日期",width:180,align:"center",formatter:dateTimeFormatter},
+								{field:"peopleMail",title:"邮箱",width:180,align:"center"},
+								{field:"peopleState",title:"状态",width:180,align:"center"},
+								{field:"peopleCode",title:"身份证号码",width:180,align:"center"},
+								{field:"peopleCodesenddate",title:"身份证号是否验证",width:180,align:"center",formatter:dateTimeFormatter},
+								{field:"peoplePhonecheck",title:"手机号码是否验证",width:180,align:"center"},
+								{field:"peopleMaillcheck",title:"邮箱是否验证",width:180,align:"center"},
 					{field:"操作",title:"操作",width:80,align:"left",
 	 					formatter:function(value,row,index){
-	 					  var str= '<a href="javascript:void(0);" onclick="to_editorg(\''+row.id+'\');">编辑</a>';
+	 					  var str= '<a href="javascript:void(0);" onclick="to_editpeople(\''+row.peopleId+'\');">查看明细</a>';
 	 					  return str;
 	 					}
 	 				}	 				
@@ -48,9 +49,9 @@ $(function(){
 	 	];
 /*######################grid columns end##############################*/
 	
-	$("#tt_Org").datagrid({
-		url:httpUrl+"/org/listOrg.html?&rand=" + Math.random(),
-		height:$("#body").height()-$('#search_areaOrg').height()-10,
+	$("#tt_People").datagrid({
+		url:httpUrl+"/people/listPeople.html?&rand=" + Math.random(),
+		height:$("#body").height()-$('#search_areaPeople').height()-10,
 		width:$("#body").width(),
 		rownumbers:true,
 		fitColumns:true,
@@ -71,12 +72,12 @@ $(function(){
 		showPageList:true,
 		pageSize:20,
 		pageList:[10,20,30],
-		idField:"id",
+		idField:"peopleId",
 		columns:columns_tt,
 		toolbar:toolbar_tt,
 		queryParams:{
-			'searchOrgName': $("#searchorgForm #searchOrgName").val(),
-			'searchOrgCode':$("#searchorgForm #searchOrgCode").val()
+			'searchUserName': $("#searchpeopleForm #searchUserName").val(),
+			'searchPhone':$("#searchpeopleForm #searchPhone").val()
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox
 			
@@ -94,17 +95,17 @@ $(function(){
  * 新增
  * @param id
  */
-function to_addorg(){
-	to_editorg('');
+function to_addpeople(){
+	to_editpeople('');
 }
 /**
  * 编辑
  * @param id
  */
-function to_editorg(id){
+function to_editpeople(id){
 	
-	var url = httpUrl+"/org/addOrg.html?&rand=" + Math.random()+"&id="+id;
-	$('#editOrgDiv').dialog({
+	var url = httpUrl+"/people/addPeople.html?&rand=" + Math.random()+"&id="+id;
+	$('#editPeopleDiv').dialog({
 		title: "新增",
 		width: 760,
 		height: 500,
@@ -116,31 +117,31 @@ function to_editorg(id){
 		toolbar:[
 				{
 					iconCls:"icon-save",text:"保存",
-					handler:save_Org
+					handler:save_People
 				},
 				{
 					iconCls:"icon-no",text:"关闭",
 					handler:function(){
-						$("#editOrgDiv").dialog("close");
+						$("#editPeopleDiv").dialog("close");
 				}
 		}]
 	});
 }
 
-function save_Org(){
-	var formdata = $("#editOrgForm").serialize();
+function save_People(){
+	var formdata = $("#editPeopleForm").serialize();
 	console.info("formdata");
 	console.info(formdata);
-	var  url =httpUrl+"/org/saveOrg.html?&rand=" + Math.random();
+	var  url =httpUrl+"/people/savePeople.html?&rand=" + Math.random();
 	 $.ajax({   
 		 type: 'POST',
 		 dataType: 'json',
 		 url: url,  
-		 data:$("#editOrgForm").serialize(),
+		 data:$("#editPeopleForm").serialize(),
 		 success: function(data){ 
 			 if(data.code ==="0"){
-				 $("#editOrgDiv").dialog("close");
-				 $('tt_Org').datagrid('reload');
+				 $("#editPeopleDiv").dialog("close");
+				 $('tt_People').datagrid('reload');
 				 $.messager.alert("提示","操作成功","info");
 			 }else{
 				 $.messager.alert("提示","操作失败","error");
@@ -152,7 +153,7 @@ function save_Org(){
 
 function reloadDataGrid()
 {
-	$("tt_Org").datagrid("reload");
+	$("tt_People").datagrid("reload");
 }
 
 
@@ -166,11 +167,11 @@ window.onresize = function(){
 };
 //改变表格和查询表单宽高
 function domresize(){
-	$('tt_Org').datagrid('resize',{  
-		height:$("#body").height()-$('#search_areaOrg').height()-5,
+	$('tt_People').datagrid('resize',{  
+		height:$("#body").height()-$('#search_areaPeople').height()-5,
 		width:$("#body").width()
 	});
-	$('#search_areaOrg').panel('resize',{
+	$('#search_areaPeople').panel('resize',{
 		width:$("#body").width()
 	});
 	$('#detailLoanDiv').dialog('resize',{  

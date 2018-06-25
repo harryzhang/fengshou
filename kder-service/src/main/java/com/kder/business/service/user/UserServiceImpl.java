@@ -2,6 +2,7 @@ package com.kder.business.service.user;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,9 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.kder.business.common.constant.Constants;
 import com.kder.business.common.exception.BusinessException;
+import com.kder.business.common.page.PageDo;
 import com.kder.business.common.result.Result;
 import com.kder.business.dao.user.PeopleMapper;
+import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.user.People;
 import com.kder.business.entity.user.PeopleExample;
 
@@ -44,6 +48,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public int insertSelective(People record){
+		record.setPeopleAppId(1);
 		return userDao.insertSelective(record);
 	}
 
@@ -60,21 +65,25 @@ public class UserServiceImpl implements IUserService {
 	
 	public int updateByExampleSelective(@Param("record") People record,
 			@Param("example") PeopleExample example){
+		record.setPeopleAppId(1);
 		return userDao.updateByExampleSelective(record, example);
 	}
 
 	
 	public int updateByExample(@Param("record") People record,
 			@Param("example") PeopleExample example){
+		record.setPeopleAppId(1);
 		return userDao.updateByExample(record, example);
 	}
 
 	
 	public int updateByPrimaryKeySelective(People record){
+		record.setPeopleAppId(1);
 		return userDao.updateByPrimaryKeySelective(record);
 	}
 
 	public int updateByPrimaryKey(People record){
+		record.setPeopleAppId(1);
 		return userDao.updateByPrimaryKey(record);
 	}
 
@@ -99,6 +108,17 @@ public class UserServiceImpl implements IUserService {
 			throw new BusinessException("注册失败", "user.reg002");
 		}
 		return Result.successResult("注册成功",userDo);
+	}
+
+
+	@Override
+	public PageDo<People> getPeoplePage(Map<String, Object> param,
+			PageDo<People> page) {
+		param.put(Constants.MYBATIS_PAGE, page);
+        List<People> list =  userDao.getPeoplePage(param);
+        page.setModelList(list);
+        return page;
+        
 	}
 
     

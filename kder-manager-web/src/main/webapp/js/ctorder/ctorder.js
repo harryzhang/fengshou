@@ -85,7 +85,7 @@ $(function(){
 		showPageList:true,
 		pageSize:20,
 		pageList:[10,20,30],
-		idField:"id",
+		idField:"orderId",
 		columns:columns_tt,
 		toolbar:toolbar_tt,
 		queryParams:{
@@ -141,27 +141,26 @@ function to_editctOrder(id){
 	});
 }
 
-
-function to_export(exportType){
-	
-	var url = httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType;
-	$('#exportCtOrderDiv').dialog({
-		title: "新增",
-		width: 760,
-		height: 500,
-		closed: false,
-		closable:false,
-		cache: false,
-		href: url,
-		modal: true,
-		toolbar:[
-				{
-					iconCls:"icon-no",text:"关闭",
-					handler:function(){
-						$("#editCtOrderDiv").dialog("close");
-				}
-		}]
-	});
+function save_CtOrder(){
+	$.ajax({ 
+			url: httpUrl+"/ctorder/saveCtOrder.html", 
+			data: $("#editCtOrderForm").serialize(),
+			type:"post",
+			dataType:"json",
+			success: function(ret){
+	   	 		if(ret.code==="0"){
+	   	 			$.messager.confirm("保存成功",
+	   	 				           '是否继续添加？', 
+	   	 				           function(r){
+					   	   			   if(r==false){
+					   	   				$("#editCtOrderDiv").dialog("close");
+					   	   			   }
+	   						});
+	   	 		}else{
+	   	 			$.messager.alert("error",ret.msg);
+	   	 		}
+	      	}
+	        });
 }
 
 function reloadDataGrid()

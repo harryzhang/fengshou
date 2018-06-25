@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>编辑字典</title>
+<title>编辑订单佣金</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache" />
 <jsp:include page="../common_easyui_cus.jsp"></jsp:include>
@@ -19,7 +19,7 @@
 					<input type="hidden" id="id" name="id" value="${ordercommission.id}"/>
 					<tr>	
 						<td align="right">
-							<label for="name">userId</label>
+							<label for="name">业务员ID</label>
 						</td>	
 						<td>
 								<input type="text" id="userId" name="userId" value="${ordercommission.userId}"/>												
@@ -27,7 +27,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">orderId</label>
+							<label for="name">保单ID</label>
 						</td>	
 						<td>
 								<input type="text" id="orderId" name="orderId" value="${ordercommission.orderId}"/>												
@@ -35,7 +35,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">userName</label>
+							<label for="name">业务员姓名</label>
 						</td>	
 						<td>
 								<input type="text" id="userName" name="userName" value="${ordercommission.userName}"/>												
@@ -43,7 +43,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">commissionAmt</label>
+							<label for="name">佣金</label>
 						</td>	
 						<td>
 								<input type="text" id="commissionAmt" name="commissionAmt" value="${ordercommission.commissionAmt}"/>												
@@ -51,7 +51,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">orderNo</label>
+							<label for="name">保单编码</label>
 						</td>	
 						<td>
 								<input type="text" id="orderNo" name="orderNo" value="${ordercommission.orderNo}"/>												
@@ -59,7 +59,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">status</label>
+							<label for="name">是否有效</label>
 						</td>	
 						<td>
 								<input type="text" id="status" name="status" value="${ordercommission.status}"/>												
@@ -67,7 +67,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">auditStatus</label>
+							<label for="name">审批状态</label>
 						</td>	
 						<td>
 								<input type="text" id="auditStatus" name="auditStatus" value="${ordercommission.auditStatus}"/>												
@@ -75,7 +75,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">auditTime</label>
+							<label for="name">审批日期</label>
 						</td>	
 						<td>
 								<input type="text" 
@@ -88,7 +88,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">auditId</label>
+							<label for="name">审批人ID</label>
 						</td>	
 						<td>
 								<input type="text" id="auditId" name="auditId" value="${ordercommission.auditId}"/>												
@@ -96,7 +96,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">createBy</label>
+							<label for="name">创建人ID</label>
 						</td>	
 						<td>
 								<input type="text" id="createBy" name="createBy" value="${ordercommission.createBy}"/>												
@@ -104,7 +104,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">createTime</label>
+							<label for="name">创建日期</label>
 						</td>	
 						<td>
 								<input type="text" 
@@ -117,7 +117,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">updateTime</label>
+							<label for="name">更新日期</label>
 						</td>	
 						<td>
 								<input type="text" 
@@ -130,7 +130,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">updateBy</label>
+							<label for="name">更新人ID</label>
 						</td>	
 						<td>
 								<input type="text" id="updateBy" name="updateBy" value="${ordercommission.updateBy}"/>												

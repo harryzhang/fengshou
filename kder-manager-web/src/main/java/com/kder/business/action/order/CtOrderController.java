@@ -208,24 +208,90 @@ public class CtOrderController extends BaseAction{
         try {
             Long time = System.currentTimeMillis();
             CtOrderExample example  = new CtOrderExample();
-            String companyName = getString("searchPolicyName");
+            String searchUserName = getString("searchUserName");
           
-            if(StringUtils.isNotBlank(companyName)){
-                example.createCriteria().andUserNameLike(companyName);
+            if(StringUtils.isNotBlank(searchUserName)){
+                example.createCriteria().andUserNameLike(searchUserName);
             }
-            String managerName = getString("searManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-            	example.createCriteria().andRecognizeeNameLike(managerName);
+            String searchRecognizeeName = getString("searchRecognizeeName");
+            if(StringUtils.isNotBlank(searchRecognizeeName)){
+            	example.createCriteria().andRecognizeeNameLike(searchRecognizeeName);
             }
             List<CtOrder> ctorderLst = ctOrderService.selectCtOrder(example);
             
+            //导出类型： 保监会、保险协会、保险公司
+            String exportType = getString("exportType");
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String fileName = URLEncoder.encode(excelHead + date + ".xls", "utf-8");
             List<String[]> excelheaderList = new ArrayList<String[]>();
-            String[] excelheader = { "保险公司名称", "保险公司简称", "联系人姓名", "联系人手机号码", "跟进单员", "合作状态", "记录状态" };
+            String[] excelheader = { "订单id", 
+            						 "订单号", 
+            						 "保险产品ID", 
+            						 "用户ID", 
+            						 "订单状态", 
+            						 "保障期限", 
+            						 "订单开始日期",
+									 "订单结束日期",
+									 "订单金额",
+									 "投保人证件号码",
+									 "投保人证件类别",
+									 "投保人地址",
+									 "投保人姓名",
+									 "投保人手机号码",
+									 "被保险人姓名",
+									 "被保险人出身年月日",
+									 "被保人证件类型",
+									 "被保人证件号码",
+									 "被保人电话",
+									 "被保人地址",
+									 "被保人性别",
+									 "是否有社保",
+									 "被保人和投保人是否同一人",
+									 "销售人员ID",
+									 "销售人员姓名",
+									 "佣金",
+									 "项目ID",
+									 "审批状态",
+									 "审批日期",
+									 "意向订单ID",
+									 "记录创建日期",
+									 "记录更新日期"};
             excelheaderList.add(0, excelheader);
-            String[] excelData = { "policyName", "shortName", "contactName", "contactPhone", "managerName", "partnerStatus", "status" };
+            String[] excelData = { "orderId", 
+            					   "orderNo", 
+            					   "prodId", 
+            					   "userId", 
+            					   "orderStatus", 
+            					   "orderPeriod", 
+            					   "startTime",
+								   "endTime",
+								   "orderAmt",
+								   "userCertNo",
+								   "userCertType",
+								   "userAddress",
+								   "userName",
+								   "userPhone",
+								   "recognizeeName",
+								   "recognizeeBirth",
+								   "recognizeeCertType",
+								   "recognizeeCertNo",
+								   "recognizeePhone",
+								   "recognizeeAddress",
+								   "recognizeeGender",
+								   "recognizeeSecurity",
+								   "isSame",
+								   "salesId",
+								   "salesMan",
+								   "commissionAmt",
+								   "projectId",
+								   "auditStatus",
+								   "auditDate",
+								   "privateCustId",
+								   "createTime",
+								   "updateTime"};
+            
+            
             HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);

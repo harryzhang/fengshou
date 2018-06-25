@@ -127,6 +127,53 @@
     from people
     where people_id = #{peopleId,jdbcType=INTEGER}
   </select>
+  
+  
+  <select id="getPeoplePage" parameterType="Map" resultMap="BaseResultMap">
+		SELECT * 
+		  FROM people
+		  <trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="peopleId != null">  
+				AND people_id = #{peopleId}
+			</if>
+			<if test="peoplePhone != null">  
+				AND people_phone = #{peoplePhone}
+			</if>
+			<if test="peopleName != null">  
+				AND people_name like  CONCAT('%',#{peopleName},'%')
+			</if>
+			<if test="peoplePassword != null">  
+				AND people_password = #{peoplePassword}
+			</if>
+			<if test="peopleDatetime != null">  
+				AND people_datetime = #{peopleDatetime}
+			</if>
+			<if test="peopleAppId != null">  
+				AND people_app_id = #{peopleAppId}
+			</if>
+			<if test="peopleMail != null">  
+				AND people_mail = #{peopleMail}
+			</if>
+			<if test="peopleState != null">  
+				AND people_state = #{peopleState}
+			</if>
+			<if test="peopleCode != null">  
+				AND people_code = #{peopleCode}
+			</if>
+			<if test="peopleCodesenddate != null">  
+				AND people_codesenddate = #{peopleCodesenddate}
+			</if>
+			<if test="peoplePhonecheck != null">  
+				AND people_phonecheck = #{peoplePhonecheck}
+			</if>
+			<if test="peopleMaillcheck != null">  
+				AND people_maillcheck = #{peopleMaillcheck}
+			</if>
+         </trim> 
+
+	</select>
+	
+	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbggenerated

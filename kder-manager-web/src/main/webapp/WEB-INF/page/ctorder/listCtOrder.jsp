@@ -9,7 +9,7 @@
 <jsp:include page="../common_easyui_cus.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/icons.css'/>" />
 <script type="text/javascript" src="<c:url value='/js/common/js/jquery-easyui-1.4.1/extension/jquery-easyui-datagridview/datagrid-detailview.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/ctorder/ctorder.js?v='/>"></script>
+<script type="text/javascript" src="<c:url value='/js/ctorder/ctorder.js?v=${jsversion}'/>"></script>
 <style type="text/css">
 .tdfont{
 	font-size: 12px;
@@ -53,6 +53,16 @@
   <div id="editCtOrderDiv"></div> 
   <div id="exportCtOrderDiv"></div> 
    
+  <script type="text/javascript">
+  function to_export(exportType) {
+      var exportIframe = document.createElement('iframe');  
+      var query = $('#searchctOrderForm').serialize();
+      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+      exportIframe.src =httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType+"&"+query;
+      exportIframe.style.display = 'none';
+      document.body.appendChild(exportIframe);
+  }
+  </script>
 </body>
 
 </html>

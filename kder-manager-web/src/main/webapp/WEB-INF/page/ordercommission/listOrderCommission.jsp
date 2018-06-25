@@ -9,7 +9,7 @@
 <jsp:include page="../common_easyui_cus.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/icons.css'/>" />
 <script type="text/javascript" src="<c:url value='/js/common/js/jquery-easyui-1.4.1/extension/jquery-easyui-datagridview/datagrid-detailview.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/ordercommission/ordercommission.js?v='/>"></script>
+<script type="text/javascript" src="<c:url value='/js/ordercommission/ordercommission.js?v=${jsversion}'/>"></script>
 <style type="text/css">
 .tdfont{
 	font-size: 12px;
@@ -33,6 +33,9 @@
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 
 			              <a  href="javascript:void(0)" id="resetButton" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >重置</a>
 				      </td>
+				      <td >
+			              <a  href="javascript:to_export();" id="exportButton_bj" class="easyui-linkbutton" iconCls="icon-search" plain="true">导出</a> 
+				      </td>
 			        </tr>
 			      </table>
 		     </form>
@@ -45,7 +48,19 @@
   
 </div>
 
-  <div id="editOrderCommissionDiv"></div>  
+  <div id="editOrderCommissionDiv"></div> 
+  
+  <script type="text/javascript">
+  function to_export(exportType) {
+      var exportIframe = document.createElement('iframe');  
+      var query = $('#searchorderCommissionForm').serialize();
+      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+      exportIframe.src =httpUrl+"/ordercommission/export.html?&rand=" + Math.random()+"&"+query;
+      exportIframe.style.display = 'none';
+      document.body.appendChild(exportIframe);
+  }
+  </script>
+   
 </body>
 
 </html>

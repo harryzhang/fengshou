@@ -3,13 +3,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>组织机构</title>
+<title>订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache" />
 <jsp:include page="../common_easyui_cus.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/icons.css'/>" />
 <script type="text/javascript" src="<c:url value='/js/common/js/jquery-easyui-1.4.1/extension/jquery-easyui-datagridview/datagrid-detailview.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/org/org.js?v=${jsversion }'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/people/people.js?v=${jsversion}'/>"></script>
 <style type="text/css">
 .tdfont{
 	font-size: 12px;
@@ -20,14 +20,14 @@
 
 <div id="body" region="center" > 
   <!-- 查询条件区域 -->
-	<div id="search_areaOrg"  class="easyui-panel" >
+	<div id="search_areaPeople"  class="easyui-panel" >
 		<div id="conditon" >
-			<form id="searchorgForm" style="margin-top:7px;margin-left:5px;" >
+			<form id="searchpeopleForm" style="margin-top:7px;margin-left:5px;" >
 			      <table border="0">
 			        <tr>
 			          <td class="tdfont">查询条件:
-			          	<input type="text" size="14" id="searchOrgName" name="searchOrgName" placeholder="组织机构名称" >
-			          	<input type="text" size="14" id="searchOrgCode" name="searchOrgCode" placeholder="组织机构编码" >
+			          	<input type="text" size="14" id="searchUserName" name="searchUserName" placeholder="用户姓名" >
+			          	<input type="text" size="14" id="searchPhone" name="searchPhone" placeholder="用户手机号码" >
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 
@@ -41,11 +41,11 @@
 	</div>
   
   	<!-- 数据表格区域 -->
-  <div id="tt_Org"></div>
+  <div id="tt_People"></div>
   
 </div>
 
-  <div id="editOrgDiv"></div>  
+  <div id="editPeopleDiv"></div>  
 </body>
 
 </html>

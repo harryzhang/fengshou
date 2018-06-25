@@ -30,25 +30,25 @@ $(function(){
 	var columns_tt = [
       			[	 				
 							{field:'id',title:'id',width:100,hidden:true},						
-								{field:"userId",title:"用户ID",width:180,align:"center"},
-								{field:"orderId",title:"订单ID",width:180,align:"center"},
-								{field:"userName",title:"用户名称",width:180,align:"center"},
-								{field:"commissionAmt",title:"佣金",width:180,align:"center"},
-								{field:"orderNo",title:"订单编号",width:180,align:"center"},
-								{field:"status",title:"是否有效",width:180,align:"center"},
-								{field:"auditStatus",title:"状态",width:180,align:"center"},
-								{field:"auditTime",title:"审批时间",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"auditId",title:"审批人",width:180,align:"center"},
-								{field:"createBy",title:"创建人",width:180,align:"center"},
-								{field:"createTime",title:"创建时间",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"updateTime",title:"更新时间",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"updateBy",title:"创建人",width:180,align:"center"},
-					{field:"操作",title:"操作",width:80,align:"left",
-	 					formatter:function(value,row,index){
-	 					  var str= '<a href="javascript:void(0);" onclick="to_editorderCommission(\''+row.id+'\');">编辑</a>';
-	 					  return str;
-	 					}
-	 				}	 				
+							{field:"userId",title:"用户ID",width:180,hidden:true},
+							{field:"orderId",title:"订单ID",hidden:true},
+							{field:"userName",title:"用户名称",width:180,align:"center"},
+							{field:"commissionAmt",title:"佣金",width:180,align:"center"},
+							{field:"orderNo",title:"订单编号",width:180,align:"center"},
+							{field:"status",title:"是否有效",width:180,align:"center"},
+							{field:"auditStatus",title:"状态",width:180,align:"center"},
+							{field:"auditTime",title:"审批时间",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"auditId",title:"审批人",width:180,align:"center"},
+							{field:"createBy",title:"创建人",width:180,align:"center"},
+							{field:"createTime",title:"创建时间",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"updateTime",title:"更新时间",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"updateBy",title:"创建人",width:180,align:"center"},
+							{field:"操作",title:"操作",width:80,align:"left",
+								formatter:function(value,row,index){
+									var str= '<a href="javascript:void(0);" onclick="to_editorderCommission(\''+row.id+'\');">编辑</a>';
+									return str;
+								}	
+							}	 				
 	 			]
 	 	];
 /*######################grid columns end##############################*/
@@ -100,7 +100,7 @@ $(function(){
  * @param id
  */
 function to_addorderCommission(){
-	to_edit('');
+	to_editorderCommission('');
 }
 /**
  * 编辑

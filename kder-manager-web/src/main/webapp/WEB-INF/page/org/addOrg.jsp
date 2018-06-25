@@ -51,7 +51,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">createTime</label>
+							<label for="name">创建日期</label>
 						</td>	
 						<td>
 								<input type="text" 

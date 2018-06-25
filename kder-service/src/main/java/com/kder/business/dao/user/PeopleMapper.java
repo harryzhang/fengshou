@@ -2,7 +2,10 @@ package com.kder.business.dao.user;
 
 import com.kder.business.entity.user.People;
 import com.kder.business.entity.user.PeopleExample;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PeopleMapper {
@@ -74,4 +77,6 @@ public interface PeopleMapper {
 	 * @mbggenerated  Sat Jun 09 01:47:56 CST 2018
 	 */
 	int updateByPrimaryKey(People record);
+
+	List<People> getPeoplePage(Map<String, Object> param);
 }
