@@ -81,7 +81,7 @@
 								<input type="text" 
 								id="auditTime" 
 								name="auditTime" 
-								value="<fmt:formatDate value="auditTime" pattern="yyyy-MM-dd"/>"
+								value="<fmt:formatDate value="${ordercommission.auditTime}" pattern="yyyy-MM-dd"/>"
 								class="easyui-datebox" size="14" data-options="editable : true"  
 								/>
 						</td>						   
@@ -110,7 +110,7 @@
 								<input type="text" 
 								id="createTime" 
 								name="createTime" 
-								value="<fmt:formatDate value="createTime" pattern="yyyy-MM-dd"/>"
+								value="<fmt:formatDate value="${ordercommission.createTime}" pattern="yyyy-MM-dd"/>"
 								class="easyui-datebox" size="14" data-options="editable : true"  
 								/>
 						</td>						   
@@ -123,7 +123,7 @@
 								<input type="text" 
 								id="updateTime" 
 								name="updateTime" 
-								value="<fmt:formatDate value="updateTime" pattern="yyyy-MM-dd"/>"
+								value="<fmt:formatDate value="${ordercommission.updateTime}" pattern="yyyy-MM-dd"/>"
 								class="easyui-datebox" size="14" data-options="editable : true"  
 								/>
 						</td>						   

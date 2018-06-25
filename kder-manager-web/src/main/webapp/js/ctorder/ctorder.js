@@ -29,44 +29,35 @@ $(function(){
 /*######################grid columns begin##############################*/
 	var columns_tt = [
       			[	 				
-							{field:'orderId',title:'orderId',width:100,hidden:true},						
-								{field:"orderNo",title:"保单号",width:180,align:"center"},
-								{field:"prodId",title:"产品ID",width:180,align:"center"},
-								{field:"userId",title:"用户ID",width:180,align:"center"},
-								{field:"userName",title:"用户姓名",width:180,align:"center"},
-								{field:"orderStatus",title:"订单状态",width:180,align:"center"},
-								{field:"orderPeriod",title:"保障期限",width:180,align:"center"},
-								{field:"startTime",title:"保障起始日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"endTime",title:"保障截止日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"orderAmt",title:"保单金额",width:180,align:"center"},
-								{field:"userCertNo",title:"投保用户证件号码",width:180,align:"center"},
-								{field:"userCertType",title:"投保用户证件类型",width:180,align:"center"},
-								{field:"userAddress",title:"投保用户地址",width:180,align:"center"},
-								{field:"userPhone",title:"投保用户手机号",width:180,align:"center"},
-								{field:"recognizeeName",title:"被保用户姓名",width:180,align:"center"},
-								{field:"recognizeeBirth",title:"被保用户生日",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"recognizeeCertType",title:"被保用户证件类型",width:180,align:"center"},
-								{field:"recognizeeCertNo",title:"被保用户证件号码",width:180,align:"center"},
-								{field:"recognizeePhone",title:"被保用户手机号",width:180,align:"center"},
-								{field:"recognizeeAddress",title:"被保用户地址",width:180,align:"center"},
-								{field:"recognizeeGender",title:"被保用户性别",width:180,align:"center"},
-								{field:"recognizeeSecurity",title:"是否有社保",width:180,align:"center"},
-								{field:"isSame",title:"是否同一人",width:180,align:"center"},
-								{field:"salesId",title:"业务员ID",width:180,align:"center"},
-								{field:"salesMan",title:"业务员",width:180,align:"center"},
-								{field:"commissionAmt",title:"佣金",width:180,align:"center"},
-								{field:"projectId",title:"项目ID",width:180,align:"center"},
-								{field:"auditStatus",title:"审批状态",width:180,align:"center"},
-								{field:"auditDate",title:"审批日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"auditInstanceId",title:"审批Id",width:180,align:"center"},
-								{field:"createTime",title:"创建日期",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"updateTime",title:"更新日期",width:180,align:"center",formatter:dateTimeFormatter},
-					{field:"操作",title:"操作",width:80,align:"left",
-	 					formatter:function(value,row,index){
-	 					  var str= '<a href="javascript:void(0);" onclick="to_editctOrder(\''+row.orderId+'\');">编辑</a>';
-	 					  return str;
-	 					}
-	 				}	 				
+							{field:'orderId',title:'orderId',width:100,hidden:true},
+							{field:"userId",title:"用户ID",width:180,hidden:true},
+							{field:"prodId",title:"产品ID",width:180,hidden:true},
+							{field:"salesId",title:"业务员ID",width:180,hidden:true},
+							{field:"projectId",title:"项目ID",width:180,hidden:true},
+							{field:"auditInstanceId",title:"审批Id",width:180,hidden:true},
+							{field:"orderNo",title:"保单号",width:180,align:"center"},
+							{field:"userName",title:"用户姓名",width:180,align:"center"},
+							{field:"orderStatus",title:"订单状态",width:180,align:"center"},
+							{field:"orderPeriod",title:"保障期限",width:180,align:"center"},
+							{field:"startTime",title:"保障起始日期",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"endTime",title:"保障截止日期",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"orderAmt",title:"保单金额",width:180,align:"center"},							
+							{field:"userPhone",title:"投保用户手机号",width:180,align:"center"},
+							{field:"recognizeeName",title:"被保用户姓名",width:180,align:"center"},							
+							{field:"recognizeeCertNo",title:"被保用户证件号码",width:180,align:"center"},
+							{field:"recognizeePhone",title:"被保用户手机号",width:180,align:"center"},
+							{field:"salesMan",title:"业务员",width:180,align:"center"},
+							{field:"commissionAmt",title:"佣金",width:180,align:"center"},							
+							{field:"auditStatus",title:"审批状态",width:180,align:"center"},
+							{field:"auditDate",title:"审批日期",width:180,align:"center",formatter:dateTimeFormatter},							
+							{field:"createTime",title:"创建日期",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"updateTime",title:"更新日期",width:180,align:"center",formatter:dateTimeFormatter},
+							{field:"操作",title:"操作",width:80,align:"left",
+								formatter:function(value,row,index){
+									var str= '<a href="javascript:void(0);" onclick="to_editctOrder(\''+row.orderId+'\');">编辑</a>';
+									return str;
+								}
+							}	 				
 	 			]
 	 	];
 /*######################grid columns end##############################*/

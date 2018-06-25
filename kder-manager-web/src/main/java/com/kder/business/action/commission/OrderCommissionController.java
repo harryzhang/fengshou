@@ -52,8 +52,6 @@ import com.kder.business.service.commission.IOrderCommissionService;
 @Controller
 @RequestMapping("/ordercommission")
 public class OrderCommissionController extends BaseAction{
-	//默认多列排序,example: username desc,createTime asc
-	//protected static final String DEFAULT_SORT_COLUMNS = null; 
 	@Resource
 	private IOrderCommissionService orderCommissionService;
 
@@ -75,16 +73,16 @@ public class OrderCommissionController extends BaseAction{
         logger.info("----listOrderCommission----");
         try{
             PageDo<OrderCommission> page = PageDoUtil.getPage(pagination);
-            String companyName = getString("searchPolicyName");
+            String searchOrderNo = getString("searchOrderNo");
             Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(companyName)){
-                param.put("policyName",companyName);
-                model.addAttribute("searchPolicyName",companyName);
+            if(StringUtils.isNotBlank(searchOrderNo)){
+                param.put("orderNo",searchOrderNo);
+                model.addAttribute("searchOrderNo",searchOrderNo);
             }
-            String managerName = getString("searManagerName");
+            String managerName = getString("searchManagerName");
             if(StringUtils.isNotBlank(managerName)){
                 param.put("managerName", managerName);
-                model.addAttribute("searManagerName",managerName);
+                model.addAttribute("searchManagerName",managerName);
             }
             page = orderCommissionService.getOrderCommissionPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
@@ -175,7 +173,7 @@ public class OrderCommissionController extends BaseAction{
             if(StringUtils.isNotBlank(searchOderNo)){
                 example.createCriteria().andOrderNoLike(searchOderNo);
             }
-            String managerName = getString("searManagerName");
+            String managerName = getString("searchManagerName");
             if(StringUtils.isNotBlank(managerName)){
             	example.createCriteria().andUserNameLike(managerName);
             }

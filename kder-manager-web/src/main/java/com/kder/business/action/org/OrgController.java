@@ -75,16 +75,16 @@ public class OrgController extends BaseAction{
         logger.info("----listOrg----");
         try{
             PageDo<OrgDo> page = PageDoUtil.getPage(pagination);
-            String companyName = getString("searchPolicyName");
+            String searchOrgName = getString("searchOrgName");
             Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(companyName)){
-                param.put("policyName",companyName);
-                model.addAttribute("searchPolicyName",companyName);
+            if(StringUtils.isNotBlank(searchOrgName)){
+                param.put("orgName",searchOrgName);
+                model.addAttribute("searchOrgName",searchOrgName);
             }
-            String managerName = getString("searManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-                param.put("managerName", managerName);
-                model.addAttribute("searManagerName",managerName);
+            String searchOrgCode = getString("searchOrgCode");
+            if(StringUtils.isNotBlank(searchOrgCode)){
+                param.put("orgCode", searchOrgCode);
+                model.addAttribute("searchOrgCode",searchOrgCode);
             }
             page = orgService.getOrgPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
@@ -175,6 +175,11 @@ public class OrgController extends BaseAction{
           
             if(StringUtils.isNotBlank(searchOrgName)){
                 example.createCriteria().andOrgNameLike(searchOrgName);
+            }
+            String searchOrgCode = getString("searchOrgCode");
+            
+            if(StringUtils.isNotBlank(searchOrgCode)){
+            	example.createCriteria().andOrgCodeLike(searchOrgCode);
             }
           
             List<OrgDo> orgLst = orgService.selectOrg(example);

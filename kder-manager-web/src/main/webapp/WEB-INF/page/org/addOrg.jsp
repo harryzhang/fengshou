@@ -19,7 +19,7 @@
 					<input type="hidden" id="id" name="id" value="${org.id}"/>
 					<tr>	
 						<td align="right">
-							<label for="name">orgCode</label>
+							<label for="name">组织机构编码</label>
 						</td>	
 						<td>
 								<input type="text" id="orgCode" name="orgCode" value="${org.orgCode}"/>												
@@ -27,7 +27,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">orgName</label>
+							<label for="name">组织机构名称</label>
 						</td>	
 						<td>
 								<input type="text" id="orgName" name="orgName" value="${org.orgName}"/>												
@@ -35,7 +35,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">parentId</label>
+							<label for="name">上级组织ID</label>
 						</td>	
 						<td>
 								<input type="text" id="parentId" name="parentId" value="${org.parentId}"/>												
@@ -43,7 +43,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">status</label>
+							<label for="name">状态</label>
 						</td>	
 						<td>
 								<input type="text" id="status" name="status" value="${org.status}"/>												
@@ -57,14 +57,14 @@
 								<input type="text" 
 								id="createTime" 
 								name="createTime" 
-								value="<fmt:formatDate value="createTime" pattern="yyyy-MM-dd"/>"
-								class="easyui-datebox" size="14" data-options="editable : true"  
+								value="<fmt:formatDate value="${org.createTime}" pattern="yyyy-MM-dd"/>"
+								class="easyui-datebox" size="14" data-options="editable : false"  
 								/>
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">createBy</label>
+							<label for="name">创建人</label>
 						</td>	
 						<td>
 								<input type="text" id="createBy" name="createBy" value="${org.createBy}"/>												
@@ -72,20 +72,20 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">updateTime</label>
+							<label for="name">更新日期</label>
 						</td>	
 						<td>
 								<input type="text" 
 								id="updateTime" 
 								name="updateTime" 
-								value="<fmt:formatDate value="updateTime" pattern="yyyy-MM-dd"/>"
+								value="<fmt:formatDate value="${org.updateTime}" pattern="yyyy-MM-dd"/>"
 								class="easyui-datebox" size="14" data-options="editable : true"  
 								/>
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">updateBy</label>
+							<label for="name">更新人</label>
 						</td>	
 						<td>
 								<input type="text" id="updateBy" name="updateBy" value="${org.updateBy}"/>												

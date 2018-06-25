@@ -4,7 +4,7 @@ $(function(){
 		
 	$("#searchorgForm #searchButton").on("click",function(){
 		$("#tt_Org").datagrid('load',{
-			'searchStr': $("#searchorgForm #searchStr").val(),
+			'searchOrgName': $("#searchorgForm #searchOrgName").val(),
 			'searchCodeStr':$("#searchorgForm #searchCodeStr").val()		
 		});
 	});
@@ -20,7 +20,7 @@ $(function(){
 	var toolbar_tt = [
 					{
 						iconCls:"icon-edit",
-						text:"新增",
+						text:"新增/编辑",
 						handler:to_addorg
 					}
 	          	];
@@ -30,14 +30,14 @@ $(function(){
 	var columns_tt = [
       			[	 				
 							{field:'id',title:'id',width:100,hidden:true},						
-								{field:"orgCode",title:"编码",width:180,align:"center"},
-								{field:"orgName",title:"编码",width:180,align:"center"},
-								{field:"parentId",title:"编码",width:180,align:"center"},
-								{field:"status",title:"编码",width:180,align:"center"},
-								{field:"createTime",title:"编码",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"createBy",title:"编码",width:180,align:"center"},
-								{field:"updateTime",title:"编码",width:180,align:"center",formatter:dateTimeFormatter},
-								{field:"updateBy",title:"编码",width:180,align:"center"},
+								{field:"orgCode",title:"机构编码",width:180,align:"center"},
+								{field:"orgName",title:"组织机构名称",width:180,align:"center"},
+								{field:"parentId",title:"上级组织",width:180,align:"center"},
+								{field:"status",title:"状态",width:180,align:"center"},
+								{field:"createTime",title:"创建日期",width:180,align:"center",formatter:dateTimeFormatter},
+								{field:"createBy",title:"创建人",width:180,align:"center"},
+								{field:"updateTime",title:"更新日期",width:180,align:"center",formatter:dateTimeFormatter},
+								{field:"updateBy",title:"更新人",width:180,align:"center"},
 					{field:"操作",title:"操作",width:80,align:"left",
 	 					formatter:function(value,row,index){
 	 					  var str= '<a href="javascript:void(0);" onclick="to_editorg(\''+row.id+'\');">编辑</a>';
@@ -75,7 +75,7 @@ $(function(){
 		columns:columns_tt,
 		toolbar:toolbar_tt,
 		queryParams:{
-			'searchStr': $("#searchorgForm #searchStr").val(),
+			'searchOrgName': $("#searchorgForm #searchOrgName").val(),
 			'searchCodeStr':$("#searchorgForm #searchCodeStr").val()
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox

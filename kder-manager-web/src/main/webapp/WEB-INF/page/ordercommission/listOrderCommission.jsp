@@ -26,8 +26,8 @@
 			      <table border="0">
 			        <tr>
 			          <td class="tdfont">查询条件:
-			          	<input type="text" size="14" id="searchStr" name="searchStr" placeholder="字典名称" >
-			          	<input type="text" size="14" id="searchCodeStr" name="searchCodeStr" placeholder="字典编码" >
+			          	<input type="text" size="14" id="searchManagerName" name="searchManagerName" placeholder="业务员名称" >
+			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单编号" >
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 
