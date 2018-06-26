@@ -37,7 +37,21 @@ $(function(){
 							{field:"auditInstanceId",title:"审批Id",width:180,hidden:true},
 							{field:"orderNo",title:"保单号",width:180,align:"center"},
 							{field:"userName",title:"用户姓名",width:180,align:"center"},
-							{field:"orderStatus",title:"订单状态",width:180,align:"center"},
+							{field:"orderStatus",title:"订单状态",width:180,align:"center",
+								formatter:function(value,row,index){
+			 						if(value=="1"){
+			 							return "草稿";
+			 						}else if(value=="2"){
+			 							return "审批中";
+			 						}else if(value=="3"){
+			 							return "已生效订单";
+			 						}else if(value=="4"){
+			 							return "在续订单";
+			 						}else if(value=="5"){
+			 							return "已完成订单";
+			 						}
+				 				}
+							},
 							{field:"orderPeriod",title:"保障期限",width:180,align:"center"},
 							{field:"startTime",title:"保障起始日期",width:180,align:"center",formatter:dateTimeFormatter},
 							{field:"endTime",title:"保障截止日期",width:180,align:"center",formatter:dateTimeFormatter},
@@ -48,7 +62,19 @@ $(function(){
 							{field:"recognizeePhone",title:"被保用户手机号",width:180,align:"center"},
 							{field:"salesMan",title:"业务员",width:180,align:"center"},
 							{field:"commissionAmt",title:"佣金",width:180,align:"center"},							
-							{field:"auditStatus",title:"审批状态",width:180,align:"center"},
+							{field:"auditStatus",title:"审批状态",width:180,align:"center",
+								formatter:function(value,row,index){
+			 						if(value=="1"){
+			 							return "待审批";
+			 						}else if(value=="2"){
+			 							return "审批中";
+			 						}else if(value=="3"){
+			 							return "已审批";
+			 						}else if(value=="4"){
+			 							return "审批不通过";
+			 						}
+				 				}
+							},
 							{field:"auditDate",title:"审批日期",width:180,align:"center",formatter:dateTimeFormatter},							
 							{field:"createTime",title:"创建日期",width:180,align:"center",formatter:dateTimeFormatter},
 							{field:"updateTime",title:"更新日期",width:180,align:"center",formatter:dateTimeFormatter},

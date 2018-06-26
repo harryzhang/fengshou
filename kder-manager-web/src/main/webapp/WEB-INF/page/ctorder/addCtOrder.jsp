@@ -28,18 +28,22 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">产品Id</label>
+							<label for="name">产品</label>
 						</td>	
 						<td>
-								<input type="text" id="prodId" name="prodId" value="${ctorder.prodId}"/>												
+								<input type="text" id="prodId" name="prodId" value="${ctorder.prodId}"/>
+								<input type="text" id="productName" name="productName" value="${ctorder.productName}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('prodId','productName','选择产品','PROD');" value="选择产品"/>											
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">用户Id</label>
+							<label for="name">用户</label>
 						</td>	
 						<td>
-								<input type="text" id="userId" name="userId" value="${ctorder.userId}"/>												
+								<input type="text" id="userId" name="userId" value="${ctorder.userId}"/>
+								<input type="text" id="userName" name="userName" value="${ctorder.userName}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择产品','PEOPLE');" value="选择产品"/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -47,7 +51,20 @@
 							<label for="name">订单状态</label>
 						</td>	
 						<td>
-								<input type="text" id="orderStatus" name="orderStatus" value="${ctorder.orderStatus}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="orderStatus" 
+								       name="orderStatus" 
+									   value="${ctorder.orderStatus}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '草稿', value: '1' },
+							 							   { text: '审批中', value: '2' },
+							 							   { text: '已生效订单', value: '3' },
+							 							   { text: '在续订单', value: '4' },
+							 							   { text: '已完成订单', value: '5' }]"
+								/>
 						</td>						   
 					</tr>
 					<tr>	
@@ -105,7 +122,17 @@
 							<label for="name">投保人证件类别</label>
 						</td>	
 						<td>
-								<input type="text" id="userCertType" name="userCertType" value="${ctorder.userCertType}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="userCertType" 
+								       name="userCertType" 
+									   value="${ctorder.userCertType}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '身份证', value: '0' },
+							 							   { text: '港澳通行证', value: '2' }]"
+								/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -150,7 +177,18 @@
 							<label for="name">被保人证件类型</label>
 						</td>	
 						<td>
-								<input type="text" id="recognizeeCertType" name="recognizeeCertType" value="${ctorder.recognizeeCertType}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="recognizeeCertType" 
+								       name="recognizeeCertType" 
+									   value="${ctorder.recognizeeCertType}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '身份证', value: '0' },
+							 							   { text: '港澳通行证', value: '2' }]"
+								/>
+																				
 						</td>						   
 					</tr>
 					<tr>	
@@ -182,7 +220,17 @@
 							<label for="name">被保人性别</label>
 						</td>	
 						<td>
-								<input type="text" id="recognizeeGender" name="recognizeeGender" value="${ctorder.recognizeeGender}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="recognizeeGender" 
+								       name="recognizeeGender" 
+									   value="${ctorder.recognizeeGender}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '男', value: '男' },
+							 							   { text: '女', value: '女' }]"
+								/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -190,7 +238,18 @@
 							<label for="name">被保是否有社保</label>
 						</td>	
 						<td>
-								<input type="text" id="recognizeeSecurity" name="recognizeeSecurity" value="${ctorder.recognizeeSecurity}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="recognizeeSecurity" 
+								       name="recognizeeSecurity" 
+									   value="${ctorder.recognizeeSecurity}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '有', value: '0' },
+							 							   { text: '无', value: '1' }]"
+								/>												
+																				
 						</td>						   
 					</tr>
 					<tr>	
@@ -198,23 +257,28 @@
 							<label for="name">跟投保是同一人</label>
 						</td>	
 						<td>
-								<input type="text" id="isSame" name="isSame" value="${ctorder.isSame}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="isSame" 
+								       name="isSame" 
+									   value="${ctorder.isSame}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '是', value: 'true' },
+							 							   { text: '否', value: 'false' }]"
+								/>													
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">业务员Id</label>
+							<label for="name">业务员</label>
 						</td>	
 						<td>
-								<input type="text" id="salesId" name="salesId" value="${ctorder.salesId}"/>												
-						</td>						   
-					</tr>
-					<tr>	
-						<td align="right">
-							<label for="name">业务员姓名</label>
-						</td>	
-						<td>
-								<input type="text" id="salesMan" name="salesMan" value="${ctorder.salesMan}"/>												
+								<input type="text" id="salesId" name="salesId" value="${ctorder.salesId}"/>
+								<input type="text" id="salesMan" name="salesMan" value="${ctorder.salesMan}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('salesId','salesMan','选择业务员','MANAGER_PEOPLE');" value="选择产品"/>
+																				
 						</td>						   
 					</tr>
 					<tr>	
@@ -225,6 +289,7 @@
 								<input type="text" id="commissionAmt" name="commissionAmt" value="${ctorder.commissionAmt}"/>												
 						</td>						   
 					</tr>
+					<!-- 
 					<tr>	
 						<td align="right">
 							<label for="name">项目Id</label>
@@ -233,12 +298,25 @@
 								<input type="text" id="projectId" name="projectId" value="${ctorder.projectId}"/>												
 						</td>						   
 					</tr>
+					-->
 					<tr>	
 						<td align="right">
 							<label for="name">审批状态</label>
 						</td>	
 						<td>
-								<input type="text" id="auditStatus" name="auditStatus" value="${ctorder.auditStatus}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="auditStatus" 
+								       name="auditStatus" 
+									   value="${ctorder.auditStatus}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '待审批', value: '1' },
+							 							   { text: '审批中', value: '2' },
+							 							   { text: '已审批', value: '3' },
+							 							   { text: '审批不通过', value: '4' }]"
+								/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -282,37 +360,56 @@
 						</td>						   
 					</tr>
 		
-				<tr>
-					<td colspan="2">
-						<input id="submitButton" name="submitButton" type="button" onclick="ctorder_submit();"  value="提交" />	
-					</td>
-				<tr>			 
 			</table>	   
 		</div>	
 	</form>
 	<script type="text/javascript">
+	
+	/**
+	 * 创建一个模态 Dialog
+	 * 
+	 * @param id divId
+	 * @param _url Div链接
+	 * @param _title 标题
+	 * @param _width 宽度
+	 * @param _height 高度
+	 * @param _icon ICON图标
+	 */
+	function createModalDialog(id, _url, _title, _width, _height, _icon){
+	    $("body").append("<div id='"+id+"' class='easyui-window'></div>");
+	    if (_width == null)
+	        _width = 800;
+	    if (_height == null)
+	        _height = 500;
+
+	    $("#"+id).dialog({
+	        title: _title,
+	        width: _width,
+	        height: _height,
+	        cache: false,
+	        iconCls: _icon,
+	        href: _url,
+	        collapsible: false,
+	        minimizable:false,
+	        maximizable: true,
+	        resizable: false,
+	        modal: true,
+	        closed: true
+	    });
+	}
+	
+	function commonChooseDialog(retId,retText,_title,chooseType){
+		var dialogDivId = "c_ch_w";
+		var url="<c:url value='/choose/index.html?chooseType='/>"+chooseType+"&retId="+retId+"&retText="+retText;
+		//移除存在的Dialog
+		$("#"+dialogDivId).remove();
+		//先根据div的id删除，但界面元素还是会存在dialog div，还需执行dialog的销毁操作
+		$("#"+dialogDivId).dialog('destroy');
+		//创建窗口
+		createModalDialog(dialogDivId,url,_title, 600, 600);
 		
-    function ctorder_submit(){
-    	$.ajax({ 
-    			url: "<c:url value='/ctorder/saveCtOrder.html'/>", 
-    			data: $("#editCtOrderForm").serialize(),
-    			type:"post",
-    			dataType:"json",
-    			success: function(ret){
-    	   	 		if(ret.code==="0"){
-    	   	 			$.messager.confirm("保存成功",
-    	   	 				           '是否继续添加？', 
-    	   	 				           function(r){
-						   	   			   if(r==false){
-						   	   				$("#editCtOrderDiv").dialog("close");
-						   	   			   }
-    	   						});
-    	   	 		}else{
-    	   	 			$.messager.alert("error",ret.msg);
-    	   	 		}
-    	      	}
-    	        });
-    }
+		$("#"+dialogDivId).dialog('open');
+	}
 	
 </script>
 

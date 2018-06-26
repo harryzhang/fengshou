@@ -80,7 +80,7 @@ public class OrderServiceImpl implements IOrderService {
 		logger.debug("addCtOrder: "+newCtOrder);
 		if(StringUtils.isBlank(newCtOrder.getOrderNo())){
 			Random random = new Random();
-			String no = StringUtil.fullString(5, random.nextInt(100));
+			String no = StringUtil.fullString(5, random.nextInt(10));
 			String userId = StringUtil.fullString(8,newCtOrder.getUserId().intValue());
 			newCtOrder.setOrderNo("B"+DateUtil.YYYY_MM_DD.format(new Date())+userId+no);
 		}
