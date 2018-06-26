@@ -114,6 +114,14 @@ public final class DateUtil {
 
 	}
 	
+	public static Date addDays(Date begin, int days) {
+		Calendar calst = java.util.Calendar.getInstance();
+		calst.setTime(begin);		
+		calst.add(Calendar.DAY_OF_MONTH, days);
+		return calst.getTime();
+	}
+	
+	
 	/**
 	 * 得到当前日期
 	 * @return
@@ -123,6 +131,10 @@ public final class DateUtil {
 		 return calendar.getTime();
 	}
     public static void main(String[] args) {
+    	
+    	Date d = addDays(new Date(), 10);
+    	System.out.println(YYYY_MM_DD.format(d));
+    	
         Date a = getDate(new Date(), 0, 0, -1);
         System.out.println(a);
         a = getDate(a, 0, 0, -1);

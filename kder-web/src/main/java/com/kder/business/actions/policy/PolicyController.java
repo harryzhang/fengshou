@@ -1,6 +1,7 @@
 package com.kder.business.actions.policy;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
+import com.kder.business.common.util.DateUtil;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
 import com.kder.business.service.order.IOrderService;
@@ -128,6 +129,7 @@ public class PolicyController extends BaseController {
     	String area = getString("area");//地址
     	String areaValue = getString("areaValue"); //地址
     	String same = getString("same");//投保和被保是否同一人
+    	String date = getString("date");//投保起止日期
     	
     	String deadline = getString("deadline");//保险期限
     	String relationshipType = getString("relationshipType");//关系
@@ -178,6 +180,10 @@ public class PolicyController extends BaseController {
     	}
     	if(StringUtils.isNotBlank(protectMobile)){
     		newCtOrder.setRecognizeePhone(protectMobile);    		
+    	}
+    	if(StringUtils.isNotBlank(date)){
+    		newCtOrder.setStartTime(new Date(date));
+    		newCtOrder.setEndTime(DateUtil.addDays(newCtOrder.getStartTime(), Integer.valueOf(deadline))); 
     	}
     	
     	if("true".equals(same)){

@@ -7,7 +7,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Document</title>
+    <title>个人中心</title>
     <link rel="stylesheet" href="<c:url value='/css/base.css'/>" />
     <link rel="stylesheet" href="<c:url value='/css/element.css'/>" />
     <link rel="stylesheet" href="<c:url value='/css/main.css'/>" />
@@ -20,7 +20,7 @@
                 <a href="http://test.51dfs.cn/article_detail.html?typeid=1001">保单验证</a> |
                 <a href="http://test.51dfs.cn/article_detail.html?typeid=1002">信息披露</a> |
                 <a href="http://test.51dfs.cn/article_detail.html?typeid=1003">关于我们</a> |
-                <a href="http://test.51dfs.cn/article_detail.html?typeid=1004">联系我们</a>
+                <a href="http://test.51dfs.cn/html/1/93/96/index.html">联系我们</a>
             </p>
             <p class="right">
             <a href="login.html">退出</a>
@@ -33,11 +33,11 @@
                 <img src="http://test.51dfs.cn/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
             </a>
             <ul class="header-nav">
-                <li><a class="on" target="_self" href="http://test.51dfs.cn/index.html">首 页</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/index.html">首 页</a></li>
                 <li><a target="_self" href="http://test.51dfs.cn/products_list.html">全部保险产品</a></li>
                 <li><a target="_self" href="http://test.51dfs.cn/claims.html">保险理赔</a></li>
                 <li><a target="_self" href="">企业团险</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
+                <li><a class="on" target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
             </ul>
             <div class="header-rnav right">
 <a href="http://test.51dfs.cn/private_custom.html">
@@ -62,8 +62,10 @@
                 <i class="i1"></i>
                 我的账户
             </dt>
-            <dd class="on"><a href="center_settings.html">账户及密码</a></dd>
+            <dd class="on"><a href="http://test.51dfs.cn/kder-api/setting/toSetting.do">账户及密码</a></dd>
+            <!-- 
             <dd><a href="center_contacts.html">常用联系人</a></dd>
+             -->
         </dl>
         <dl>
             <dt>
@@ -112,7 +114,7 @@
                             <p class="cGray">${sysUserDo.peopleMail}</p>
                         </td>
                         <td class="edit">
-                            <a href="center_email.html" class="cBlue">绑定</a>
+                            <a href="http://test.51dfs.cn/kder-api/user/toChangeMail.do" class="cBlue">绑定</a>
                         </td>
                     </tr>
                     <tr>
@@ -124,7 +126,7 @@
                             <p class="cGray">*******</p>
                         </td>
                         <td class="edit">
-                            <a href="center_update_login_password.html" class="cBlue">修改</a>
+                            <a href="http://test.51dfs.cn/kder-api/user/toChangePwd.do" class="cBlue">修改</a>
                         </td>
                     </tr>
                 </table>
@@ -132,7 +134,6 @@
 
         </div>
     </div>
-</div>
 </div>
 
     <footer class="footer">

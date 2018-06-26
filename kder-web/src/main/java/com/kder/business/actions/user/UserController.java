@@ -206,6 +206,43 @@ public class UserController extends BaseController {
          ModelAndView mav = new ModelAndView("center/centerModifyPassword");
          return mav;
     }
+    @RequestMapping(value = "/toChangeMail", method ={  RequestMethod.GET,RequestMethod.POST })
+    public  ModelAndView  toChangeMail() {
+    	ModelAndView mav = new ModelAndView("center/centerEmail");
+    	return mav;
+    }
+    
+    /**
+     * 邮箱认证
+     * @param request
+     * @param response
+     * @return  
+     */
+    @RequestMapping(value = "/changeMail", method = RequestMethod.POST)
+    public Result<?> changeMail() {
+    	
+    	String email = getString("email");
+    	String identity = getString("identity");
+    	String stepIndex = getString("stepIndex");
+        Assert.hasText(email, "请输入邮箱地址");
+        Assert.hasText(stepIndex, "当前步骤获取异常");
+        
+        logger.info("changeMail , email:" + email + "; identity:" + identity);
+        
+        Integer userId = this.getUserId();
+        Assert.notNull(userId, "未登录");
+        
+        People userDo = userService.selectByPrimaryKey(userId);
+        Assert.notNull(userDo, "用户不存在");
+        
+        userDo.setPeopleMail(email);
+        userService.updateByPrimaryKey(userDo);
+        
+        String token = TokenUtil.createToken(userDo.getPeopleId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        return Result.successResult("邮箱修改成功", map);
+    }
     
     
     /**

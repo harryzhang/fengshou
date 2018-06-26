@@ -7,73 +7,76 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/element.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <title>个人中心-修改密码</title>
+    <link rel="stylesheet" href="<c:url value='/css/base.css'/>" />
+    <link rel="stylesheet" href="<c:url value='/css/element.css'/>" />
+    <link rel="stylesheet" href="<c:url value='/css/main.css'/>" />
+    
 </head>
 <body>
     <div class="top-bar">
         <div class="container clearfix">
             <p class="left">
-                <a href="article_detail.html?typeid=1001">保单验证</a> |
-                <a href="article_detail.html?typeid=1002">信息披露</a> |
-                <a href="article_detail.html?typeid=1003">关于我们</a> |
-                <a href="article_detail.html?typeid=1004">联系我们</a>
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1001">保单验证</a> |
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1002">信息披露</a> |
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1003">关于我们</a> |
+                <a href="http://test.51dfs.cn/html/1/93/96/index.html">联系我们</a>
             </p>
             <p class="right">
-            <a href="login.html">登陆</a> |
-            <a href="register.html">注册</a>
+            <a href="login.html">退出</a>
             </p>
         </div>
     </div>
     <div class="top-header">
         <div class="container clearfix">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="" width="177" height="47" />
+                <img src="http://test.51dfs.cn/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
             </a>
             <ul class="header-nav">
-                <li><a class="on" target="_self" href="index.html">首 页</a></li>
-                <li><a target="_self" href="products_list.html">全部保险产品</a></li>
-                <li><a target="_self" href="claims.html">保险理赔</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/index.html">首 页</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/products_list.html">全部保险产品</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/claims.html">保险理赔</a></li>
                 <li><a target="_self" href="">企业团险</a></li>
-                <li><a target="_self" href="center_orders.html">我的保单</a></li>
+                <li><a class="on" target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
             </ul>
             <div class="header-rnav right">
-                <a href="private_custom.html">
-                    <i class="i1"></i>
-                    定制
-                </a>
+<a href="http://test.51dfs.cn/private_custom.html">
+                <i class="i1"></i>
+                定制
+            </a>
                 <a href="">
                     <i class="i2"></i>
                     公众号
                 </a>
             </div>
         </div>
-    </div>          
+    </div>    
 <div class="container mt20 clearfix">
     <div class="side-nav">
         <div class="user-info">
-            <img src="images/user_avator.jpg" height="90" width="90" alt="" />
-            <p>Hi，12345678900</p>
+            <img src="http://test.51dfs.cn/templets/1/fengshou//images/user_avator.jpg" height="90" width="90" alt="" />
+            <p>Hi，${sysUserDo.peoplePhone}</p>
         </div>
         <dl>
             <dt>
                 <i class="i1"></i>
                 我的账户
             </dt>
-            <dd><a href="center_settings.html">账户及密码</a></dd>
+            <dd class="on"><a href="http://test.51dfs.cn/kder-api/setting/toSetting.do">账户及密码</a></dd>
+            <!-- 
             <dd><a href="center_contacts.html">常用联系人</a></dd>
+             -->
         </dl>
         <dl>
             <dt>
                 <i class="i2"></i>
                 订单管理
             </dt>
-            <dd><a href="center_orders.html?type=1">已完成订单</a></dd>
-            <dd><a href="center_orders.html?type=2">未完成订单</a></dd>
-            <dd><a href="center_orders.html?type=3">可续保订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=5">已完成订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=1">未完成订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=4">可续保订单</a></dd>
         </dl>
+        <!-- 
         <dl>
             <dt>
                 <i class="i3"></i>
@@ -81,6 +84,7 @@
             </dt>
             <dd><a href="">我的积分</a></dd>
         </dl>
+         -->
     </div>
     <div class="center-content">
         <div class="inner-content">
@@ -114,7 +118,6 @@
         </div>
     </div>
 </div>
-</div>
 
     <footer class="footer">
         <div class="copyright">
@@ -133,10 +136,9 @@
             <p>Copyright ©2013-2018 深圳市康达尔（集团）股份有限公司 粤ICP备08029152号</p>
         </div>
     </footer>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/vue.js"></script>
-    <script src="js/element.js"></script>
+    <script src="<c:url value='/js/jquery.js'/>"></script>
+    <script src="<c:url value='/js/vue.js'/>"></script>
+    <script src="<c:url value='/js/element.js'/>"></script>
     <script>
         var vm = new Vue({
             el: '#appCtrl',
@@ -179,8 +181,20 @@
                     var that = this;
                     this.$refs.form.validate(function(valid){
                         if(valid){
-                            alert('提交表单')
-                            that.$message.error('手机短信验证码错误');
+                            $.ajax({
+            						type: 'POST',
+            						url:'http://test.51dfs.cn/kder-api/user/changePwd.do',
+            						data: {"oldPwd":vm.form.oldPsw,"newPwd":vm.form.psw,"confirmNewPwd":vm.form.confirmPsw},
+            						dataType:'json',
+            						success:function(res){
+            							if(res.code==="0"){
+            								location.href = 'http://test.51dfs.cn/kder-api/setting/toSetting.do';
+            							}else{
+            								vm.$message.error(res.msg)
+            							}
+            						}
+            					})
+            				  //end ajax
                         }else{
                             return false;
                         }
