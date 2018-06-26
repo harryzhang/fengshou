@@ -25,4 +25,17 @@ public class CenterSettingController extends BaseController{
          return mav;
     }
     
+    
+	/**
+     * 我的保单页面
+     * @param request
+     * @param response
+     * @return  
+     */
+    @RequestMapping(value = "/mypolicy", method ={ RequestMethod.GET, RequestMethod.POST })
+    public  ModelAndView  mypolicy() {
+         ModelAndView mav = new ModelAndView("center/centerOrder");
+         return mav;
+    }
+    
 }

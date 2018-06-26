@@ -6,9 +6,12 @@
 
 package com.kder.business.service.order;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kder.business.common.constant.Constants;
 import com.kder.business.common.page.PageDo;
+import com.kder.business.common.util.DateUtil;
+import com.kder.business.common.util.StringUtil;
 import com.kder.business.dao.order.CtOrderMapper;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
@@ -73,6 +78,16 @@ public class OrderServiceImpl implements IOrderService {
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public int addCtOrder(CtOrder newCtOrder){
 		logger.debug("addCtOrder: "+newCtOrder);
+		if(StringUtils.isBlank(newCtOrder.getOrderNo())){
+			Random random = new Random();
+			String no = StringUtil.fullString(5, random.nextInt(100));
+			String userId = StringUtil.fullString(8,newCtOrder.getUserId().intValue());
+			newCtOrder.setOrderNo("B"+DateUtil.YYYY_MM_DD.format(new Date())+userId+no);
+		}
+		if(null == newCtOrder.getOrderStatus()){
+			newCtOrder.setOrderStatus(1);
+		}
+		newCtOrder.setCreateTime(new Date());
 		return ctOrderDao.insertSelective(newCtOrder);
 	}
 	

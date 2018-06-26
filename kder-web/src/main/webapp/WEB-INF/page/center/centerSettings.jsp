@@ -17,31 +17,30 @@
     <div class="top-bar">
         <div class="container clearfix">
             <p class="left">
-                <a href="article_detail.html?typeid=1001">保单验证</a> |
-                <a href="article_detail.html?typeid=1002">信息披露</a> |
-                <a href="article_detail.html?typeid=1003">关于我们</a> |
-                <a href="article_detail.html?typeid=1004">联系我们</a>
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1001">保单验证</a> |
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1002">信息披露</a> |
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1003">关于我们</a> |
+                <a href="http://test.51dfs.cn/article_detail.html?typeid=1004">联系我们</a>
             </p>
             <p class="right">
-            <a href="login.html">登陆</a> |
-            <a href="register.html">注册</a>
+            <a href="login.html">退出</a>
             </p>
         </div>
     </div>
     <div class="top-header">
         <div class="container clearfix">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="" width="177" height="47" />
+                <img src="http://test.51dfs.cn/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
             </a>
             <ul class="header-nav">
-                <li><a class="on" target="_self" href="index.html">首 页</a></li>
-                <li><a target="_self" href="products_list.html">全部保险产品</a></li>
-                <li><a target="_self" href="claims.html">保险理赔</a></li>
+                <li><a class="on" target="_self" href="http://test.51dfs.cn/index.html">首 页</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/products_list.html">全部保险产品</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/claims.html">保险理赔</a></li>
                 <li><a target="_self" href="">企业团险</a></li>
-                <li><a target="_self" href="center_orders.html">我的保单</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
             </ul>
             <div class="header-rnav right">
-<a href="private_custom.html">
+<a href="http://test.51dfs.cn/private_custom.html">
                 <i class="i1"></i>
                 定制
             </a>
@@ -55,8 +54,8 @@
 <div class="container mt20 clearfix">
     <div class="side-nav">
         <div class="user-info">
-            <img src="images/user_avator.jpg" height="90" width="90" alt="" />
-            <p>Hi，12345678900</p>
+            <img src="http://test.51dfs.cn/templets/1/fengshou//images/user_avator.jpg" height="90" width="90" alt="" />
+            <p>Hi，${sysUserDo.peoplePhone}</p>
         </div>
         <dl>
             <dt>
@@ -71,10 +70,11 @@
                 <i class="i2"></i>
                 订单管理
             </dt>
-            <dd><a href="center_orders.html?type=1">已完成订单</a></dd>
-            <dd><a href="center_orders.html?type=2">未完成订单</a></dd>
-            <dd><a href="center_orders.html?type=3">可续保订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=5">已完成订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=1">未完成订单</a></dd>
+            <dd><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=4">可续保订单</a></dd>
         </dl>
+        <!-- 
         <dl>
             <dt>
                 <i class="i3"></i>
@@ -82,6 +82,7 @@
             </dt>
             <dd><a href="">我的积分</a></dd>
         </dl>
+         -->
     </div>
     <div class="center-content">
         <div class="inner-content">
@@ -96,7 +97,7 @@
                             手机号
                         </td>
                         <td>
-                            <p class="cGray">12345678900</p>
+                            <p class="cGray">${sysUserDo.peoplePhone}</p>
                         </td>
                         <td class="edit">
                             <p class="cGray">已绑定</p>
@@ -108,7 +109,7 @@
                             电子邮箱
                         </td>
                         <td>
-                            <p class="cGray"></p>
+                            <p class="cGray">${sysUserDo.peopleMail}</p>
                         </td>
                         <td class="edit">
                             <a href="center_email.html" class="cBlue">绑定</a>
@@ -151,9 +152,9 @@
             <p>Copyright ©2013-2018 深圳市康达尔（集团）股份有限公司 粤ICP备08029152号</p>
         </div>
     </footer>
-    <script src="js/jquery.js"></script>
-    <script src="js/vue.js"></script>
-    <script src="js/element.js"></script>
+    <script src="<c:url value='/js/jquery.js'/>"></script>
+    <script src="<c:url value='/js/vue.js'/>"></script>
+    <script src="<c:url value='/js/element.js'/>"></script>
     <script>
         var vm = new Vue({
             el: '#appCtrl',

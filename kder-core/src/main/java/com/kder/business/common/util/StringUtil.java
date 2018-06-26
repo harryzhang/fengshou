@@ -3,6 +3,15 @@ package com.kder.business.common.util;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringUtil {
+	
+	public static String fullString(long i, int length) {
+        String result = String.valueOf(i);
+        while (result.length() < length) {
+            result = "0" + result;
+        }
+        return result;
+    }
+	
     /**
      * 过滤用户输入要保护应用程序免遭跨站点脚本编制的攻击，
      * 请通过 将敏感字符转换为其对应的字符实体来清理HTML。

@@ -16,6 +16,7 @@ import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.result.Result;
 import com.kder.business.entity.order.CtOrder;
+import com.kder.business.entity.order.CtOrderExample;
 import com.kder.business.service.order.IOrderService;
 
 
@@ -68,11 +69,25 @@ public class PolicyController extends BaseController {
     	
          try{
          	CtOrder newCtOrder = makeOrder();
-         	newCtOrder.setUserId(Long.valueOf(this.getUserId()));
-			
-         	//List<CtOrder> ordLst = orderService.selectCtOrder(example);
-         	
-         	int i = orderService.addCtOrder(newCtOrder);
+         	logger.info("userId:"+this.getUserId());
+         	if(null == this.getUserId()){
+         		return Result.failureResult("请先登录");
+         	}
+         	Long userId = Long.valueOf(this.getUserId());
+         	newCtOrder.setUserId(userId);
+         	newCtOrder.setCreateBy(userId);
+         	CtOrderExample example = new CtOrderExample();
+         	example.createCriteria().andUserIdEqualTo(userId);
+         	example.createCriteria().andProdIdEqualTo(newCtOrder.getProdId());
+         	example.createCriteria().andOrderStatusEqualTo(1);//草稿状态
+			List<CtOrder> ordLst = orderService.selectCtOrder(example);
+			int i = 0;
+			if(ordLst != null && ordLst.size()>0){
+				newCtOrder.setOrderId(ordLst.get(0).getOrderId());
+				i = orderService.updateCtOrderById(newCtOrder);
+			}else{
+				i = orderService.addCtOrder(newCtOrder);
+			}
          	
          	if(i>0){
          		return Result.successResult("提交成功");
@@ -123,6 +138,7 @@ public class PolicyController extends BaseController {
     	String protectMobile = getString("protectMobile"); //手机号码
 
     	CtOrder newCtOrder = new CtOrder();
+    	
     	if(StringUtils.isNotBlank(productId)){
     		newCtOrder.setProdId(Long.valueOf(productId));    		
     	}
