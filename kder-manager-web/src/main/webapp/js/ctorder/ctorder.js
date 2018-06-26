@@ -90,8 +90,8 @@ $(function(){
 	
 	$("#tt_CtOrder").datagrid({
 		url:httpUrl+"/ctorder/listCtOrder.html?&rand=" + Math.random(),
-		height:$("#body").height()-$('#search_areaCtOrder').height()-10,
-		width:$("#body").width(),
+		height:400,
+		width:500,
 		rownumbers:true,
 		fitColumns:true,
 		singleSelect:false,//配合根据状态限制checkbox

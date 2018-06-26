@@ -85,10 +85,10 @@ $(function(){
 		                            return '<input type="radio" name="selectRadio" id="selectRadio"' + index + '    value="' + row.id + '" />';
 		                        }
 		                    },
-							{field:"name",title:"名称",width:280},							
-							{field:"操作",title:"操作",width:100,align:"left",
+							{field:"name",title:"名称",width:120},							
+							{field:"操作",title:"操作",width:50,align:"left",
 								formatter:function(value,row,index){
-									var str= '<a href="javascript:void(0);" onclick="dochoose(\''+row.id+'\');">选择</a>';
+									var str= '<a href="javascript:void(0);" onclick="dochoose(\''+row.id+'\',\''+row.name+'\');">选择</a>';
 									return str;
 								}
 							}	 				
@@ -139,7 +139,11 @@ $(function(){
 	});	
 });
 /*##########################grid init end###################################################*/
-function dochoose(){
+function dochoose(retid,retname){
+	var idv= $("#searchCommonChooseForm #retId").val();
+	var txtv= $("#searchCommonChooseForm #retText").val();
+	$("#"+idv).val(retid);
+	$("#"+txtv).val(retname);
 	$("#tt_CommonChoose").dialog("close");
 }
 

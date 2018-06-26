@@ -4,21 +4,21 @@
 <mapper namespace="com.kder.business.dao.choose.ICommonChooseDao">
 	
 	<select id="getChooseProductPage" parameterType="map" resultType="Map">
-		select  id ,user_name as name
+		select  id ,username as name
 		from managers 
 		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
 			<if test="searchName != null">  
-				AND user_name like CONCAT('%',#{searchName},'%')
+				AND username like CONCAT('%',#{searchName},'%')
 			</if>			
          </trim> 
 	</select>
 	
 	<select id="getChooseManagerPeoplePage" parameterType="map" resultType="Map">
-		select  id ,user_name as name
+		select  id ,username as name
 		from managers 
 		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
 			<if test="searchName != null">  
-				AND user_name like CONCAT('%',#{searchName},'%')
+				AND username like CONCAT('%',#{searchName},'%')
 			</if>			
          </trim> 
 	</select>

@@ -43,7 +43,7 @@
 						<td>
 								<input type="text" id="userId" name="userId" value="${ctorder.userId}"/>
 								<input type="text" id="userName" name="userName" value="${ctorder.userName}"/>
-								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择产品','PEOPLE');" value="选择产品"/>												
+								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择用户','PEOPLE');" value="选择用户"/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -277,7 +277,7 @@
 						<td>
 								<input type="text" id="salesId" name="salesId" value="${ctorder.salesId}"/>
 								<input type="text" id="salesMan" name="salesMan" value="${ctorder.salesMan}"/>
-								<input type="button" onclick="javascript:commonChooseDialog('salesId','salesMan','选择业务员','MANAGER_PEOPLE');" value="选择产品"/>
+								<input type="button" onclick="javascript:commonChooseDialog('salesId','salesMan','选择业务员','MANAGER_PEOPLE');" value="选择业务员"/>
 																				
 						</td>						   
 					</tr>
