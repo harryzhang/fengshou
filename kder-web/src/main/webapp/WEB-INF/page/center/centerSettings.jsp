@@ -33,8 +33,8 @@
                 <img src="http://test.51dfs.cn/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
             </a>
             <ul class="header-nav">
-                <li><a target="_self" href="http://test.51dfs.cn/index.html">首 页</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/products_list.html">全部保险产品</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/">首 页</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/ins/view/index.do">全部保险产品</a></li>
                 <li><a target="_self" href="http://test.51dfs.cn/claims.html">保险理赔</a></li>
                 <li><a target="_self" href="">企业团险</a></li>
                 <li><a class="on" target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>

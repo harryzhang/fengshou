@@ -181,10 +181,9 @@ public class PolicyController extends BaseController {
     	if(StringUtils.isNotBlank(protectMobile)){
     		newCtOrder.setRecognizeePhone(protectMobile);    		
     	}
-    	if(StringUtils.isNotBlank(date)){
-    		newCtOrder.setStartTime(new Date(date));
-    		newCtOrder.setEndTime(DateUtil.addDays(newCtOrder.getStartTime(), Integer.valueOf(deadline))); 
-    	}
+
+    	newCtOrder.setStartTime(new Date());
+    	newCtOrder.setEndTime(DateUtil.addDays(newCtOrder.getStartTime(), Integer.valueOf(deadline))); 
     	
     	if("true".equals(same)){
     		newCtOrder.setRecognizeePhone(mobile);

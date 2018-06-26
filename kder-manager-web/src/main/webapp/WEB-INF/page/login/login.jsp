@@ -168,7 +168,7 @@
 <body>
 <div class="login">
     <div  class="logo" style="float:left;width:400px;">
-     	<font style="color:#FFFFFF;font-size:32px;">丰收经纪后台管理系统</font>
+     	<font style="color:#FFFFFF;font-size:32px;">丰收经纪业务系统</font>
     </div>
 <%--     <img src="<c:url value='/images/login_logo.png'/>" class="logo"> --%>
     <div class="login-wapper">
@@ -224,7 +224,7 @@
         var password = $("#password").val();
 
         if(HHN.checkEmpty(mobile)){
-            HHN.webPopup("请输入代理商编号！");
+            HHN.webPopup("请输入手机号码！");
             return false;
         }
         if(HHN.checkEmpty(password)){
