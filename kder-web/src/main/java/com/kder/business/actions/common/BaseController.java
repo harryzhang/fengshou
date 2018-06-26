@@ -17,7 +17,7 @@ import com.kder.web.contants.WebContants;
 
 public class BaseController {
 
-	private final static Logger logger = Logger.getLogger(BaseController.class);
+	protected final static Logger logger = Logger.getLogger(BaseController.class);
 	
     protected String getString(String name) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
