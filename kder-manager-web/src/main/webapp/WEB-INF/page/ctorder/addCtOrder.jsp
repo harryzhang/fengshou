@@ -28,12 +28,40 @@
 					</tr>
 					<tr>	
 						<td align="right">
+							<label for="name">保险公司</label>
+						</td>	
+						<td>
+								<input type="text" id="policyCompId" name="policyCompId" value="${ctorder.policyCompId}" readonly="readonly"/>
+								<input type="text" id="policyCompany" name="policyCompany" value="${ctorder.policyCompany}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('policyCompId','policyCompany','选择保险公司','POLICY_COMPANY');" value="选择保险公司"/>											
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
 							<label for="name">产品</label>
 						</td>	
 						<td>
-								<input type="text" id="prodId" name="prodId" value="${ctorder.prodId}"/>
+								<input type="text" id="prodId" name="prodId" value="${ctorder.prodId}" readonly="readonly"/>
 								<input type="text" id="productName" name="productName" value="${ctorder.productName}"/>
 								<input type="button" onclick="javascript:commonChooseDialog('prodId','productName','选择产品','PROD');" value="选择产品"/>											
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">产品编码</label>
+						</td>	
+						<td>
+								<input type="text" id="productCode" name="productCode" value="${ctorder.productCode}"/>
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">机构</label>
+						</td>	
+						<td>
+								<input type="text" id="orgId" name="orgId" value="${ctorder.orgId}" readonly="readonly"/>
+								<input type="text" id="orgCompany " name="orgCompany" value="${ctorder.orgCompany}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('orgId','orgCompany','选择机构','ORG');" value="选择机构"/>											
 						</td>						   
 					</tr>
 					<tr>	
@@ -41,9 +69,60 @@
 							<label for="name">用户</label>
 						</td>	
 						<td>
-								<input type="text" id="userId" name="userId" value="${ctorder.userId}"/>
+								<input type="text" id="userId" name="userId" value="${ctorder.userId}" readonly="readonly"/>
 								<input type="text" id="userName" name="userName" value="${ctorder.userName}"/>
 								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择用户','PEOPLE');" value="选择用户"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">险种</label>
+						</td>	
+						<td>
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="policyType" 
+								       name="policyType" 
+									   value="${ctorder.policyType}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '车险', value: '1' },
+							 							   { text: '非车险', value: '2' },
+							 							   { text: '寿险', value: '3' }]"
+								/>
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">支付方式</label>
+						</td>	
+						<td>
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="payType" 
+								       name="payType" 
+									   value="${ctorder.payType}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '月付', value: '1' },
+							 							   { text: '季付', value: '2' },
+							 							   { text: '年付', value: '3' },
+							 							   { text: '长付', value: '4' }]"
+								/>
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">支付期限</label>
+						</td>	
+						<td>
+								<input 							       
+								       id="payPeriod" 
+								       name="payPeriod" 
+									   value="${ctorder.payPeriod}"
+								/>
 						</td>						   
 					</tr>
 					<tr>	
@@ -275,7 +354,7 @@
 							<label for="name">业务员</label>
 						</td>	
 						<td>
-								<input type="text" id="salesId" name="salesId" value="${ctorder.salesId}"/>
+								<input type="text" id="salesId" name="salesId" value="${ctorder.salesId}" readonly="readonly"/>
 								<input type="text" id="salesMan" name="salesMan" value="${ctorder.salesMan}"/>
 								<input type="button" onclick="javascript:commonChooseDialog('salesId','salesMan','选择业务员','MANAGER_PEOPLE');" value="选择业务员"/>
 																				
@@ -287,6 +366,86 @@
 						</td>	
 						<td>
 								<input type="text" id="commissionAmt" name="commissionAmt" value="${ctorder.commissionAmt}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">佣金比率</label>
+						</td>	
+						<td>
+								<input type="text" id="commissionRate" name="commissionRate" value="${ctorder.commissionRate}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">代理费比率</label>
+						</td>	
+						<td>
+								<input type="text" id="proxyRate" name="proxyRate" value="${ctorder.proxyRate}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">代理费</label>
+						</td>	
+						<td>
+								<input type="text" id="proxyFee" name="proxyFee" value="${ctorder.proxyFee}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">车牌号</label>
+						</td>	
+						<td>
+								<input type="text" id="cardNo" name="cardNo" value="${ctorder.cardNo}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">单证号</label>
+						</td>	
+						<td>
+								<input type="text" id="billNo" name="billNo" value="${ctorder.billNo}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">被保人数</label>
+						</td>	
+						<td>
+								<input type="text" id="policyManCnt" name="policyManCnt" value="${ctorder.policyManCnt}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">总保额</label>
+						</td>	
+						<td>
+								<input type="text" id="policyAmt" name="policyAmt" value="${ctorder.policyAmt}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">首期保费</label>
+						</td>	
+						<td>
+								<input type="text" id="firstPolicyFee" name="firstPolicyFee" value="${ctorder.firstPolicyFee}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">续期保费</label>
+						</td>	
+						<td>
+								<input type="text" id="nextPolicyFee" name="nextPolicyFee" value="${ctorder.nextPolicyFee}"/>												
+						</td>						   
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">备注</label>
+						</td>	
+						<td>
+								<input type="text" id="remark" name="remark" value="${ctorder.remark}"/>												
 						</td>						   
 					</tr>
 					<!-- 

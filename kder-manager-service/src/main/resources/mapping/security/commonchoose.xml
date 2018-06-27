@@ -46,6 +46,26 @@
          </trim> 
 	</select>
 		
+	<select id="getChooseOrgPage" parameterType="map" resultType="Map">
+		SELECT id , org_name AS `name` FROM t_org 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND org_name like CONCAT('%',#{searchName},'%')
+			</if>			
+			<if test="searchCode != null">  
+				AND org_code like CONCAT('%',#{searchCode},'%')
+			</if>			
+         </trim> 
+	</select>
+	<select id="getChoosePolicyCompanyPage" parameterType="map" resultType="Map">
+		SELECT company_id AS id , company_name AS `name` FROM t_fs_insurance_company 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND company_name like CONCAT('%',#{searchName},'%')
+			</if>		
+         </trim> 
+	</select>
+		
 	
 </mapper>
 

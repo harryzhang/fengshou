@@ -36,6 +36,8 @@ $(function(){
 							{field:"projectId",title:"项目ID",width:180,hidden:true},
 							{field:"auditInstanceId",title:"审批Id",width:180,hidden:true},
 							{field:"orderNo",title:"保单号",width:180,align:"center"},
+							{field:"policyCompany",title:"保险公司",width:180,align:"center"},
+							{field:"productName",title:"产品名称",width:180,align:"center"},
 							{field:"userName",title:"用户姓名",width:180,align:"center"},
 							{field:"orderStatus",title:"订单状态",width:180,align:"center",
 								formatter:function(value,row,index){
