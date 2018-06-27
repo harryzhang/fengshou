@@ -90,8 +90,8 @@ $(function(){
 	
 	$("#tt_CtOrder").datagrid({
 		url:httpUrl+"/ctorder/listCtOrder.html?&rand=" + Math.random(),
-		height:400,
-		width:500,
+		height:$("#body").height()-$('#search_areaCtOrder').height()-10,
+		width:$("#body").width(),
 		rownumbers:true,
 		fitColumns:true,
 		singleSelect:false,//配合根据状态限制checkbox
@@ -146,8 +146,8 @@ function to_editctOrder(id){
 	var url = httpUrl+"/ctorder/addCtOrder.html?&rand=" + Math.random()+"&orderId="+id;
 	$('#editCtOrderDiv').dialog({
 		title: "新增",
-		width: 760,
-		height: 500,
+		width: 860,
+		height: 600,
 		closed: false,
 		closable:false,
 		cache: false,

@@ -45,9 +45,12 @@ public class ChooseController extends BaseAction{
     	String chooseType= this.getString("chooseType");
     	String retId = this.getString("retId");
     	String retText = this.getString("retText");
+    	String dialogDivId = this.getString("dialogDivId");
+    	
     	model.addAttribute("chooseType", chooseType);
     	model.addAttribute("retId", retId);
     	model.addAttribute("retText", retText);
+    	model.addAttribute("dialogDivId", dialogDivId);
         return "choose/listChoose";
     }
 	

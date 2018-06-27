@@ -35,8 +35,34 @@ $(function(){
 							{field:"userName",title:"用户名称",width:180,align:"center"},
 							{field:"commissionAmt",title:"佣金",width:180,align:"center"},
 							{field:"orderNo",title:"订单编号",width:180,align:"center"},
-							{field:"status",title:"是否有效",width:180,align:"center"},
-							{field:"auditStatus",title:"状态",width:180,align:"center"},
+							{field:"status",title:"记录状态",width:180,align:"center",
+								formatter:function(value,row,index){
+			 						if(value=="1"){
+			 							return "待审批";
+			 						}else if(value=="2"){
+			 							return "审批中";
+			 						}else if(value=="3"){
+			 							return "已审批";
+			 						}else if(value=="4"){
+			 							return "已发放";
+			 						}else if(value=="5"){
+			 							return "作废";
+			 						}
+				 				}
+							},
+							{field:"auditStatus",title:"状态",width:180,align:"center",
+								formatter:function(value,row,index){
+			 						if(value=="1"){
+			 							return "待审批";
+			 						}else if(value=="2"){
+			 							return "审批中";
+			 						}else if(value=="3"){
+			 							return "已审批";
+			 						}else if(value=="4"){
+			 							return "审核不通过";
+			 						}
+				 				}
+							},
 							{field:"auditTime",title:"审批时间",width:180,align:"center",formatter:dateTimeFormatter},
 							{field:"auditId",title:"审批人",width:180,align:"center"},
 							{field:"createBy",title:"创建人",width:180,align:"center"},

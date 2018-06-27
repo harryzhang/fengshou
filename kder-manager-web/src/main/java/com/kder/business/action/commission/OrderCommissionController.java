@@ -64,6 +64,16 @@ public class OrderCommissionController extends BaseAction{
     public String index(Model model){
         return "ordercommission/listOrderCommission";
     }
+    
+    /**
+     * 去列表页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/report")
+    public String report(Model model){
+        return "ordercommission/report";
+    }
 	
 	@RequestMapping("/listOrderCommission")
     public void listOrderCommission(NewPagination<OrderCommission> pagination,

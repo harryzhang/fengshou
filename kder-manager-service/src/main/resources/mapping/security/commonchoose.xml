@@ -32,7 +32,21 @@
 				AND people_phone like CONCAT('%',#{searchName},'%')
 			</if>			
          </trim> 
-	</select>	
+	</select>
+	
+	<select id="getChooseOrderPage" parameterType="map" resultType="Map">
+		select  order_id as id ,order_no as name
+		from ct_order 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND user_name like CONCAT('%',#{searchName},'%')
+			</if>			
+			<if test="searchCode != null">  
+				AND order_no like CONCAT('%',#{searchCode},'%')
+			</if>			
+         </trim> 
+	</select>
+		
 	
 </mapper>
 

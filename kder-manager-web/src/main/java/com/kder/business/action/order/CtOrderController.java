@@ -68,6 +68,16 @@ public class CtOrderController extends BaseAction{
     public String index(Model model){
         return "ctorder/listCtOrder";
     }
+    
+    /**
+     * 去列表页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/report")
+    public String report(Model model){
+        return "ctorder/report";
+    }
 	
 	@RequestMapping("/listCtOrder")
     public void listCtOrder(NewPagination<CtOrder> pagination,

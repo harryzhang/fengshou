@@ -22,23 +22,20 @@
 							<label for="name">业务员ID</label>
 						</td>	
 						<td>
-								<input type="text" id="userId" name="userId" value="${ordercommission.userId}"/>												
+								<input type="text" id="userId" name="userId" value="${ordercommission.userId}"/>
+								<input type="text" id="userName" name="userName" value="${ordercommission.userName}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择业务员','MANAGER_PEOPLE');" value="选择业务员"/>
+																				
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">保单ID</label>
+							<label for="name">保单</label>
 						</td>	
 						<td>
-								<input type="text" id="orderId" name="orderId" value="${ordercommission.orderId}"/>												
-						</td>						   
-					</tr>
-					<tr>	
-						<td align="right">
-							<label for="name">业务员姓名</label>
-						</td>	
-						<td>
-								<input type="text" id="userName" name="userName" value="${ordercommission.userName}"/>												
+								<input type="text" id="orderId" name="orderId" value="${ordercommission.orderId}"/>
+								<input type="text" id="orderNo" name="orderNo" value="${ordercommission.orderNo}"/>
+								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择保单','ORDER');" value="选择保单"/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -49,20 +46,26 @@
 								<input type="text" id="commissionAmt" name="commissionAmt" value="${ordercommission.commissionAmt}"/>												
 						</td>						   
 					</tr>
-					<tr>	
-						<td align="right">
-							<label for="name">保单编码</label>
-						</td>	
-						<td>
-								<input type="text" id="orderNo" name="orderNo" value="${ordercommission.orderNo}"/>												
-						</td>						   
-					</tr>
+					
 					<tr>	
 						<td align="right">
 							<label for="name">是否有效</label>
 						</td>	
 						<td>
-								<input type="text" id="status" name="status" value="${ordercommission.status}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="status" 
+								       name="status" 
+									   value="${ordercommission.status}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '待审批', value: '1' },
+							 							   { text: '审批中', value: '2' },
+							 							   { text: '已审批', value: '3' },
+							 							   { text: '已发放', value: '4' },
+							 							   { text: '作废', value: '5' }]"
+								/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -70,7 +73,20 @@
 							<label for="name">审批状态</label>
 						</td>	
 						<td>
-								<input type="text" id="auditStatus" name="auditStatus" value="${ordercommission.auditStatus}"/>												
+								<input size="20" 
+								       class="easyui-combobox" 
+								       id="auditStatus" 
+								       name="auditStatus" 
+									   value="${ordercommission.auditStatus}"
+									   data-options="panelHeight:'90',
+							 						valueField: 'value', 
+							 						textField: 'text', 
+							 						data: [{ text: '待审批', value: '1' },
+							 							   { text: '审批中', value: '2' },
+							 							   { text: '已审批', value: '3' },
+							 							   { text: '审批不通过', value: '4' }]"
+								/>	
+																				
 						</td>						   
 					</tr>
 					<tr>	
@@ -91,7 +107,7 @@
 							<label for="name">审批人ID</label>
 						</td>	
 						<td>
-								<input type="text" id="auditId" name="auditId" value="${ordercommission.auditId}"/>												
+								<input type="text" id="auditId" name="auditId" value="${ordercommission.auditId}" readonly="readonly"/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -99,7 +115,7 @@
 							<label for="name">创建人ID</label>
 						</td>	
 						<td>
-								<input type="text" id="createBy" name="createBy" value="${ordercommission.createBy}"/>												
+								<input type="text" id="createBy" name="createBy" value="${ordercommission.createBy}" readonly="readonly"/>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -133,7 +149,7 @@
 							<label for="name">更新人ID</label>
 						</td>	
 						<td>
-								<input type="text" id="updateBy" name="updateBy" value="${ordercommission.updateBy}"/>												
+								<input type="text" id="updateBy" name="updateBy" value="${ordercommission.updateBy}" readonly="readonly"/>												
 						</td>						   
 					</tr>
 		
@@ -168,6 +184,55 @@
     	      	}
     	        });
     }
+	
+</script>
+<script type="text/javascript">
+	
+	/**
+	 * 创建一个模态 Dialog
+	 * 
+	 * @param id divId
+	 * @param _url Div链接
+	 * @param _title 标题
+	 * @param _width 宽度
+	 * @param _height 高度
+	 * @param _icon ICON图标
+	 */
+	function createModalDialog(id, _url, _title, _width, _height, _icon){
+	    $("body").append("<div id='"+id+"' class='easyui-window'></div>");
+	    if (_width == null)
+	        _width = 800;
+	    if (_height == null)
+	        _height = 500;
+
+	    $("#"+id).dialog({
+	        title: _title,
+	        width: _width,
+	        height: _height,
+	        cache: false,
+	        iconCls: _icon,
+	        href: _url,
+	        collapsible: false,
+	        minimizable:false,
+	        maximizable: true,
+	        resizable: false,
+	        modal: true,
+	        closed: true
+	    });
+	}
+	
+	function commonChooseDialog(retId,retText,_title,chooseType){
+		var dialogDivId = "c_ch_w";
+		var url="<c:url value='/choose/index.html?chooseType='/>"+chooseType+"&retId="+retId+"&retText="+retText+"&=dialogDivId"+dialogDivId;
+		//移除存在的Dialog
+		$("#"+dialogDivId).remove();
+		//先根据div的id删除，但界面元素还是会存在dialog div，还需执行dialog的销毁操作
+		$("#"+dialogDivId).dialog('destroy');
+		//创建窗口
+		createModalDialog(dialogDivId,url,_title, 600, 600);
+		
+		$("#"+dialogDivId).dialog('open');
+	}
 	
 </script>
 

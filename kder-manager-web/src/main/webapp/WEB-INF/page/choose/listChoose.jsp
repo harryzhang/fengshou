@@ -27,9 +27,11 @@
 			          <td class="tdfont">查询条件:
 			          	<input type="text" size="14" id="searchName" name="searchName" placeholder="名称" >
 			          	<input type="text" size="14" id="searchCode" name="searchCode" placeholder="编码" >
-			          	<input type="text" size="14" id="chooseType" name="chooseType" value="${chooseType}">
-			          	<input type="text" size="14" id="retId" name="retId" value="${retId}">
-			          	<input type="text" size="14" id="retText" name="retText" value="${retText}">
+			          	<input type="hidden" size="14" id="chooseType" name="chooseType" value="${chooseType}">
+			          	<input type="hidden" size="14" id="retId" name="retId" value="${retId}">
+			          	<input type="hidden" size="14" id="retText" name="retText" value="${retText}">
+						<input type="hidden" size="14" id="dialogDivId" name="dialogDivId" value="${dialogDivId}">
+						
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 
@@ -80,13 +82,8 @@ $(function(){
       			[	 				
 							
 							{field:'id',title:'id',width:100,hidden:true},
-							{ field: 'checked', title: 'Choice', width: 30,
-		                        formatter: function(value, row, index) {
-		                            return '<input type="radio" name="selectRadio" id="selectRadio"' + index + '    value="' + row.id + '" />';
-		                        }
-		                    },
-							{field:"name",title:"名称",width:120},							
-							{field:"操作",title:"操作",width:50,align:"left",
+							{field:"name",title:"名称",width:150},							
+							{field:"操作",title:"操作",width:30,align:"left",
 								formatter:function(value,row,index){
 									var str= '<a href="javascript:void(0);" onclick="dochoose(\''+row.id+'\',\''+row.name+'\');">选择</a>';
 									return str;
@@ -98,8 +95,8 @@ $(function(){
 	
 	$("#tt_CommonChoose").datagrid({
 		url:httpUrl+"/choose/doChoose.html?&rand=" + Math.random(),
-		height:$("#body").height()-$('#search_areaCommonChoose').height()-10,
-		width:$("#body").width(),
+		height:600,
+		width:500,
 		rownumbers:true,
 		fitColumns:true,
 		singleSelect:false,//配合根据状态限制checkbox
@@ -129,22 +126,22 @@ $(function(){
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox
 			
-		},
-		onClickRow:  
-            function () {  
-                //单击行的时候，将单选按钮设置为选中  
-                var SelectedRow = $('#tt_CommonChoose').datagrid("getSelected");  
-                $("input[name='selectRadio'][value='"+SelectedRow.id+"']").attr("checked", true);
-            }        
+		}       
 	});	
 });
 /*##########################grid init end###################################################*/
 function dochoose(retid,retname){
 	var idv= $("#searchCommonChooseForm #retId").val();
 	var txtv= $("#searchCommonChooseForm #retText").val();
+	var dialogDivIdval= $("#searchCommonChooseForm #dialogDivId").val();
 	$("#"+idv).val(retid);
 	$("#"+txtv).val(retname);
-	$("#tt_CommonChoose").dialog("close");
+	$("#"+dialogDivIdval).dialog("close");
+	//移除存在的Dialog
+	$("#"+dialogDivIdval).remove();
+	//先根据div的id删除，但界面元素还是会存在dialog div，还需执行dialog的销毁操作
+	$("#"+dialogDivId).dialog('destroy');
+	
 }
 
 

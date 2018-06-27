@@ -37,6 +37,10 @@ public class ChooseServiceImpl implements ICommonChooseService {
 			List<Map<String, Object>> datas = commonChooseDao.getChoosePeoplePage(param);
 			page.setModelList(datas);
 		}
+		if("ORDER".equalsIgnoreCase(chooseType)){
+			List<Map<String, Object>> datas = commonChooseDao.getChooseOrderPage(param);
+			page.setModelList(datas);
+		}
 		
 		return page;
 	}

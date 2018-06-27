@@ -26,5 +26,6 @@ public interface ICommonChooseDao {
 	 * @return
 	 */
 	List<Map<String, Object>> getChoosePeoplePage(Map<String, Object> param);
+	List<Map<String, Object>> getChooseOrderPage(Map<String, Object> param);
 
 }
