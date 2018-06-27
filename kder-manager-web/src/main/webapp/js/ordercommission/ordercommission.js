@@ -171,7 +171,7 @@ function save_OrderCommission(){
 		 success: function(data){ 
 			 if(data.code ==="0"){
 				 $("#editOrderCommissionDiv").dialog("close");
-				 $('tt_OrderCommission').datagrid('reload');
+				 $('#tt_OrderCommission').datagrid('reload');
 				 $.messager.alert("提示","操作成功","info");
 			 }else{
 				 $.messager.alert("提示","操作失败","error");
@@ -183,7 +183,7 @@ function save_OrderCommission(){
 
 function reloadDataGrid()
 {
-	$("tt_OrderCommission").datagrid("reload");
+	$("#tt_OrderCommission").datagrid("reload");
 }
 
 

@@ -125,6 +125,29 @@ function to_editctPrivateCust(id){
 	});
 }
 
+
+function save_CtPrivateCust(){
+	$.ajax({ 
+			url: "<c:url value='/ctprivatecust/saveCtPrivateCust.html'/>", 
+			data: $("#editCtPrivateCustForm").serialize(),
+			type:"post",
+			dataType:"json",
+			success: function(ret){
+	   	 		if(ret.code==="0"){
+	   	 			$.messager.confirm("保存成功",
+	   	 				           '是否继续添加？', 
+	   	 				           function(r){
+					   	   			   if(r==false){
+					   	   				$("#editCtPrivateCustDiv").dialog("close");
+					   	   			   }
+	   						});
+	   	 		}else{
+	   	 			$.messager.alert("error",ret.msg);
+	   	 		}
+	      	}
+	        });
+}
+
 /**
  * 编辑
  * @param id

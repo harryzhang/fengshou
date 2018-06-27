@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>丰收经纪</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/login/base.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/login/main.css'/>">
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/login/icons.css'/>">
@@ -167,10 +167,11 @@
 </style>
 <body>
 <div class="login">
-    <div  class="logo" style="float:left;width:400px;">
+	<img style="float: left;width: 400px;margin-right: 100px;margin-top: 0px" src="<c:url value='/images/logo.png'/>" class="logo">
+    <div  class="logo" style="float:left;width:400px;margin-top:0px;">    	
      	<font style="color:#FFFFFF;font-size:32px;">丰收经纪业务系统</font>
     </div>
-<%--     <img src="<c:url value='/images/login_logo.png'/>" class="logo"> --%>
+	
     <div class="login-wapper">
         <div class="login-head">
         </div>

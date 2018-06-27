@@ -68,13 +68,7 @@ $(function(){
 	
 /*##########################grid init begin####################################################*/
 /*##########################grid toolbar begin#################################################*/
-	var toolbar_tt = [
-					{
-						iconCls:"icon-edit",
-						text:"选择",
-						handler:to_addctOrder
-					}
-	          	];
+	var toolbar_tt = [        	];
 	
 /*######################grid toolbar end##############################*/
 /*######################grid columns begin##############################*/
@@ -131,6 +125,7 @@ $(function(){
 });
 /*##########################grid init end###################################################*/
 function dochoose(retid,retname){
+	debugger;
 	var idv= $("#searchCommonChooseForm #retId").val();
 	var txtv= $("#searchCommonChooseForm #retText").val();
 	var dialogDivIdval= $("#searchCommonChooseForm #dialogDivId").val();

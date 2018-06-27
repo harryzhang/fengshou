@@ -400,7 +400,7 @@
 	
 	function commonChooseDialog(retId,retText,_title,chooseType){
 		var dialogDivId = "c_ch_w";
-		var url="<c:url value='/choose/index.html?chooseType='/>"+chooseType+"&retId="+retId+"&retText="+retText+"&=dialogDivId"+dialogDivId;
+		var url="<c:url value='/choose/index.html?chooseType='/>"+chooseType+"&retId="+retId+"&retText="+retText+"&dialogDivId="+dialogDivId;
 		//移除存在的Dialog
 		$("#"+dialogDivId).remove();
 		//先根据div的id删除，但界面元素还是会存在dialog div，还需执行dialog的销毁操作

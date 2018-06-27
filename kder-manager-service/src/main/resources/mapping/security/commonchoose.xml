@@ -4,11 +4,10 @@
 <mapper namespace="com.kder.business.dao.choose.ICommonChooseDao">
 	
 	<select id="getChooseProductPage" parameterType="map" resultType="Map">
-		select  id ,username as name
-		from managers 
+		SELECT ins_id AS id , title AS `name` FROM t_fs_insurance 
 		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
 			<if test="searchName != null">  
-				AND username like CONCAT('%',#{searchName},'%')
+				AND title like CONCAT('%',#{searchName},'%')
 			</if>			
          </trim> 
 	</select>
