@@ -5,7 +5,8 @@ $(function(){
 	$("#searchctOrderForm #searchButton").on("click",function(){
 		$("#tt_CtOrder").datagrid('load',{
 			'searchUserName': $("#searchctOrderForm #searchUserName").val(),
-			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val()		
+			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val(),	
+			'searchOrderNo':$("#searchctOrderForm #searchOrderNo").val()		
 		});
 	});
 	
@@ -118,7 +119,8 @@ $(function(){
 		toolbar:toolbar_tt,
 		queryParams:{
 			'searchUserName': $("#searchctOrderForm #searchUserName").val(),
-			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val()
+			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val(),
+			'searchOrderNo':$("#searchctOrderForm #searchOrderNo").val()
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox
 			

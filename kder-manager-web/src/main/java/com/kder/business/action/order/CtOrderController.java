@@ -98,6 +98,11 @@ public class CtOrderController extends BaseAction{
                 param.put("recognizeeName", searchRecognizeeName);
                 model.addAttribute("searchRecognizeeName",searchRecognizeeName);
             }
+            String searchOrderNo = getString("searchOrderNo");
+            if(StringUtils.isNotBlank(searchOrderNo)){
+            	param.put("orderNo", searchOrderNo);
+            	model.addAttribute("searchOrderNo",searchOrderNo);
+            }
             page = ctOrderService.getOrderPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);

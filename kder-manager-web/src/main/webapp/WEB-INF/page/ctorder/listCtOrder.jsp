@@ -27,6 +27,7 @@
 			        <tr>
 			          <td class="tdfont">查询条件:
 			          	<input type="text" size="14" id="searchUserName" name="searchUserName" placeholder="投保人姓名" >
+			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单号" >
 			          	<input type="text" size="14" id="searchRecognizeeName" name="searchRecognizeeName" placeholder="被保人姓名" >
 			          </td>
 			          <td >
