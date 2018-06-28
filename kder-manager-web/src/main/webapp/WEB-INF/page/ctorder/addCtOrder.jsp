@@ -66,12 +66,12 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">用户</label>
+							<label for="name">投保人</label>
 						</td>	
 						<td>
 								<input type="text" id="userId" name="userId" value="${ctorder.userId}" readonly="readonly"/>
 								<input type="text" id="userName" name="userName" value="${ctorder.userName}"/>
-								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择用户','PEOPLE');" value="选择用户"/>												
+								<input type="button" onclick="javascript:commonChooseDialog('userId','userName','选择投保人','PEOPLE');" value="选择投保人"/>												
 						</td>						   
 					</tr>
 					<tr>	

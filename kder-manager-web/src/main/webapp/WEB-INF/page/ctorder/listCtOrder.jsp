@@ -29,6 +29,7 @@
 			          	<input type="text" size="14" id="searchUserName" name="searchUserName" placeholder="投保人姓名" >
 			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单号" >
 			          	<input type="text" size="14" id="searchRecognizeeName" name="searchRecognizeeName" placeholder="被保人姓名" >
+			          	<input type="text" size="14" id="searchUserPhone" name="searchUserPhone" placeholder="投保人手机号" >
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 

@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>管理后台</title>
+<title>丰收经纪业务系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache" />
 <link href="<c:url value='/css/default.css'/>" rel="stylesheet" type="text/css" />
@@ -162,12 +162,12 @@
 		<span style="float: right; padding-right: 20px;" class="head">欢迎
 			${user.nickName } <a href="#" id="editpass">修改密码</a> <a id="loginOut">安全退出</a>
 		</span> <span style="padding-left: 10px; font-size: 16px;"><img
-			src="<c:url value='/images/blocks.gif'/>" width="20" height="20"
-			align="absmiddle" /> 我的后台</span>
+			src="<c:url value='/images/logo.png'/>" width="20" height="20"
+			align="absmiddle" />丰收经纪业务系统</span>
 	</div>
 	<div region="south" split="true"
 		style="height: 30px; background: #D2E0F2;">
-		<div class="footer">丰收经纪管理后台</div>
+		<div class="footer">丰收经纪业务系统</div>
 	</div>
 
 	<!--  <div class="easyui-accordion" region="west" split="true" border="false" title="导航菜单" style="width:200px;" id="west">
