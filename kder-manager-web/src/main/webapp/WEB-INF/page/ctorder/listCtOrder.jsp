@@ -30,6 +30,12 @@
 			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单号" >
 			          	<input type="text" size="14" id="searchRecognizeeName" name="searchRecognizeeName" placeholder="被保人姓名" >
 			          	<input type="text" size="14" id="searchUserPhone" name="searchUserPhone" placeholder="投保人手机号" >
+			          	<br>
+			          	申请起始日期
+			          	<input type="text" size="14"  class="easyui-datebox"  id="searchStartTime" name="searchStartTime" placeholder="申请起始日期" >
+			          	至
+			          	<input type="text" size="14"  class="easyui-datebox"  id="searchEndTime" name="searchEndTime" placeholder="申请起始日期" >
+			          	
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 

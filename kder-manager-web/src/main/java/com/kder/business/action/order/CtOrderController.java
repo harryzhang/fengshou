@@ -39,7 +39,7 @@ import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
-import com.kder.business.entity.privatecust.PrivateCustDo;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.service.order.IOrderService;
 import com.kder.business.service.privatecust.IPrivateCustService;
 
@@ -108,6 +108,18 @@ public class CtOrderController extends BaseAction{
             	param.put("userPhone", searchMobile);
             	model.addAttribute("searchMobile",searchMobile);
             }
+            
+            String searchStartTime = getString("searchStartTime");
+            if(StringUtils.isNotBlank(searchStartTime)){
+            	param.put("createTime", searchStartTime);
+            	model.addAttribute("searchStartTime",searchStartTime);
+            }
+            String searchEndTime = getString("searchEndTime");
+            if(StringUtils.isNotBlank(searchEndTime)){
+            	param.put("createTime", searchEndTime);
+            	model.addAttribute("searchEndTime",searchEndTime);
+            }
+			
             page = ctOrderService.getOrderPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);

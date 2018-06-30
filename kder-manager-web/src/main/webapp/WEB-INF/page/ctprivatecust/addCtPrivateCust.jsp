@@ -19,7 +19,7 @@
 					<input type="hidden" id="id" name="id" value="${ctprivatecust.id}"/>
 					<tr>	
 						<td align="right">
-							<label for="name">userName</label>
+							<label for="name">客户姓名</label>
 						</td>	
 						<td>
 							<input type="text" id="userName" name="userName" value="${ctprivatecust.userName}"/>
@@ -27,7 +27,7 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">phone</label>
+							<label for="name">客户手机号码</label>
 						</td>	
 						<td>
 							<input type="text" id="phone" name="phone" value="${ctprivatecust.phone}"/>
@@ -35,30 +35,72 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">gender</label>
+							<label for="name">意向单类型</label>
 						</td>	
 						<td>
-							<input type="text" id="gender" name="gender" value="${ctprivatecust.gender}"/>
+							
+								<input size="20" 
+								   class="easyui-combobox" 
+								   id="privateCustType" 
+								   name="privateCustType" 
+								   value="${ctprivatecust.privateCustType}"
+								   data-options="panelHeight:'90',
+												valueField: 'value', 
+												textField: 'text', 
+												data: [{ text: '私人定制', value: '1' },
+													   { text: '企业团购', value: '2' }]"
+								/>
 						</td>
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">status</label>
+							<label for="name">客户性别</label>
 						</td>	
 						<td>
-							<input type="text" id="status" name="status" value="${ctprivatecust.status}"/>
+							<input size="20" 
+								   class="easyui-combobox" 
+								   id="gender" 
+								   name="gender" 
+								   value="${ctprivatecust.gender}"
+								   data-options="panelHeight:'90',
+												valueField: 'value', 
+												textField: 'text', 
+												data: [{ text: '男', value: '男' },
+													   { text: '女', value: '女' }]"
+							/>
+							
 						</td>
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">createTime</label>
+							<label for="name">意向单状态</label>
+						</td>	
+						<td>
+							<input size="20" 
+							   class="easyui-combobox" 
+							   id="status" 
+							   name="status" 
+							   value="${ctprivatecust.status}"
+							   data-options="panelHeight:'90',
+											valueField: 'value', 
+											textField: 'text', 
+											data: [{ text: '草稿', value: '1' },
+												   { text: '作废', value: '2' },
+												   { text: '已转订单', value: '3' }]"
+							/>
+						
+						</td>
+					</tr>
+					<tr>	
+						<td align="right">
+							<label for="name">创建日期</label>
 						</td>	
 						<td>
 							<input type="text" 
 								id="createTime" 
 								name="createTime" 
 								value="<fmt:formatDate value="${ctprivatecust.createTime}" pattern="yyyy-MM-dd"/>"
-								class="easyui-datebox" size="14" data-options="editable : true"  
+								class="easyui-datebox" size="14" data-options="editable : false"
 								/>
 						</td>
 					</tr>

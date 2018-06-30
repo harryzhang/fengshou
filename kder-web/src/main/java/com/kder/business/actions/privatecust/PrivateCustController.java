@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.result.Result;
-import com.kder.business.entity.privatecust.PrivateCustDo;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.service.privatecust.IPrivateCustService;
 import com.kder.web.util.TokenUtil;
 
@@ -50,7 +50,7 @@ public class PrivateCustController extends BaseController {
         Assert.hasText(phone, "请输入手机号码");
         logger.info("私人订制, userName:" + userName + "; phone:" + phone);
         
-        PrivateCustDo privateCust = new PrivateCustDo();
+        CtPrivateCust privateCust = new CtPrivateCust();
         privateCust.setUserName(userName);
         privateCust.setPhone(phone);
         privateCust.setGender(gender);        

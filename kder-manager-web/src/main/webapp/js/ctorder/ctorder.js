@@ -7,7 +7,9 @@ $(function(){
 			'searchUserName': $("#searchctOrderForm #searchUserName").val(),
 			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val(),	
 			'searchOrderNo':$("#searchctOrderForm #searchOrderNo").val(),
-			'searchUserPhone':$("#searchctOrderForm #searchUserPhone").val()
+			'searchUserPhone':$("#searchctOrderForm #searchUserPhone").val(),
+			'searchStartTime':$("#searchctOrderForm #searchStartTime").datebox("getValue"),
+			'searchEndTime':$("#searchctOrderForm #searchEndTime").datebox("getValue")
 		});
 	});
 	
@@ -122,7 +124,9 @@ $(function(){
 			'searchUserName': $("#searchctOrderForm #searchUserName").val(),
 			'searchRecognizeeName':$("#searchctOrderForm #searchRecognizeeName").val(),
 			'searchOrderNo':$("#searchctOrderForm #searchOrderNo").val(),
-			'searchUserPhone':$("#searchctOrderForm #searchUserPhone").val()
+			'searchUserPhone':$("#searchctOrderForm #searchUserPhone").val(),
+			'searchStartTime':$("#searchctOrderForm #searchStartTime").datebox("getValue"),
+			'searchEndTime':$("#searchctOrderForm #searchEndTime").datebox("getValue")
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox
 			
@@ -152,7 +156,7 @@ function to_editctOrder(id){
 	var url = httpUrl+"/ctorder/addCtOrder.html?&rand=" + Math.random()+"&orderId="+id;
 	$('#editCtOrderDiv').dialog({
 		title: "新增",
-		width: 860,
+		width: 1060,
 		height: 600,
 		closed: false,
 		closable:false,

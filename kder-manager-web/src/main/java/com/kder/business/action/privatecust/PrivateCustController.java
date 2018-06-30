@@ -38,7 +38,7 @@ import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.privatecust.CtPrivateCustExample;
-import com.kder.business.entity.privatecust.PrivateCustDo;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.service.privatecust.IPrivateCustService;
 
 
@@ -66,13 +66,13 @@ public class PrivateCustController extends BaseAction{
     }
 	
 	@RequestMapping("/listCtPrivateCust")
-    public void listCtPrivateCust(NewPagination<PrivateCustDo> pagination,
+    public void listCtPrivateCust(NewPagination<CtPrivateCust> pagination,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
         logger.info("----listCtPrivateCust----");
         try{
-            PageDo<PrivateCustDo> page = PageDoUtil.getPage(pagination);
+            PageDo<CtPrivateCust> page = PageDoUtil.getPage(pagination);
             String searchUserName = getString("searchUserName");
             Map<String,Object> param = new HashMap<String,Object>();
             if(StringUtils.isNotBlank(searchUserName)){
@@ -107,7 +107,7 @@ public class PrivateCustController extends BaseAction{
         logger.info("----addCtPrivateCust----");
         try{
             if(StringUtils.isNotBlank(id)){
-                PrivateCustDo ctprivatecustDo = ctPrivateCustService.getById(Long.valueOf(id));
+                CtPrivateCust ctprivatecustDo = ctPrivateCustService.getById(Long.valueOf(id));
                 if(null != ctprivatecustDo){
                     modelMap.addAttribute("ctprivatecust", ctprivatecustDo);
                 }
@@ -129,7 +129,7 @@ public class PrivateCustController extends BaseAction{
      */
     @RequestMapping("/saveCtPrivateCust")
     @ResponseBody
-    public void saveCtPrivateCust(PrivateCustDo ctprivatecustDo, 
+    public void saveCtPrivateCust(CtPrivateCust ctprivatecustDo, 
     							  HttpServletRequest request, 
     							  HttpServletResponse response) {
         logger.info("----saveCtPrivateCust------");
@@ -179,7 +179,7 @@ public class PrivateCustController extends BaseAction{
                 example.createCriteria().andUserNameEqualTo(searchUserName);
             }
             
-            List<PrivateCustDo> ctprivatecustLst = ctPrivateCustService.selectCtPrivateCust(example);
+            List<CtPrivateCust> ctprivatecustLst = ctPrivateCustService.selectCtPrivateCust(example);
             
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

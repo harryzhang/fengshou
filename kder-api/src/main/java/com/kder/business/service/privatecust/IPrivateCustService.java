@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.kder.business.common.page.PageDo;
 import com.kder.business.entity.privatecust.CtPrivateCustExample;
-import com.kder.business.entity.privatecust.PrivateCustDo;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 
 public interface IPrivateCustService {
 
@@ -13,22 +13,22 @@ public interface IPrivateCustService {
 	 * 根据ID 查询
 	 * @parameter id
 	 */
-	public PrivateCustDo getById(Long id);
+	public CtPrivateCust getById(Long id);
 	
 	/**
 	 *根据条件查询列表
 	 */
-	public List<PrivateCustDo> selectCtPrivateCust(CtPrivateCustExample example);
+	public List<CtPrivateCust> selectCtPrivateCust(CtPrivateCustExample example);
 	
 	/**
 	 * 更新
 	 */
-	public int  updateCtPrivateCustById(PrivateCustDo newCtPrivateCustDo);
+	public int  updateCtPrivateCustById(CtPrivateCust newCtPrivateCustDo);
 	
 	/**
 	 * 新增
 	 */
-	public int addCtPrivateCust(PrivateCustDo newCtPrivateCustDo);
+	public int addCtPrivateCust(CtPrivateCust newCtPrivateCustDo);
 	
 	/**
 	 * 分页查询
@@ -36,7 +36,7 @@ public interface IPrivateCustService {
 	 * @param page
 	 * @return
 	 */
-	public PageDo<PrivateCustDo> getPrivateCustPage(Map<String, Object> param, PageDo<PrivateCustDo> page);
+	public PageDo<CtPrivateCust> getPrivateCustPage(Map<String, Object> param, PageDo<CtPrivateCust> page);
 	
 	
 	/**

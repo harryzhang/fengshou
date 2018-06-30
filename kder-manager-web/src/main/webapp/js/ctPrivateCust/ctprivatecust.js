@@ -33,7 +33,26 @@ $(function(){
 								{field:"userName",title:"用户姓名",width:180,align:"center"},
 								{field:"phone",title:"手机号码",width:180,align:"center"},
 								{field:"gender",title:"性别",width:180,align:"center"},
-								{field:"status",title:"状态",width:180,align:"center"},
+								{field:"privateCustType",title:"意向单类别",width:180,align:"center",
+									formatter:function(value,row,index){
+				 						if(value=="1"){
+				 							return "私人定制";
+				 						}else if(value=="2"){
+				 							return "企业团购";
+				 						}
+					 				}
+								},
+								{field:"status",title:"状态",width:180,align:"center",
+									formatter:function(value,row,index){
+				 						if(value=="1"){
+				 							return "草稿";
+				 						}else if(value=="2"){
+				 							return "作废";
+				 						}else if(value=="3"){
+				 							return "已转订单";
+				 						}
+					 				}
+								},
 								{field:"createTime",title:"意向单申请日期",width:180,align:"center",formatter:dateTimeFormatter},
 					{field:"操作",title:"操作",width:180,align:"left",
 	 					formatter:function(value,row,index){
@@ -93,7 +112,7 @@ $(function(){
  * @param id
  */
 function to_addctPrivateCust(){
-	to_edit('');
+	to_editctPrivateCust('');
 }
 /**
  * 编辑

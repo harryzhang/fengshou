@@ -161,10 +161,15 @@
         line-height: 25px;color: #fff;">
 		<span style="float: right; padding-right: 20px;" class="head">欢迎
 			${user.nickName } <a href="#" id="editpass">修改密码</a> <a id="loginOut">安全退出</a>
-		</span> <span style="padding-left: 10px; font-size: 16px;"><img
-			src="<c:url value='/images/logo.png'/>" width="20" height="20"
-			align="absmiddle" />丰收经纪业务系统</span>
+		</span> 
+		<span style="padding-left: 10px; font-size: 16px;">
+  		&nbsp;<img src="<c:url value='/images/logo.png'/>" width="80px" align="absmiddle">
+  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 丰收经纪业务系统</span>		
 	</div>
+	
+	
+	
+	
 	<div region="south" split="true"
 		style="height: 30px; background: #D2E0F2;">
 		<div class="footer">丰收经纪业务系统</div>

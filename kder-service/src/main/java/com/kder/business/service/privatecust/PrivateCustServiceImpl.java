@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kder.business.common.constant.Constants;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.dao.privatecust.PrivateCustDao;
+import com.kder.business.dao.privatecust.CtPrivateCustMapper;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.entity.privatecust.CtPrivateCustExample;
-import com.kder.business.entity.privatecust.PrivateCustDo;
 
 /**
  * @author  huangzl QQ: 272950754
@@ -34,14 +34,14 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	private final Logger logger = Logger.getLogger(this.getClass());
 	
 	@Autowired
-    private PrivateCustDao  ctPrivateCustDao;
+    private CtPrivateCustMapper  ctPrivateCustDao;
 	
 	/**
 	 * 根据ID 查询
 	 * @parameter id
 	 */
 	@Override
-	public PrivateCustDo getById(Long id){
+	public CtPrivateCust getById(Long id){
 	  return ctPrivateCustDao.selectByPrimaryKey(id);
 	}
 	
@@ -49,7 +49,7 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	 *根据条件查询列表
 	 */
 	@Override
-	public List<PrivateCustDo> selectCtPrivateCust(CtPrivateCustExample example){
+	public List<CtPrivateCust> selectCtPrivateCust(CtPrivateCustExample example){
 		return ctPrivateCustDao.selectByExample(example);
 	}
 	
@@ -60,7 +60,7 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-	public int updateCtPrivateCustById(PrivateCustDo newCtPrivateCustDo){
+	public int updateCtPrivateCustById(CtPrivateCust newCtPrivateCustDo){
 		logger.debug("updateCtPrivateCust(PrivateCustDo: "+newCtPrivateCustDo);
 		return  ctPrivateCustDao.updateByPrimaryKeySelective(newCtPrivateCustDo);		
 	}
@@ -70,7 +70,7 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-	public int addCtPrivateCust(PrivateCustDo newCtPrivateCustDo){
+	public int addCtPrivateCust(CtPrivateCust newCtPrivateCustDo){
 		logger.debug("addCtPrivateCust: "+newCtPrivateCustDo);
 		return ctPrivateCustDao.insertSelective(newCtPrivateCustDo);
 	}
@@ -81,10 +81,10 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 	 * @param page
 	 * @return
 	 */
-	public PageDo<PrivateCustDo> getPrivateCustPage(Map<String, Object> param, PageDo<PrivateCustDo> page){
+	public PageDo<CtPrivateCust> getPrivateCustPage(Map<String, Object> param, PageDo<CtPrivateCust> page){
 		logger.info("----getCtPrivateCustPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
-        List<PrivateCustDo> list =  ctPrivateCustDao.queryListPage(param);
+        List<CtPrivateCust> list =  ctPrivateCustDao.queryListPage(param);
         page.setModelList(list);
         return page;
 	}

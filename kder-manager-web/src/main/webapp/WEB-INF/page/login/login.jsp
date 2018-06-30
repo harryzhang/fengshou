@@ -167,10 +167,15 @@
 </style>
 <body>
 <div class="login">
-    <div  class="logo" style="float:left;width:400px;margin-top:0px;">    	
-		<img style="float: left;width: 200px;margin-right: 100px;margin-top: 0px" src="<c:url value='/images/logo.png'/>" class="logo">
-     	<font style="color:#FFFFFF;font-size:32px;">丰收经纪业务系统</font>
-    </div>
+    <div class="logo" style="float:left;width:400px;margin-top:0px;height: 120px;">    	
+		<div>
+			<img style="width: 200px;margin-right: 100px;margin-top: 36px;" src="<c:url value='/images/logo.png'/>" class="logo">
+	    </div>
+		<br>
+	    <div>    	
+			<font style="color:#FFFFFF;font-size:32px;">丰收经纪业务系统</font>
+	    </div>
+	</div>
 	
     <div class="login-wapper">
         <div class="login-head">
