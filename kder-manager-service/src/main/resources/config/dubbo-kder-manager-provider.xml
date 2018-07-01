@@ -37,6 +37,6 @@
     <dubbo:service interface="com.kder.business.service.account.IAuthorityresourcesService" ref="authorityresourcesService" />
     <dubbo:service interface="com.kder.business.service.account.IAuthoritiesService" ref="authoritiesService" />
     <dubbo:service interface="com.kder.business.service.choose.ICommonChooseService" ref="commonChooseService" />
-    
+    <dubbo:service interface="com.kder.business.service.report.IReportService" ref="reportService" />
     
 </beans>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kder.business.dao.report.IReportDao">
+	
+	<select id="selectOrderReport" parameterType="map" resultType="Map">
+		SELECT 
+			<if test="fieldsClause != null">
+      			${fieldsClause}
+    	 	</if>
+		FROM ct_order 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND title like CONCAT('%',#{searchName},'%')
+			</if>			
+         </trim>
+         <if test="groupByClause != null">
+      		group by ${groupByClause}
+    	 </if>
+         <if test="orderByClause != null">
+      		order by ${orderByClause}
+    	 </if>
+          
+	</select>
+	
+	<select id="selectCommissionReport" parameterType="map" resultType="Map">
+		select 
+			<if test="fieldsClause != null">
+      			${fieldsClause}
+    	 	</if>
+		from t_order_commission 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND username like CONCAT('%',#{searchName},'%')
+			</if>			
+        </trim> 
+        <if test="groupByClause != null">
+      		group by ${groupByClause}
+    	 </if>
+         <if test="orderByClause != null">
+      		order by ${orderByClause}
+    	 </if> 
+	</select>
+	
+	<select id="selectPeopleReport" parameterType="map" resultType="Map">
+		select  
+			<if test="fieldsClause != null">
+      			${fieldsClause}
+    	 	</if>
+		from people 
+		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			<if test="searchName != null">  
+				AND people_phone like CONCAT('%',#{searchName},'%')
+			</if>			
+         </trim>
+         <if test="groupByClause != null">
+      		group by ${groupByClause}
+    	 </if>
+         <if test="orderByClause != null">
+      		order by ${orderByClause}
+    	 </if> 
+	</select>
+	
+</mapper>

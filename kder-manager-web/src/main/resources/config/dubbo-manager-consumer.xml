@@ -47,6 +47,7 @@
     
     <dubbo:reference  id="userService"  interface="com.kder.business.service.user.IUserService"/>
     <dubbo:reference  id="commonChooseService"  interface="com.kder.business.service.choose.ICommonChooseService"  />
+    <dubbo:reference  id="reportService" interface="com.kder.business.service.report.IReportService" />
     
     
      
