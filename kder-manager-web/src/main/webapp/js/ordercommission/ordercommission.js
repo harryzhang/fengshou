@@ -5,7 +5,10 @@ $(function(){
 	$("#searchorderCommissionForm #searchButton").on("click",function(){
 		$("#tt_OrderCommission").datagrid('load',{
 			'searchManagerName': $("#searchorderCommissionForm #searchManagerName").val(),
-			'searchOrderNo':$("#searchorderCommissionForm #searchOrderNo").val()		
+			'searchOrderNo':$("#searchorderCommissionForm #searchOrderNo").val(),
+			'searchStartTime':$("#searchorderCommissionForm #searchStartTime").datebox("getValue"),
+			'searchEndTime':$("#searchorderCommissionForm #searchEndTime").datebox("getValue")
+			
 		});
 	});
 	
@@ -107,16 +110,15 @@ $(function(){
 		toolbar:toolbar_tt,
 		queryParams:{
 			'searchManagerName': $("#searchorderCommissionForm #searchManagerName").val(),
-			'searchOrderNo':$("#searchorderCommissionForm #searchOrderNo").val()
+			'searchOrderNo':$("#searchorderCommissionForm #searchOrderNo").val(),
+			'searchStartTime':$("#searchorderCommissionForm #searchStartTime").datebox("getValue"),
+			'searchEndTime':$("#searchorderCommissionForm #searchEndTime").datebox("getValue")
 		},
 		onLoadSuccess:function(data){//根据状态限制checkbox
 			
 		}
-	});
-	
-	/*$(window).resize(function (){
-		domresize();
-	 }); */
+	});	
+
 /*##########################grid init end###################################################*/
 });
 

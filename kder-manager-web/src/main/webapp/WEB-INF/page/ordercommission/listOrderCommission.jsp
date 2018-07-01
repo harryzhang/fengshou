@@ -28,6 +28,12 @@
 			          <td class="tdfont">查询条件:
 			          	<input type="text" size="14" id="searchManagerName" name="searchManagerName" placeholder="业务员名称" >
 			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单编号" >
+			          	<br>
+			          	创建起始日期
+			          	<input type="text" size="14"  class="easyui-datebox"  id="searchStartTime" name="searchStartTime" placeholder="创建起始日期" >
+			          	至
+			          	<input type="text" size="14"  class="easyui-datebox"  id="searchEndTime" name="searchEndTime" placeholder="创建起始日期" >
+			          	
 			          </td>
 			          <td >
 			              <a  href="javascript:void(0)" id="searchButton" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a> 

@@ -30,15 +30,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
-import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
 import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
+import com.kder.business.entity.account.ManagersDo;
 import com.kder.business.entity.commission.OrderCommission;
 import com.kder.business.entity.commission.OrderCommissionExample;
+import com.kder.business.service.account.IManagerUserService;
 import com.kder.business.service.commission.IOrderCommissionService;
 
 
@@ -54,6 +55,8 @@ import com.kder.business.service.commission.IOrderCommissionService;
 public class OrderCommissionController extends BaseAction{
 	@Resource
 	private IOrderCommissionService orderCommissionService;
+	@Resource
+	private IManagerUserService managerService;
 
 	/**
      * 去列表页面
@@ -82,21 +85,7 @@ public class OrderCommissionController extends BaseAction{
 
         logger.info("----listOrderCommission----");
         try{
-            PageDo<OrderCommission> page = PageDoUtil.getPage(pagination);
-            String searchOrderNo = getString("searchOrderNo");
-            Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(searchOrderNo)){
-                param.put("orderNo",searchOrderNo);
-                model.addAttribute("searchOrderNo",searchOrderNo);
-            }
-            String managerName = getString("searchManagerName");
-            if(StringUtils.isNotBlank(managerName)){
-                param.put("userName", managerName);
-                model.addAttribute("searchManagerName",managerName);
-            }
-            page = orderCommissionService.getOrderCommissionPage(param, page);
-            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
-            model.addAttribute("statusList", statusList);
+            PageDo<OrderCommission> page = buildPage(pagination);
             pagination = PageDoUtil.getPageValue(pagination, page);
             outPrint(response, JSONObject.toJSON(pagination));
         }catch(Exception e){
@@ -104,6 +93,32 @@ public class OrderCommissionController extends BaseAction{
             throw new BusinessException("系统繁忙，请稍后再试");
         }
     }
+
+	private PageDo<OrderCommission> buildPage(NewPagination<OrderCommission> pagination) {
+		PageDo<OrderCommission> page = PageDoUtil.getPage(pagination);
+		String searchOrderNo = getString("searchOrderNo");
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(StringUtils.isNotBlank(searchOrderNo)){
+		    param.put("orderNo",searchOrderNo);
+		}
+		String managerName = getString("searchManagerName");
+		if(StringUtils.isNotBlank(managerName)){
+		    param.put("userName", managerName);
+		}
+		
+		String searchEndTime = getString("searchEndTime");
+		if(StringUtils.isNotBlank(searchEndTime)){
+		    param.put("searchEndTime", searchEndTime);
+		}
+		
+		String searchStartTime = getString("searchStartTime");
+		if(StringUtils.isNotBlank(searchStartTime)){
+		    param.put("searchStartTime", searchStartTime);
+		}
+		
+		page = orderCommissionService.getOrderCommissionPage(param, page);
+		return page;
+	}
 	
 	
 	  
@@ -117,9 +132,28 @@ public class OrderCommissionController extends BaseAction{
         logger.info("----addOrderCommission----");
         try{
             if(StringUtils.isNotBlank(id)){
-                OrderCommission OrderCommission = orderCommissionService.getById(Long.valueOf(id));
-                if(null != OrderCommission){
-                    modelMap.addAttribute("ordercommission", OrderCommission);
+                OrderCommission orderCommission = orderCommissionService.getById(Long.valueOf(id));
+                if(null != orderCommission){
+                    modelMap.addAttribute("ordercommission", orderCommission);
+                    //创建人
+                    Long createBy = orderCommission.getCreateBy();
+                    if(null != createBy){
+                    	ManagersDo createByDo = managerService.getUserById(createBy.intValue());
+                    	modelMap.put("createByDo", createByDo);
+                    }
+                    
+                    //审批人
+                    Long auditBy = orderCommission.getAuditId();
+                    if(null != auditBy){
+                    	ManagersDo auditByDo = managerService.getUserById(auditBy.intValue());
+                    	modelMap.put("auditByDo", auditByDo);
+                    }
+                    //更新人
+                    Long updateBy = orderCommission.getUpdateBy();
+                    if(null != updateBy){
+                    	ManagersDo updateByDo = managerService.getUserById(updateBy.intValue());
+                    	modelMap.put("updateByDo", updateByDo);
+                    }
                 }
             }
             return "ordercommission/addOrderCommission";

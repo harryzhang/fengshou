@@ -104,18 +104,24 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">审批人ID</label>
+							<label for="name">审批人</label>
 						</td>	
 						<td>
-								<input type="text" id="auditId" name="auditId" value="${ordercommission.auditId}" readonly="readonly"/>												
+								<input type="hidden" id="auditId" name="auditId" value="${ordercommission.auditId}" />
+								<c:if test="${!empty auditByDo }">
+									<input type="text" id="auditName" name="auditName" value="${auditByDo.nickname}" readonly="readonly"/>
+								</c:if>												
 						</td>						   
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">创建人ID</label>
+							<label for="name">创建人</label>
 						</td>	
 						<td>
-								<input type="text" id="createBy" name="createBy" value="${ordercommission.createBy}" readonly="readonly"/>												
+								<input type="hidden" id="createBy" name="createBy" value="${ordercommission.createBy}" readonly="readonly"/>
+								<c:if test="${!empty createByDo }">
+									<input type="text" id="createByName" name="createByName" value="${createByDo.nickname}" readonly="readonly"/>
+								</c:if>												
 						</td>						   
 					</tr>
 					<tr>	
@@ -146,10 +152,13 @@
 					</tr>
 					<tr>	
 						<td align="right">
-							<label for="name">更新人ID</label>
+							<label for="name">更新人</label>
 						</td>	
 						<td>
-								<input type="text" id="updateBy" name="updateBy" value="${ordercommission.updateBy}" readonly="readonly"/>												
+								<input type="hidden" id="updateBy" name="updateBy" value="${ordercommission.updateBy}" />
+								<c:if test="${!empty updateByDo }">
+									<input type="text" id="updateByName" name="updateByName" value="${updateByDo.nickname}" readonly="readonly"/>
+								</c:if>													
 						</td>						   
 					</tr>
 		
