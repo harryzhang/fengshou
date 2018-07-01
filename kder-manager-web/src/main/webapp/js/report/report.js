@@ -11,9 +11,10 @@ $(function(){
 			'reportType':$("#searchctOrderReportForm #reportType").val(),
 			'searchStartTime':$("#searchctOrderReportForm #searchStartTime").datebox("getValue"),
 			'searchEndTime':$("#searchctOrderReportForm #searchEndTime").datebox("getValue"),
-			'groupByOrg':$("#searchctOrderReportForm #groupByOrg").val(),
-			'groupByProduct':$("#searchctOrderReportForm #groupByProduct").val(),
-			'groupByManager':$("#searchctOrderReportForm #groupByManager").val(),
+			'groupByOrg':$("#searchctOrderReportForm #groupByOrg").prop('checked'),
+			'groupByProduct':$("#searchctOrderReportForm #groupByProduct").prop('checked'),
+			'groupByManager':$("#searchctOrderReportForm #groupByManager").prop('checked'),
+			'groupByCompany':$("#searchctOrderReportForm #groupByCompany").prop('checked'),
 			'groupByTypeDate':$('#searchctOrderReportForm input[name="groupByTypeDate"]:checked').val()
 			
 		});
@@ -31,16 +32,14 @@ $(function(){
 	
 /*######################grid toolbar end##############################*/
 /*######################grid columns begin##############################*/
-	var columns_tt = [
-      			[	 		{field:"orgName",title:"机构",width:180,align:"center"},		
-							{field:"policyCompany",title:"保险公司",width:180,align:"center"},
-							{field:"productName",title:"产品名称",width:180,align:"center"},
-							{field:"userName",title:"投保人姓名",width:180,align:"center"},
-							{field:"orderAmt",title:"保单金额",width:180,align:"center"},
-							{field:"salesMan",title:"业务员",width:180,align:"center"},
-							{field:"commissionAmt",title:"佣金",width:180,align:"center"}	 				
-	 			]
-	 	];
+	var columns_tt = [[	 	
+	                   		{field:"org_company",title:"机构",width:180,align:"center"},		
+							{field:"policy_company",title:"保险公司",width:180,align:"center"},
+							{field:"product_name",title:"产品名称",width:180,align:"center"},
+							{field:"sales_man",title:"业务员",width:180,align:"center"},
+							{field:"amt",title:"金额",width:180,align:"center"},
+							{field:"group_time",title:"日期",width:180,align:"center"}
+	 			]];
 /*######################grid columns end##############################*/
 	
 	$("#tt_Order_report").datagrid({
@@ -76,9 +75,10 @@ $(function(){
 			'reportType':$("#searchctOrderReportForm #reportType").val(),
 			'searchStartTime':$("#searchctOrderReportForm #searchStartTime").datebox("getValue"),
 			'searchEndTime':$("#searchctOrderReportForm #searchEndTime").datebox("getValue"),
-			'groupByOrg':$("#searchctOrderReportForm #groupByOrg").val(),
-			'groupByProduct':$("#searchctOrderReportForm #groupByProduct").val(),
-			'groupByManager':$("#searchctOrderReportForm #groupByManager").val(),
+			'groupByOrg':$("#searchctOrderReportForm #groupByOrg").prop('checked'),
+			'groupByProduct':$("#searchctOrderReportForm #groupByProduct").prop('checked'),
+			'groupByManager':$("#searchctOrderReportForm #groupByManager").prop('checked'),
+			'groupByCompany':$("#searchctOrderReportForm #groupByCompany").prop('checked'),
 			'groupByTypeDate':$('#searchctOrderReportForm input[name="groupByTypeDate"]:checked').val()
 			
 		},

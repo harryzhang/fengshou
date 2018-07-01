@@ -8,10 +8,30 @@
 			<if test="fieldsClause != null">
       			${fieldsClause}
     	 	</if>
+    	 	,SUM(IFNULL(order_amt,0)) as amt
 		FROM ct_order 
 		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
-			<if test="searchName != null">  
-				AND title like CONCAT('%',#{searchName},'%')
+			<if test="searchOrgName != null">  
+				AND org_company like CONCAT('%',#{searchOrgName},'%')
+			</if>
+			<if test="searchCompanyName != null">  
+				AND policy_company like CONCAT('%',#{searchCompanyName},'%')
+			</if>
+			<if test="searchProductName != null">  
+				AND product_name like CONCAT('%',#{searchProductName},'%')
+			</if>
+			<if test="searchManagerName != null">  
+				AND sales_man like CONCAT('%',#{searchManagerName},'%')
+			</if>
+			<if test="searchStartTime != null">  
+			   <![CDATA[
+				AND create_time>= #{searchStartTime}
+				]]>
+			</if>
+			<if test="searchEndTime != null">  
+			   <![CDATA[
+				AND create_time>= #{searchEndTime}
+				]]>
 			</if>			
          </trim>
          <if test="groupByClause != null">
@@ -24,22 +44,43 @@
 	</select>
 	
 	<select id="selectCommissionReport" parameterType="map" resultType="Map">
-		select 
+		SELECT 
 			<if test="fieldsClause != null">
       			${fieldsClause}
     	 	</if>
-		from t_order_commission 
-		<trim prefix="WHERE" prefixOverrides="AND |OR "> 
-			<if test="searchName != null">  
-				AND username like CONCAT('%',#{searchName},'%')
+    	 	,sum(ifnull(b.commission_amt,0)) as amt
+		FROM ct_order a, t_order_commission b 
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			 AND a.order_id = b.order_id 
+			<if test="searchOrgName != null">  
+				AND a.org_company like CONCAT('%',#{searchOrgName},'%')
+			</if>
+			<if test="searchCompanyName != null">  
+				AND a.policy_company like CONCAT('%',#{searchCompanyName},'%')
+			</if>
+			<if test="searchProductName != null">  
+				AND a.product_name like CONCAT('%',#{searchProductName},'%')
+			</if>
+			<if test="searchManagerName != null">  
+				AND a.sales_man like CONCAT('%',#{searchManagerName},'%')
+			</if>
+			<if test="searchStartTime != null">  
+			   <![CDATA[
+				AND b.create_time>= #{searchStartTime}
+				]]>
+			</if>
+			<if test="searchEndTime != null">  
+			   <![CDATA[
+				AND b.create_time>= #{searchEndTime}
+				]]>
 			</if>			
-        </trim> 
-        <if test="groupByClause != null">
+         </trim>
+         <if test="groupByClause != null">
       		group by ${groupByClause}
     	 </if>
          <if test="orderByClause != null">
       		order by ${orderByClause}
-    	 </if> 
+    	 </if>
 	</select>
 	
 	<select id="selectPeopleReport" parameterType="map" resultType="Map">
