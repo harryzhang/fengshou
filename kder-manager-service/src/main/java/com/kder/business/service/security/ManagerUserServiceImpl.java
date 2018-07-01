@@ -144,7 +144,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		}else{
 			datas = userDao.getUsersByPage(params);
 		}
-		page.setModelList(datas);
+		page.setDatas(datas);
 		return page;
     }
 
@@ -157,7 +157,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		params.put("roleName", roleName);
 
 		List<RolesDo> datas = rolesDao.getRolesByPage(params);
-		page.setModelList(datas);
+		page.setDatas(datas);
 		return page;
 	}
 
@@ -179,7 +179,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		}
 		params.put("deptId", deptId);
 		List<RolesDo> datas = rolesDao.getDeptRolesByPage(params);
-		page.setModelList(datas);
+		page.setDatas(datas);
 		return page;
     }
 
@@ -229,7 +229,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 
 		List<ManagersDo> modelList = flag ? userDao.getUsersInRolesByPage(params) :
 			userDao.getUsersNotInRolesByPage(params);
-		page.setModelList(modelList);
+		page.setDatas(modelList);
 		return page;
 	}
 
@@ -256,7 +256,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		params.put("authId", authId);
 		List<RolesDo> modelList = inOrNot ? rolesDao.getRolesInAuthorityByPage(params) : rolesDao
 				.getRolesNotInAuthorityByPage(params);
-		page.setModelList(modelList);
+		page.setDatas(modelList);
 		return page;
 	}
 
@@ -268,7 +268,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		params.put("roleName", roleName);
 		params.put("roleDesc", roleDesc);
 		List<RolesDo> modelList = inOrNot ? rolesDao.getRolesInAuthorityByPage(params) : rolesDao.getRolesNotInAuthorityByPage(params);
-		page.setModelList(modelList);
+		page.setDatas(modelList);
 		return page;
 	}
 
@@ -352,7 +352,7 @@ public class ManagerUserServiceImpl implements IManagerUserService {
 		
 		List<ManagersDo> modelList = flag ? userDao.getDeptUsersInRolesByPage(params) :
 			userDao.getDeptUsersNotInRolesByPage(params);
-		page.setModelList(modelList);
+		page.setDatas(modelList);
 		return page;
     }
 

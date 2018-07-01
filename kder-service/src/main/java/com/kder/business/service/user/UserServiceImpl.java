@@ -116,7 +116,7 @@ public class UserServiceImpl implements IUserService {
 			PageDo<People> page) {
 		param.put(Constants.MYBATIS_PAGE, page);
         List<People> list =  userDao.getPeoplePage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
         
 	}

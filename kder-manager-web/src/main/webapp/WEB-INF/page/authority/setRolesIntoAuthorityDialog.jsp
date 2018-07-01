@@ -73,6 +73,26 @@
         </div>
     </div>
     <script type="text/javascript">
+    
+    $(document).ready(function(){
+		 $('#hasAdd').datagrid({loadFilter:function(data){
+				return {
+					'rows' : data.datas,
+					'total' : data.total,
+					'pageSize' : data.pageSize,
+					'pageNumber' : data.page
+				};
+			}});
+		 $('#unAdd').datagrid({loadFilter:function(data){
+			return {
+				'rows' : data.datas,
+				'total' : data.total,
+				'pageSize' : data.pageSize,
+				'pageNumber' : data.page
+			};
+		}});
+	});
+    
    	 var basePath="/manager";
         /*查询和重置按钮事件*/
         $("#searchForm #resetButton").on("click", function () {

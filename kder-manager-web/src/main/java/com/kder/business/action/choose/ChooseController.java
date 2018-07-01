@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.service.choose.ICommonChooseService;
 
 
@@ -60,7 +58,7 @@ public class ChooseController extends BaseAction{
      * @return
      */
     @RequestMapping("/doChoose")
-    public void doChoose(NewPagination<Map<String,Object>> pagination,
+    public void doChoose(PageDo<Map<String,Object>> page,
     		                    ModelMap modelMap, 
     							HttpServletResponse response) {
         logger.info("----dochoose----");
@@ -69,7 +67,6 @@ public class ChooseController extends BaseAction{
         	Map<String,Object> param = new HashMap<String,Object>();
         	param.put("chooseType", chooseType);
 
-            PageDo<Map<String,Object>> page = PageDoUtil.getPage(pagination);
             String searchName = getString("searchName");
             if(StringUtils.isNotBlank(searchName)){
                 param.put("searchName",searchName);
@@ -81,8 +78,7 @@ public class ChooseController extends BaseAction{
                 modelMap.addAttribute("searchCode",searchCode);
             }
             page = chooseService.getChoosePage(param, page);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("页面异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");

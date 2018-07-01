@@ -101,7 +101,7 @@ public class OrderServiceImpl implements IOrderService {
 		logger.info("----getCtOrderPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<CtOrder> list =  ctOrderDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
 	}
 	

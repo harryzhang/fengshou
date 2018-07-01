@@ -31,9 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.account.ManagersDo;
@@ -79,23 +77,21 @@ public class OrderCommissionController extends BaseAction{
     }
 	
 	@RequestMapping("/listOrderCommission")
-    public void listOrderCommission(NewPagination<OrderCommission> pagination,
+    public void listOrderCommission(PageDo<OrderCommission> page,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
         logger.info("----listOrderCommission----");
         try{
-            PageDo<OrderCommission> page = buildPage(pagination);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            page = buildPage(page);
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
         }
     }
 
-	private PageDo<OrderCommission> buildPage(NewPagination<OrderCommission> pagination) {
-		PageDo<OrderCommission> page = PageDoUtil.getPage(pagination);
+	private PageDo<OrderCommission> buildPage(PageDo<OrderCommission> page) {
 		String searchOrderNo = getString("searchOrderNo");
 		Map<String,Object> param = new HashMap<String,Object>();
 		if(StringUtils.isNotBlank(searchOrderNo)){

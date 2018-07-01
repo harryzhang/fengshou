@@ -19,8 +19,6 @@ import com.alibaba.fastjson.JSON;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
-import com.kder.business.common.page.Pagination;
 import com.kder.business.entity.account.ModuleDo;
 import com.kder.business.service.account.IModuleService;
 import com.kder.manager.util.ResponseUtils;
@@ -39,9 +37,8 @@ public class ModuleController extends BaseAction {
 
     @RequestMapping("moduleDatas")
     @ResponseBody
-    public void moduleDatas(Pagination<ModuleDo> modules, HttpServletRequest request,
+    public void moduleDatas(PageDo<ModuleDo> page, HttpServletRequest request,
                             HttpServletResponse response) {
-        PageDo<ModuleDo> pageDo = PageDoUtil.getPage(modules);
         try {
             String moduleName = getString(request, "name");
             if(null!=moduleName){
@@ -51,12 +48,11 @@ public class ModuleController extends BaseAction {
             if(null!=moduleNick){
                 moduleNick = URLDecoder.decode(moduleNick, "UTF-8");
             }
-            pageDo  = moduleService.getAllModules(pageDo,moduleName,moduleNick);
-            if(pageDo.getTotalPage() == null){
-                pageDo.setTotalCount(1L);
+            page  = moduleService.getAllModules(page,moduleName,moduleNick);
+            if(page.getTotalPage() == null){
+            	page.setTotal(1L);
             }
-            modules = PageDoUtil.getPageValue(modules, pageDo);
-            outPrint(response, JSON.toJSONString(modules));
+            outPrint(response, JSON.toJSONString(page));
         } catch (UnsupportedEncodingException e) {
             logger.error("获取moduleDatas，格式化异常", e);
         }catch (Exception e){

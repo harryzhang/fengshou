@@ -39,7 +39,7 @@
         <div data-options="region:'east',split:true,iconCls:'icon-ok'" title="已加入人员(双击可删除)" style="width:450px;">
           <table class="easyui-datagrid" id="hasAdd"
           pagination="true" striped="true" 
-            rownumbers="true" fitColumns="true"
+            rownumbers="true" fitColumns="true" 
                     data-options="url:'${basePath }/homemng/menuAdmin/users2Roles.action?roleId=${role.id }&inOrNot=1&pageSize=10',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true
                     ,onDblClickRow:removeResources">
                 <thead>
@@ -73,6 +73,25 @@
         </div>
     </div>
     <script type="text/javascript">
+    $(document).ready(function(){
+  		 $('#hasAdd').datagrid({loadFilter:function(data){
+  				return {
+  					'rows' : data.datas,
+  					'total' : data.total,
+  					'pageSize' : data.pageSize,
+  					'pageNumber' : data.page
+  				};
+  			}});
+  		 $('#unAdd').datagrid({loadFilter:function(data){
+  			return {
+  				'rows' : data.datas,
+  				'total' : data.total,
+  				'pageSize' : data.pageSize,
+  				'pageNumber' : data.page
+  			};
+  		}});
+  	});
+    
     var basePath="/manager";
         /*查询和重置按钮事件*/
         $("#resetButton").on("click",function () {

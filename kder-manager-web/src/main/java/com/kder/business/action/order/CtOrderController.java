@@ -32,14 +32,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
-import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.service.order.IOrderService;
 import com.kder.business.service.privatecust.IPrivateCustService;
 
@@ -80,13 +77,12 @@ public class CtOrderController extends BaseAction{
     }
 	
 	@RequestMapping("/listCtOrder")
-    public void listCtOrder(NewPagination<CtOrder> pagination,
+    public void listCtOrder(PageDo<CtOrder> page,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
         logger.info("----listCtOrder----");
         try{
-            PageDo<CtOrder> page = PageDoUtil.getPage(pagination);
             String searchUserName = getString("searchUserName");
             Map<String,Object> param = new HashMap<String,Object>();
             if(StringUtils.isNotBlank(searchUserName)){
@@ -123,8 +119,7 @@ public class CtOrderController extends BaseAction{
             page = ctOrderService.getOrderPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");

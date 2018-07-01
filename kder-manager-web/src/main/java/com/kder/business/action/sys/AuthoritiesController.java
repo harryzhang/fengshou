@@ -20,8 +20,6 @@ import com.kder.business.action.BaseAction;
 import com.kder.business.common.constant.Constants;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
-import com.kder.business.common.page.Pagination;
 import com.kder.business.entity.account.AuthoritiesDo;
 import com.kder.business.entity.account.AuthorityresourcesDo;
 import com.kder.business.entity.account.ResourcesDo;
@@ -55,7 +53,7 @@ public class AuthoritiesController extends BaseAction {
      */
     @RequestMapping("authoritiesList")
     @ResponseBody
-    public void listDatas(Pagination<AuthoritiesDo> pagination,
+    public void listDatas(PageDo<AuthoritiesDo> page,
                           HttpServletRequest request, HttpServletResponse response) {
         String name = getString("name");
         try {
@@ -66,10 +64,8 @@ public class AuthoritiesController extends BaseAction {
             if (null != authDesc) {
                 authDesc = URLDecoder.decode(authDesc, "UTF-8");
             }
-            PageDo<AuthoritiesDo> page = PageDoUtil.getPage(pagination);
             page = authorityService.getAuthority(page, name, authDesc);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSON.toJSONString(pagination));
+            outPrint(response, JSON.toJSONString(page));
 
         } catch (UnsupportedEncodingException e) {
             logger.error("显示权限列表异常", e);
@@ -177,7 +173,7 @@ public class AuthoritiesController extends BaseAction {
      */
     @RequestMapping("resourcesInAuthorities")
     @ResponseBody
-    public void resourcesInAuthorities(Pagination<ResourcesDo> pagination,
+    public void resourcesInAuthorities(PageDo<ResourcesDo> page,
                                        HttpServletRequest request, HttpServletResponse response) {
         try{
             int authorityId = getInt("authorityId");
@@ -190,11 +186,11 @@ public class AuthoritiesController extends BaseAction {
             if (StringUtils.isNotBlank(filterLinks)) {
                 filterLinks = URLDecoder.decode(filterLinks, "utf-8");
             }
-            PageDo<ResourcesDo> page = PageDoUtil.getPage(pagination);
+            
             page = authorityService.getResourcesInOrNotAuthority(page, authorityId,
                     inOrNot == 1, filterName, filterLinks);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSON.toJSONString(pagination));
+            
+            outPrint(response, JSON.toJSONString(page));
         }catch (UnsupportedEncodingException e){
             logger.error("获取在权限中的菜单,格式化异常", e);
         }catch(Exception e){
@@ -266,9 +262,8 @@ public class AuthoritiesController extends BaseAction {
 
     @RequestMapping("rolesInAuthority")
     @ResponseBody
-    public void rolesInAuthority(Pagination<RolesDo> pagination,
+    public void rolesInAuthority(PageDo<RolesDo> page,
                                  HttpServletRequest request, HttpServletResponse response) {
-        PageDo<RolesDo> page = PageDoUtil.getPage(pagination);
         int authId = getInt("authId");
         int inOrNot = getInt("inOrNot");
         String roleName = getString(request, "name");
@@ -288,8 +283,7 @@ public class AuthoritiesController extends BaseAction {
             PageDo<RolesDo> rolesList = managerUserService
                     .getRolesInOrNotInAuthoritiesByPage(page, authId,
                             inOrNot == 1, roleName, roleDesc);
-            pagination = PageDoUtil.getPageValue(pagination, rolesList);
-            outPrint(response, JSON.toJSONString(pagination));
+            outPrint(response, JSON.toJSONString(rolesList));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

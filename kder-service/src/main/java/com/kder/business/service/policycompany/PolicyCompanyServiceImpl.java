@@ -89,7 +89,7 @@ public class PolicyCompanyServiceImpl implements IPolicyCompanyService {
 		logger.info("----getPolicyCompanyPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<PolicyCompanyDo> list =  policyCompanyDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
 	}
 

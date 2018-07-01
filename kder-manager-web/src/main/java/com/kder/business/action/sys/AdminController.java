@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +24,6 @@ import com.kder.business.action.BaseAction;
 import com.kder.business.common.constant.Constants;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
-import com.kder.business.common.page.Pagination;
 import com.kder.business.entity.account.AuthoritiesDo;
 import com.kder.business.entity.account.ManagersDo;
 import com.kder.business.entity.account.ModuleDo;
@@ -54,10 +53,9 @@ public class AdminController extends BaseAction {
 
     @RequestMapping("listDatas")
     @ResponseBody
-    public void menuDatas(Pagination<ResourcesDo> pagination, HttpServletRequest request,
+    public void menuDatas(PageDo<ResourcesDo> page, HttpServletRequest request,
                           HttpServletResponse response){
         try{
-            PageDo<ResourcesDo> page = PageDoUtil.getPage(pagination);
             String name = getString(request,"name");
             if(null != name){
                 try {
@@ -68,8 +66,7 @@ public class AdminController extends BaseAction {
                 }
             }
             PageDo<ResourcesDo> usersList=moduleService.getResources(page, name);
-            pagination = PageDoUtil.getPageValue(pagination, usersList);
-            outPrint(response, JSON.toJSON(pagination));
+            outPrint(response, JSON.toJSON(usersList));
         }catch(Exception e){
             logger.error("显示数据异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
@@ -164,10 +161,9 @@ public class AdminController extends BaseAction {
 
     @ResponseBody
     @RequestMapping("userDatas")
-    public void userDatas(Pagination<ManagersDo> pagination, HttpServletRequest request,
+    public void userDatas(PageDo<ManagersDo> page, HttpServletRequest request,
                           HttpServletResponse response) {
         try{
-            PageDo<ManagersDo> page = PageDoUtil.getPage(pagination);
             String userName = getString(request, "username");
             String nickName = getString(request, "nickname");
             if (null != userName) {
@@ -194,8 +190,7 @@ public class AdminController extends BaseAction {
             }else{
                 usersList = managerUserService.getManagersByPage(page, userName,nickName);
             }
-            pagination = PageDoUtil.getPageValue(pagination, usersList);
-            outPrint(response, JSON.toJSONString(pagination));
+            outPrint(response, JSON.toJSONString(usersList));
         }catch(Exception e){
             logger.error("显示用户数据异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
@@ -359,9 +354,10 @@ public class AdminController extends BaseAction {
      * @param response
      */
     @RequestMapping("roleList")
-    public void roleDatas(Pagination<RolesDo> pagination, HttpServletRequest request,
+    public void roleDatas(PageDo<RolesDo> page, 
+    					  HttpServletRequest request,
                           HttpServletResponse response) {
-        PageDo<RolesDo> page = PageDoUtil.getPage(pagination);
+    	
         String roleName = getString("name");
         try {
             if (null != roleName) {
@@ -380,8 +376,7 @@ public class AdminController extends BaseAction {
             }else{
                 roleList = managerUserService.getRolesByPage(page, roleName);
             }
-            pagination = PageDoUtil.getPageValue(pagination, roleList);
-            outPrint(response, JSON.toJSONString(pagination));
+            outPrint(response, JSON.toJSONString(roleList));
         }catch(Exception e){
             logger.error("角色列表查询异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
@@ -489,18 +484,14 @@ public class AdminController extends BaseAction {
      */
     @RequestMapping("authoritiesInRolesOrNot")
     @ResponseBody
-    public void getInOrNotAuthoritiesByRoleId(Pagination<AuthoritiesDo> pagination, HttpServletRequest request,
+    public void getInOrNotAuthoritiesByRoleId(PageDo<AuthoritiesDo> pageDo, 
+    										  HttpServletRequest request,
                                               HttpServletResponse response){
         try{
             int roleId=getInt("roleId");
             int inRoleOrNot=getInt("inRoleOrNot");
-
-            PageDo<AuthoritiesDo> pageDo = PageDoUtil.getPage(pagination);
-
             pageDo = authorityService.getInOrNotAuthoritiesByRoleId(pageDo, roleId, inRoleOrNot==1);
-
-            Pagination<AuthoritiesDo> authList = PageDoUtil.getPageValue(pagination, pageDo);
-            outPrint(response, JSON.toJSONString(authList ));
+            outPrint(response, JSON.toJSONString(pageDo ));
         }catch(Exception e){
            logger.error("获取在角色下或者不在角色下的权限异常",e);
            throw new BusinessException("系统繁忙，请稍后再试");
@@ -535,9 +526,8 @@ public class AdminController extends BaseAction {
 
     @RequestMapping("users2Roles")
     @ResponseBody
-    public void users2Roles(Pagination<ManagersDo> pagination, HttpServletRequest request,
+    public void users2Roles(PageDo<ManagersDo> page, HttpServletRequest request,
                             HttpServletResponse response) {
-        PageDo<ManagersDo> page = PageDoUtil.getPage(pagination);
         int roleId = getInt("roleId");
         int inOrNot = getInt("inOrNot");
         //角色ID不为空，并且制定是在角色内或者非该角色标识才进行查询
@@ -559,8 +549,7 @@ public class AdminController extends BaseAction {
                 }else{
                     list = managerUserService.getManagersInOrNotInRolesByPage(page, roleId, inOrNot == 1,userName,nickName);
                 }
-                pagination = PageDoUtil.getPageValue(pagination, list);
-                outPrint(response, JSON.toJSONString(pagination));
+                outPrint(response, JSON.toJSONString(list));
             }
         } catch (UnsupportedEncodingException e) {
             logger.error("获取用户角色,转码失败", e);

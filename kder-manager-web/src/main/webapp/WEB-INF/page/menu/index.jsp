@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/js/jquery-easyui/themes/icon.css'/>" />
 <script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery-easyui/jquery.easyui.pack.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/menu/index.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/menu/index.js'/>?v=${jsversion}"></script>
 <script type="text/javascript" src="<c:url value='/js/common/pwdCheckout.js'/>"></script>
 <script type="text/javascript">
     //密码即将过期提示

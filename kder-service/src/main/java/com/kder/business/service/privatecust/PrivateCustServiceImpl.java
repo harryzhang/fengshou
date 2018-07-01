@@ -85,7 +85,7 @@ public class PrivateCustServiceImpl implements IPrivateCustService {
 		logger.info("----getCtPrivateCustPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<CtPrivateCust> list =  ctPrivateCustDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
 	}
 	

@@ -17,6 +17,14 @@ var AdminMenu=function(){
 					pageSize:20,
 					pageList:[20],
 					idField:"id",
+					loadFilter : function(data){
+						return {
+							'rows' : data.datas,
+							'total' : data.total,
+							'pageSize' : data.pageSize,
+							'pageNumber' : data.page
+						};
+					},
 					columns:[[
 					          {field:"name",title:"名字",width:150,align:"center"},
 					          {field:"resouceType",title:"资源类型",width:150,align:"center"},

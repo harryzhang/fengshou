@@ -181,7 +181,7 @@ public class DictServiceImpl implements IDictService {
     	logger.info("----getLoanDictPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<LoanDictDo> list = loanDictDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
     }
 }

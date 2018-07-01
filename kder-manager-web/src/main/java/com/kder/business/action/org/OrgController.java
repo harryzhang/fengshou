@@ -32,9 +32,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.org.OrgDo;
@@ -68,13 +66,12 @@ public class OrgController extends BaseAction{
     }
 	
 	@RequestMapping("/listOrg")
-    public void listOrg(NewPagination<OrgDo> pagination,
+    public void listOrg(PageDo<OrgDo> page,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
         logger.info("----listOrg----");
         try{
-            PageDo<OrgDo> page = PageDoUtil.getPage(pagination);
             String searchOrgName = getString("searchOrgName");
             Map<String,Object> param = new HashMap<String,Object>();
             if(StringUtils.isNotBlank(searchOrgName)){
@@ -87,10 +84,7 @@ public class OrgController extends BaseAction{
                 model.addAttribute("searchOrgCode",searchOrgCode);
             }
             page = orgService.getOrgPage(param, page);
-            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
-            model.addAttribute("statusList", statusList);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");

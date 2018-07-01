@@ -30,11 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
-import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.user.People;
@@ -66,13 +63,12 @@ public class PeopleController extends BaseAction{
     }
 	
 	@RequestMapping("/listPeople")
-    public void listPeople(NewPagination<People> pagination,
+    public void listPeople(PageDo<People> page,
     							  ModelMap model,
     							  HttpServletResponse response) {
 
         logger.info("----listPeople----");
         try{
-            PageDo<People> page = PageDoUtil.getPage(pagination);
             Map<String,Object> param = new HashMap<String,Object>();
             String searchUserName = getString("searchUserName");
             if(StringUtils.isNotBlank(searchUserName)){
@@ -86,10 +82,7 @@ public class PeopleController extends BaseAction{
             }
             
             page = peopleService.getPeoplePage(param, page);
-            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
-            model.addAttribute("statusList", statusList);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");

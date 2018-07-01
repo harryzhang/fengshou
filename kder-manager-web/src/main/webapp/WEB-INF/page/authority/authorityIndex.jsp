@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache" />
     <jsp:include page="../common.jsp"></jsp:include>
-    <script type="text/javascript" src="<c:url value='/js/sys/authorityIndex.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/js/sys/authorityIndex.js'/>?v=${jsversion}"></script>
     <style type="text/css">
         .tdfont {
             font-size: 12px;

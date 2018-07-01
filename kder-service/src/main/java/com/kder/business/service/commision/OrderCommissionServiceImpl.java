@@ -85,7 +85,7 @@ public class OrderCommissionServiceImpl implements IOrderCommissionService {
 		logger.info("----getOrderCommissionPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<OrderCommission> list =  orderCommissionDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
 	}
 	

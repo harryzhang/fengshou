@@ -177,7 +177,7 @@ public class ModuleServiceImpl implements IModuleService {
 		params.put("resourceStr", resourceName);
 		
 		List<ResourcesDo> datas = moduleDao.getResourcesInModulePage(params);
-		page.setModelList(datas);
+		page.setDatas(datas);
 		return page;
 		
 	}
@@ -235,7 +235,7 @@ public class ModuleServiceImpl implements IModuleService {
 				}
 			}
 		}
-		page.setModelList(mTempList);
+		page.setDatas(mTempList);
 		return page;
 	}
 	 /**

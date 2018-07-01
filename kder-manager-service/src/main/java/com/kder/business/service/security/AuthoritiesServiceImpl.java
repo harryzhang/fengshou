@@ -106,18 +106,18 @@ public class AuthoritiesServiceImpl implements IAuthoritiesService {
 		params.put(Constants.MYBATIS_PAGE, page);
 		params.put("name", name);
 		params.put("authDesc", authDesc);
-		if(page.getTotalCount() == null){
-			page.setTotalCount(1L);
+		if(page.getTotal() == null){
+			page.setTotal(1L);
 		}
-		if(page.getCurrentPage() == null){
-			page.setCurrentPage(1L);
+		if(page.getPage() == null){
+			page.setPage(1L);
 		}
 		if(page.getTotalPage() == null){
 			page.setTotalPage(1L);
 		}
 		List<AuthoritiesDo> datas = authoritiesDao.getAuthorityPage(params);
 		logger.info(datas);
-		page.setModelList(datas);
+		page.setDatas(datas);
 		return page;
 	}
 
@@ -127,9 +127,9 @@ public class AuthoritiesServiceImpl implements IAuthoritiesService {
 		map.put("roleId", (Integer)roleId );
 		map.put(Constants.MYBATIS_PAGE, pageDo);
 		if(inRoleOrNot){
-			pageDo.setModelList(rolesAuthorityDao.getAuthoritiesInRolesPage(map));
+			pageDo.setDatas(rolesAuthorityDao.getAuthoritiesInRolesPage(map));
 		}else{
-			pageDo.setModelList(rolesAuthorityDao.getAuthoritiesNotInRolesPage(map));
+			pageDo.setDatas(rolesAuthorityDao.getAuthoritiesNotInRolesPage(map));
 		}
 		
 		return pageDo;
@@ -184,19 +184,19 @@ public class AuthoritiesServiceImpl implements IAuthoritiesService {
 			params.put("resourceStr", filterLinks);
 		}
 		
-		if(page.getTotalCount() == null){
-			page.setTotalCount(1L);
+		if(page.getTotal() == null){
+			page.setTotal(1L);
 		}
-		if(page.getCurrentPage() == null){
-			page.setCurrentPage(1L);
+		if(page.getPage() == null){
+			page.setPage(1L);
 		}
 		if(page.getTotalPage() == null){
 			page.setTotalPage(1L);
 		}
 		if(b){
-			page.setModelList(resourcesDao.getResourcesInInAuthorityPage(params));
+			page.setDatas(resourcesDao.getResourcesInInAuthorityPage(params));
 		}else{
-			page.setModelList(resourcesDao.getResourceNotInAuthorityPage(params));
+			page.setDatas(resourcesDao.getResourceNotInAuthorityPage(params));
 		}
 		return page;
 	}

@@ -21,9 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
 import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
-import com.kder.business.common.page.NewPagination;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.page.PageDoUtil;
 import com.kder.business.common.result.Result;
 import com.kder.business.entity.dict.LoanDictDo;
 import com.kder.business.entity.dict.LoanDictDtlDo;
@@ -103,11 +101,10 @@ public class DictController extends BaseAction{
      * @return
      */
     @RequestMapping("/listDict")
-    public void listDict(NewPagination<LoanDictDo> pagination,ModelMap model,HttpServletResponse response) {
+    public void listDict(PageDo<LoanDictDo> page,ModelMap model,HttpServletResponse response) {
 
         logger.info("----listDict----");
         try{
-            PageDo<LoanDictDo> page = PageDoUtil.getPage(pagination);
             String dictName = getString("searchStr");
             Map<String,Object> param = new HashMap<String,Object>();
             if(StringUtils.isNotBlank(dictName)){
@@ -122,8 +119,7 @@ public class DictController extends BaseAction{
             page = dictService.getLoanDictPage(param, page);
             List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
             model.addAttribute("statusList", statusList);
-            pagination = PageDoUtil.getPageValue(pagination, page);
-            outPrint(response, JSONObject.toJSON(pagination));
+            outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("数据字典 查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");

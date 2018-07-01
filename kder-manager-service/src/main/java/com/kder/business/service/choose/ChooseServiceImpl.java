@@ -27,27 +27,27 @@ public class ChooseServiceImpl implements ICommonChooseService {
 		String chooseType = (String)param.get("chooseType");
 		if("PROD".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChooseProductPage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		if("MANAGER_PEOPLE".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChooseManagerPeoplePage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		if("PEOPLE".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChoosePeoplePage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		if("ORDER".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChooseOrderPage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		if("ORG".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChooseOrgPage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		if("POLICY_COMPANY".equalsIgnoreCase(chooseType)){
 			List<Map<String, Object>> datas = commonChooseDao.getChoosePolicyCompanyPage(param);
-			page.setModelList(datas);
+			page.setDatas(datas);
 		}
 		return page;
 	}

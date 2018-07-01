@@ -162,11 +162,6 @@
 						</td>						   
 					</tr>
 		
-				<tr>
-					<td colspan="2">
-						<input id="submitButton" name="submitButton" type="button" onclick="ordercommission_submit();"  value="提交" />	
-					</td>
-				<tr>			 
 			</table>	   
 		</div>	
 	</form>

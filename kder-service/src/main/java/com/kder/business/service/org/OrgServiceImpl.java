@@ -84,7 +84,7 @@ public class OrgServiceImpl implements IOrgService {
 		logger.info("----getOrgPage----"+param);
         param.put(Constants.MYBATIS_PAGE, page);
         List<OrgDo> list =  orgDao.queryListPage(param);
-        page.setModelList(list);
+        page.setDatas(list);
         return page;
 	}
 	

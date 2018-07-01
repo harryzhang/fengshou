@@ -5,23 +5,23 @@ import java.util.List;
 
 public class PageDo<T> implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long currentPage; // 当前页
-    private Long pageSize; // 每页记录数
-    private Long totalCount; // 总记录数
+    private Long page; // 当前页
+    private Long rows; // 每页记录数
+    private Long total; // 总记录数
     private Long totalPage; // 总页数
-    private List<T> modelList; // 实体对象列表
+    private List<T> datas; // 实体对象列表
 
     public PageDo() {
 
     }
 
     public PageDo(Long currentPage, Long pageSize, Long totalCount, List<T> modelList) {
-        this.setCurrentPage(currentPage);
-        this.setPageSize(pageSize);
-        this.setTotalCount(totalCount);
-        long totalPage = (getTotalCount() / getPageSize()) + ((getTotalCount() % getPageSize()) > 0 ? 1 : 0);
+        this.setPage(currentPage);
+        this.setRows(pageSize);
+        this.setTotal(totalCount);
+        long totalPage = (getTotal() / getRows()) + ((getTotal() % getRows()) > 0 ? 1 : 0);
         this.setTotalPage(totalPage);
-        this.setModelList(modelList);
+        this.setDatas(modelList);
     }
 
     /**
@@ -29,8 +29,8 @@ public class PageDo<T> implements Serializable {
      * 
      * @return currentPage
      */
-    public Long getCurrentPage() {
-        return currentPage;
+    public Long getPage() {
+        return page;
     }
 
     /**
@@ -38,11 +38,11 @@ public class PageDo<T> implements Serializable {
      * 
      * @param currentPage the currentPage to set
      */
-    public void setCurrentPage(Long currentPage) {
+    public void setPage(Long currentPage) {
         if (currentPage == null || currentPage.intValue() <= 0) {
             currentPage = 1l;
         }
-        this.currentPage = currentPage;
+        this.page = currentPage;
     }
 
     /**
@@ -50,8 +50,8 @@ public class PageDo<T> implements Serializable {
      * 
      * @return pageSize
      */
-    public Long getPageSize() {
-        return pageSize;
+    public Long getRows() {
+        return rows;
     }
 
     /**
@@ -59,11 +59,11 @@ public class PageDo<T> implements Serializable {
      * 
      * @param pageSize the pageSize to set
      */
-    public void setPageSize(Long pageSize) {
+    public void setRows(Long pageSize) {
         if (pageSize == null || pageSize.intValue() <= 0) {
             pageSize = 10l;
         }
-        this.pageSize = pageSize;
+        this.rows = pageSize;
     }
 
     /**
@@ -71,8 +71,8 @@ public class PageDo<T> implements Serializable {
      * 
      * @return totalCount
      */
-    public Long getTotalCount() {
-        return totalCount;
+    public Long getTotal() {
+        return total;
     }
 
     /**
@@ -80,11 +80,11 @@ public class PageDo<T> implements Serializable {
      * 
      * @param totalCount the totalCount to set
      */
-    public void setTotalCount(Long totalCount) {
+    public void setTotal(Long totalCount) {
         if (totalCount == null) {
             totalCount = 0l;
         }
-        this.totalCount = totalCount;
+        this.total = totalCount;
     }
 
     /**
@@ -110,8 +110,8 @@ public class PageDo<T> implements Serializable {
      * 
      * @return modelList
      */
-    public List<T> getModelList() {
-        return modelList;
+    public List<T> getDatas() {
+        return datas;
     }
 
     /**
@@ -119,8 +119,8 @@ public class PageDo<T> implements Serializable {
      * 
      * @param modelList the modelList to set
      */
-    public void setModelList(List<T> modelList) {
-        this.modelList = modelList;
+    public void setDatas(List<T> modelList) {
+        this.datas = modelList;
     }
 
     /**
@@ -128,8 +128,8 @@ public class PageDo<T> implements Serializable {
      * @return  
      */
     public Long getOffset() {
-        long current = getCurrentPage() == null ? 1L : getCurrentPage();
-        long size = getPageSize() == null ? 0L : getPageSize();
+        long current = getPage() == null ? 1L : getPage();
+        long size = getRows() == null ? 0L : getRows();
         return (current - 1) * size;
     }
 
@@ -137,7 +137,7 @@ public class PageDo<T> implements Serializable {
      * 计算并设置分页总页数
      */
     public void calTotalPage() {
-        int totalPage = (int) (totalCount / getPageSize() + ((totalCount % getPageSize() == 0) ? 0 : 1));
+        int totalPage = (int) (total / getRows() + ((total % getRows() == 0) ? 0 : 1));
         setTotalPage((long) totalPage);
     }
 }

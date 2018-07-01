@@ -54,10 +54,8 @@ public class PageInterceptor implements Interceptor {
 
     private static final Log logger = LogFactory.getLog(PageInterceptor.class);
     private static String defaultDialect = "mysql"; // 数据库类型(默认为mysql)
-    private static String defaultPageSqlId = ".*Page$"; // 需要拦截的ID(正则匹配)
+    private static String defaultPageSqlId = "^select[\\s\\S]*|^list[\\s\\S]*|.*Page$"; // 需要拦截的ID(正则匹配)
 
-    //    private String dialect = ""; // 数据库类型(默认为mysql)
-    //    private String pageSqlId = ""; // 需要拦截的ID(正则匹配)
 
     private static final ReflectorFactory DEFAULT_REFLECTOR_FACTORY = new DefaultReflectorFactory();
 
@@ -88,22 +86,17 @@ public class PageInterceptor implements Interceptor {
 
         //pageSqlId设置成static会存在并发问题，导致pageSqlId为空，2017.06.09
         String pageSqlId = defaultPageSqlId;
-        //        String pageSqlId = configuration.getVariables().getProperty("pageSqlId");  //需要拦截的ID(正则匹配)
-        //        pageSqlId = configuration.getVariables().getProperty("pageSqlId");
-        //        if (null == pageSqlId || "".equals(pageSqlId)) {
-        //            logger.debug("Property pageSqlId is not setted,use default '.*Page$' ");
-        //            pageSqlId = defaultPageSqlId;
-        //        }
 
         MappedStatement mappedStatement = (MappedStatement) metaStatementHandler.getValue("delegate.mappedStatement");
         // 只重写需要分页的sql语句。
-        //通过MappedStatement的ID匹配，默认重写以Page结尾的MappedStatement的sql
+        //通过MappedStatement的ID匹配，默认重写以Page结尾或list，select 开头的MappedStatement的sql
         if (mappedStatement.getId().matches(pageSqlId)) {
             BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");
             Object parameterObject = boundSql.getParameterObject();
-            if (parameterObject == null || metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") == null) {
-                throw new NullPointerException("parameterObject is null or page can't found !");
-            } else {
+            
+            //有page参数就执行翻页
+            if (parameterObject != null || metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") != null) {
+            	
                 PageDo page = (PageDo) metaStatementHandler.getValue("delegate.boundSql.parameterObject.page");
 
                 String sql = boundSql.getSql();
@@ -167,8 +160,8 @@ public class PageInterceptor implements Interceptor {
             if (rs.next()) {
                 totalCount = rs.getInt(1);
             }
-            page.setTotalCount((long) totalCount);
-            int totalPage = (int) (totalCount / page.getPageSize() + ((totalCount % page.getPageSize() == 0) ? 0 : 1));
+            page.setTotal((long) totalCount);
+            int totalPage = (int) (totalCount / page.getRows() + ((totalCount % page.getRows() == 0) ? 0 : 1));
             page.setTotalPage((long) totalPage);
         } catch (SQLException e) {
             logger.error("Ignore this exception", e);
@@ -242,9 +235,9 @@ public class PageInterceptor implements Interceptor {
      */
     private String buildPageSql(String sql, PageDo page, String dialect) {
         if (page != null) {
-            boolean resetFlag = (page.getCurrentPage() - 1) * page.getPageSize() > page.getTotalCount();
-            if (resetFlag || (page.getCurrentPage() > page.getTotalPage())) {
-                page.setCurrentPage(page.getTotalPage() == 0 ? 1 : page.getTotalPage());
+            boolean resetFlag = (page.getPage() - 1) * page.getRows() > page.getTotal();
+            if (resetFlag || (page.getPage() > page.getTotalPage())) {
+                page.setPage(page.getTotalPage() == 0 ? 1 : page.getTotalPage());
             }
 
             StringBuilder pageSql = new StringBuilder();
@@ -272,9 +265,9 @@ public class PageInterceptor implements Interceptor {
      */
     private StringBuilder buildPageSqlForMysql(String sql, PageDo page) {
         StringBuilder pageSql = new StringBuilder(100);
-        String beginrow = String.valueOf((page.getCurrentPage() - 1) * page.getPageSize());
+        String beginrow = String.valueOf((page.getPage() - 1) * page.getRows());
         pageSql.append(sql);
-        pageSql.append(" limit " + beginrow + "," + page.getPageSize());
+        pageSql.append(" limit " + beginrow + "," + page.getRows());
         return pageSql;
     }
 
@@ -290,15 +283,15 @@ public class PageInterceptor implements Interceptor {
      */
     private StringBuilder buildPageSqlForSybase(String sql, PageDo page) {
         StringBuilder pageSql = new StringBuilder(100);
-        int beginrow = (int) ((page.getCurrentPage() - 1) * page.getPageSize());
-        int endrow = (int) (page.getCurrentPage() * page.getPageSize());
+        int beginrow = (int) ((page.getPage() - 1) * page.getRows());
+        int endrow = (int) (page.getPage() * page.getRows());
 
         // 临时表随机命名，防止名称冲突
         String temp = "#temp" + new Random().nextInt(1000000);
         String fromSql = sql.substring(sql.indexOf("from"));
         String order = "";
         String tempOrder = "asc";
-        if (beginrow * 2 > page.getTotalCount()) {
+        if (beginrow * 2 > page.getTotal()) {
             if (fromSql.lastIndexOf("desc") > 0) {
                 order = "asc";
                 fromSql = fromSql.substring(0, fromSql.lastIndexOf("desc")) + order;
@@ -324,8 +317,8 @@ public class PageInterceptor implements Interceptor {
      */
     private StringBuilder buildPageSqlForOracle(String sql, PageDo page) {
         StringBuilder pageSql = new StringBuilder(100);
-        String beginrow = String.valueOf((page.getCurrentPage() - 1) * page.getPageSize());
-        String endrow = String.valueOf(page.getCurrentPage() * page.getPageSize());
+        String beginrow = String.valueOf((page.getPage() - 1) * page.getRows());
+        String endrow = String.valueOf(page.getPage() * page.getRows());
 
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");
         pageSql.append(sql);
@@ -347,6 +340,6 @@ public class PageInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-        //    	this.properties = properties;
+//            	this.properties = properties;
     }
 }
