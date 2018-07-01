@@ -147,7 +147,7 @@ function to_editctPrivateCust(id){
 
 function save_CtPrivateCust(){
 	$.ajax({ 
-			url: "<c:url value='/ctprivatecust/saveCtPrivateCust.html'/>", 
+			url:httpUrl+"/ctprivatecust/saveCtPrivateCust.html?&rand=" + Math.random(), 
 			data: $("#editCtPrivateCustForm").serialize(),
 			type:"post",
 			dataType:"json",
