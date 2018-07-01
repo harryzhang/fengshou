@@ -169,6 +169,16 @@
 			<if test="createTime != null">  
 				AND create_time = #{createTime}
 			</if>
+			<if test="searchStartTime != null">
+				<![CDATA[  
+				AND create_time >= #{searchStartTime}
+				]]>
+			</if>
+			<if test="searchStartTime != null">
+				<![CDATA[  
+				AND create_time <= #{searchEndTime}
+				]]>
+			</if>
 			<if test="updateTime != null">  
 				AND update_time = #{updateTime}
 			</if>

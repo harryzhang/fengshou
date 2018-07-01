@@ -435,6 +435,28 @@
 					</font>
 				</td> 
 				<td style="border:0;width:25%;font-size:10px;"></td>
+			</tr>
+			<tr style="width:90%;height:35px;"> 
+				<td style="border:0;width:25%;font-size:10px;"><b>订单来源： </b>
+				<font style="color:#000;font-weight:bold;">
+					<input size="20" 
+							   class="easyui-combobox" 
+							   id="orderFrom" 
+							   name="orderFrom" 
+							   value="${ctorder.orderFrom}"
+							   data-options="panelHeight:'90',
+											valueField: 'value', 
+											textField: 'text', 
+											data: [{ text: '线上', value: '1' },
+												   { text: '线下', value: '2' }]"
+						/>
+				</font>
+				</td>
+				<td  style="border:0;width:25%;font-size:10px;">
+				</td>
+				<td  style="border:0;width:25%;font-size:10px;">
+				</td> 
+				<td style="border:0;width:25%;font-size:10px;"></td>
 			</tr>					
 			</tbody>
 		</table>

@@ -37,6 +37,7 @@ import com.kder.business.common.result.Result;
 import com.kder.business.common.util.ExeclTools;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
+import com.kder.business.entity.privatecust.CtPrivateCust;
 import com.kder.business.service.order.IOrderService;
 import com.kder.business.service.privatecust.IPrivateCustService;
 
@@ -76,6 +77,56 @@ public class CtOrderController extends BaseAction{
         return "ctorder/report";
     }
 	
+    @RequestMapping("/queryReport")
+    public void queryReport(PageDo<CtOrder> page,
+    							  ModelMap model,
+    							  HttpServletResponse response) {
+
+        logger.info("----listCtOrder----");
+        try{
+            String searchUserName = getString("searchUserName");
+            Map<String,Object> param = new HashMap<String,Object>();
+            if(StringUtils.isNotBlank(searchUserName)){
+                param.put("userName",searchUserName);
+                model.addAttribute("searchUserName",searchUserName);
+            }
+            String searchRecognizeeName = getString("searchRecognizeeName");
+            if(StringUtils.isNotBlank(searchRecognizeeName)){
+                param.put("recognizeeName", searchRecognizeeName);
+                model.addAttribute("searchRecognizeeName",searchRecognizeeName);
+            }
+            String searchOrderNo = getString("searchOrderNo");
+            if(StringUtils.isNotBlank(searchOrderNo)){
+            	param.put("orderNo", searchOrderNo);
+            	model.addAttribute("searchOrderNo",searchOrderNo);
+            }
+            String searchMobile = getString("searchMobile");
+            if(StringUtils.isNotBlank(searchMobile)){
+            	param.put("userPhone", searchMobile);
+            	model.addAttribute("searchMobile",searchMobile);
+            }
+            
+            String searchStartTime = getString("searchStartTime");
+            if(StringUtils.isNotBlank(searchStartTime)){
+            	param.put("createTime", searchStartTime);
+            	model.addAttribute("searchStartTime",searchStartTime);
+            }
+            String searchEndTime = getString("searchEndTime");
+            if(StringUtils.isNotBlank(searchEndTime)){
+            	param.put("createTime", searchEndTime);
+            	model.addAttribute("searchEndTime",searchEndTime);
+            }
+			
+            page = ctOrderService.getOrderPage(param, page);
+            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
+            model.addAttribute("statusList", statusList);
+            outPrint(response, JSONObject.toJSON(page));
+        }catch(Exception e){
+            logger.error("查询清单异常",e);
+            throw new BusinessException("系统繁忙，请稍后再试");
+        }
+    }
+    
 	@RequestMapping("/listCtOrder")
     public void listCtOrder(PageDo<CtOrder> page,
     							  ModelMap model,
@@ -195,24 +246,35 @@ public class CtOrderController extends BaseAction{
      */
     @RequestMapping("/saveCtOrder")
     @ResponseBody
-    public void saveCtOrder(CtOrder CtOrder, 
+    public void saveCtOrder(CtOrder order, 
     							  HttpServletRequest request, 
     							  HttpServletResponse response) {
         logger.info("----saveCtOrder------");
         try{
-            Long id = CtOrder.getOrderId();
+            Long id = order.getOrderId();
             Long userId = new Long(this.getUserId());
             
             int i = 0;
             if (id != null && id.intValue()>0) {
-            	CtOrder.setUpdateBy(userId);
-            	CtOrder.setUpdateTime(new Date());
-                i = ctOrderService.updateCtOrderById(CtOrder);
+            	order.setUpdateBy(userId);
+            	order.setUpdateTime(new Date());
+                i = ctOrderService.updateCtOrderById(order);
             } else {
-				CtOrder.setCreateBy(userId);
-            	CtOrder.setCreateTime(new Date());
+				order.setCreateBy(userId);
+            	order.setCreateTime(new Date());
             	
-                i = ctOrderService.addCtOrder(CtOrder);
+                i = ctOrderService.addCtOrder(order);
+                
+                //修改意向订单状态
+                if(order.getPrivateCustId()!=null){
+                	Long privateCustId = order.getPrivateCustId();
+                	CtPrivateCust privCust = privateCustService.getById(privateCustId);
+                	if(privCust != null &&privCust.getStatus() !=null&& 1 == privCust.getStatus().intValue()){
+                		privCust.setStatus(3);
+                		privateCustService.updateCtPrivateCustById(privCust);
+                	}
+                }
+                
             }
 
             if (i <= 0) {
