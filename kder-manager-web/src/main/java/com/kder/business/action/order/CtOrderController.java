@@ -314,74 +314,23 @@ public class CtOrderController extends BaseAction{
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String fileName = URLEncoder.encode(excelHead + date + ".xls", "utf-8");
             List<String[]> excelheaderList = new ArrayList<String[]>();
-            String[] excelheader = { "订单id", 
-            						 "订单号", 
-            						 "保险产品ID", 
-            						 "用户ID", 
-            						 "订单状态", 
-            						 "保障期限", 
-            						 "订单开始日期",
-									 "订单结束日期",
-									 "订单金额",
-									 "投保人证件号码",
-									 "投保人证件类别",
-									 "投保人地址",
-									 "投保人姓名",
-									 "投保人手机号码",
-									 "被保险人姓名",
-									 "被保险人出身年月日",
-									 "被保人证件类型",
-									 "被保人证件号码",
-									 "被保人电话",
-									 "被保人地址",
-									 "被保人性别",
-									 "是否有社保",
-									 "被保人和投保人是否同一人",
-									 "销售人员ID",
-									 "销售人员姓名",
-									 "佣金",
-									 "项目ID",
-									 "审批状态",
-									 "审批日期",
-									 "意向订单ID",
-									 "记录创建日期",
-									 "记录更新日期"};
-            excelheaderList.add(0, excelheader);
-            String[] excelData = { "orderId", 
-            					   "orderNo", 
-            					   "prodId", 
-            					   "userId", 
-            					   "orderStatus", 
-            					   "orderPeriod", 
-            					   "startTime",
-								   "endTime",
-								   "orderAmt",
-								   "userCertNo",
-								   "userCertType",
-								   "userAddress",
-								   "userName",
-								   "userPhone",
-								   "recognizeeName",
-								   "recognizeeBirth",
-								   "recognizeeCertType",
-								   "recognizeeCertNo",
-								   "recognizeePhone",
-								   "recognizeeAddress",
-								   "recognizeeGender",
-								   "recognizeeSecurity",
-								   "isSame",
-								   "salesId",
-								   "salesMan",
-								   "commissionAmt",
-								   "projectId",
-								   "auditStatus",
-								   "auditDate",
-								   "privateCustId",
-								   "createTime",
-								   "updateTime"};
-            
-            
-            HSSFWorkbook wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+            HSSFWorkbook wb = null;
+            if("bxgs".equals(exportType)){
+            	String[]excelData=buildBxgsHeader(excelheaderList); 
+            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}else if("bxxh1".equals(exportType)){
+    			String[]excelData=buildBxxhHeader1(excelheaderList); 
+            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}else if("bxxh2".equals(exportType)){
+    			String[]excelData=buildBxxhHeader2(excelheaderList); 
+            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}else if("bxxh3".equals(exportType)){
+    			String[]excelData=buildBxxhHeader3(excelheaderList); 
+            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}else if("bj".equals(exportType)){
+    			String[]excelData=buildBJHeader(excelheaderList); 
+            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             wb.write(response.getOutputStream());
@@ -398,6 +347,270 @@ public class CtOrderController extends BaseAction{
         }
 
     }
+
+	private String[] buildBxxhHeader1(List<String[]> excelheaderList) {
+		String[] excelheader = { "保险公司名称", 
+				 "业务归属机构", 
+				 "险种", 
+				 "被保险人", 
+				 "保单号", 
+				 "起保日期", 
+				 "终保日期",
+				 "业务员",
+				 "投保日期",
+				 "单证号",
+				 "标的号",
+				 "标的名称",
+				 "保费",
+				 "代理费费率",
+				 "代理费",
+				 "业务员佣金率",
+				 "业务员佣金",
+				 "备注"};
+		 excelheaderList.add(0, excelheader);
+		 String[] excelData = { "policy_company", 
+			   "org_name", 
+			   "policy_type", 
+			   "recognizee_name",
+			   "order_no",
+			   "start_time", 
+			   "end_time", 
+			   "sales_man",
+			   "create_time",
+			   "bill_no",
+			   "product_code",
+			   "product_name",
+			   "order_amt",
+			   "proxy_rate",
+			   "proxy_fee",
+			   "commission_rate",
+			   "commission_amt",
+			   "remark"};
+		 
+		return excelData;
+	}
+	
+	private String[] buildBxxhHeader2(List<String[]> excelheaderList) {
+		String[] excelheader = { "保险公司名称", 
+				 "业务归属机构", 
+				 "被保险人",
+				 "车牌号",
+				 "业务员",
+				 "投保日期",
+				 "保单号/税号",
+				 "产品名称",
+				 "保费",
+				 "代理费费率",
+				 "代理费",
+				 "业务员佣金率",
+				 "业务员佣金",
+				 "起保日期", 
+				 "终保日期",
+				 "备注"};
+		 excelheaderList.add(0, excelheader);
+		 String[] excelData = { "policy_company", 
+			   "org_name", 
+			   "recognizee_name",
+			   "card_no",
+			   "sales_man",
+			   "create_time",
+			   "order_no",
+			   "product_name",
+			   "order_amt",
+			   "proxy_rate",
+			   "proxy_fee",
+			   "commission_rate",
+			   "commission_amt",
+			   "start_time", 
+			   "end_time", 
+			   "remark"};
+		 
+		return excelData;
+	}
+	
+	private String[] buildBxxhHeader3(List<String[]> excelheaderList) {
+		String[] excelheader = { "保险公司名称", 
+				 "险种名称", 
+				 "保单号", 
+				 "所属机构", 
+				 "被保险人数", 
+				 "总保额",
+				 "总保费",
+				 "缴别",
+				 "缴费年限",
+				 "首期保费",
+				 "续期保费",
+				 "投保日期",
+				 "起保日期", 
+				 "终保日期",
+				 "代理手续费费率",
+				 "代理费",
+				 "业务员佣金率",
+				 "业务员佣金",
+				 "业务员名称"};
+		 excelheaderList.add(0, excelheader);
+		 String[] excelData = { "policy_company",
+			   "policy_type",
+			   "order_no",
+			   "org_name", 
+			   "policy_man_cnt",
+			   "policy_amt",
+			   "order_amt",
+			   "pay_type",
+			   "pay_period",
+			   "first_policy_fee",
+			   "next_policy_fee",
+			   "create_time",
+			   "start_time", 
+			   "end_time", 
+			   "proxy_rate",
+			   "proxy_fee",
+			   "commission_rate",
+			   "commission_amt",
+			   "sales_man"};
+		return excelData;
+	}
+	
+	private String[] buildBJHeader(List<String[]> excelheaderList) {
+		String[] excelheader = { "订单id", 
+				 "订单号", 
+				 "保险产品ID", 
+				 "用户ID", 
+				 "订单状态", 
+				 "保障期限", 
+				 "订单开始日期",
+				 "订单结束日期",
+				 "订单金额",
+				 "投保人证件号码",
+				 "投保人证件类别",
+				 "投保人地址",
+				 "投保人姓名",
+				 "投保人手机号码",
+				 "被保险人姓名",
+				 "被保险人出身年月日",
+				 "被保人证件类型",
+				 "被保人证件号码",
+				 "被保人电话",
+				 "被保人地址",
+				 "被保人性别",
+				 "是否有社保",
+				 "被保人和投保人是否同一人",
+				 "销售人员ID",
+				 "销售人员姓名",
+				 "佣金",
+				 "项目ID",
+				 "审批状态",
+				 "审批日期",
+				 "意向订单ID",
+				 "记录创建日期",
+				 "记录更新日期"};
+		 excelheaderList.add(0, excelheader);
+		 String[] excelData = { "orderId", 
+			   "orderNo", 
+			   "prodId", 
+			   "userId", 
+			   "orderStatus", 
+			   "orderPeriod", 
+			   "startTime",
+			   "endTime",
+			   "orderAmt",
+			   "userCertNo",
+			   "userCertType",
+			   "userAddress",
+			   "userName",
+			   "userPhone",
+			   "recognizeeName",
+			   "recognizeeBirth",
+			   "recognizeeCertType",
+			   "recognizeeCertNo",
+			   "recognizeePhone",
+			   "recognizeeAddress",
+			   "recognizeeGender",
+			   "recognizeeSecurity",
+			   "isSame",
+			   "salesId",
+			   "salesMan",
+			   "commissionAmt",
+			   "projectId",
+			   "auditStatus",
+			   "auditDate",
+			   "privateCustId",
+			   "createTime",
+			   "updateTime"};
+		 
+		return excelData;
+	}
+	
+	
+	private String[] buildBxgsHeader(List<String[]> excelheaderList) {
+		String[] excelheader = { "订单id", 
+				 "订单号", 
+				 "保险产品ID", 
+				 "用户ID", 
+				 "订单状态", 
+				 "保障期限", 
+				 "订单开始日期",
+				 "订单结束日期",
+				 "订单金额",
+				 "投保人证件号码",
+				 "投保人证件类别",
+				 "投保人地址",
+				 "投保人姓名",
+				 "投保人手机号码",
+				 "被保险人姓名",
+				 "被保险人出身年月日",
+				 "被保人证件类型",
+				 "被保人证件号码",
+				 "被保人电话",
+				 "被保人地址",
+				 "被保人性别",
+				 "是否有社保",
+				 "被保人和投保人是否同一人",
+				 "销售人员ID",
+				 "销售人员姓名",
+				 "佣金",
+				 "项目ID",
+				 "审批状态",
+				 "审批日期",
+				 "意向订单ID",
+				 "记录创建日期",
+				 "记录更新日期"};
+		 excelheaderList.add(0, excelheader);
+		 String[] excelData = { "orderId", 
+			   "orderNo", 
+			   "prodId", 
+			   "userId", 
+			   "orderStatus", 
+			   "orderPeriod", 
+			   "startTime",
+			   "endTime",
+			   "orderAmt",
+			   "userCertNo",
+			   "userCertType",
+			   "userAddress",
+			   "userName",
+			   "userPhone",
+			   "recognizeeName",
+			   "recognizeeBirth",
+			   "recognizeeCertType",
+			   "recognizeeCertNo",
+			   "recognizeePhone",
+			   "recognizeeAddress",
+			   "recognizeeGender",
+			   "recognizeeSecurity",
+			   "isSame",
+			   "salesId",
+			   "salesMan",
+			   "commissionAmt",
+			   "projectId",
+			   "auditStatus",
+			   "auditDate",
+			   "privateCustId",
+			   "createTime",
+			   "updateTime"};
+		 
+		return excelData;
+	}
 	
 }
 
