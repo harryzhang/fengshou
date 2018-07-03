@@ -97,10 +97,13 @@ public class OrderServiceImpl implements IOrderService {
 	 * @param page
 	 * @return
 	 */
-	public PageDo<CtOrder> getOrderPage(Map<String, Object> param, PageDo<CtOrder> page){
+	public PageDo<CtOrder> getOrderPage(Map<String, Object> param){
 		logger.info("----getCtOrderPage----"+param);
-        param.put(Constants.MYBATIS_PAGE, page);
+		PageDo page = (PageDo)param.get(Constants.MYBATIS_PAGE);
         List<CtOrder> list =  ctOrderDao.queryListPage(param);
+        if(null == page){
+        	page = new PageDo<CtOrder>();
+        }
         page.setDatas(list);
         return page;
 	}

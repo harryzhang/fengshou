@@ -67,65 +67,7 @@ public class CtOrderController extends BaseAction{
         return "ctorder/listCtOrder";
     }
     
-    /**
-     * 去列表页面
-     * @param model
-     * @return
-     */
-    @RequestMapping("/report")
-    public String report(Model model){
-        return "ctorder/report";
-    }
-	
-    @RequestMapping("/queryReport")
-    public void queryReport(PageDo<CtOrder> page,
-    							  ModelMap model,
-    							  HttpServletResponse response) {
-
-        logger.info("----listCtOrder----");
-        try{
-            String searchUserName = getString("searchUserName");
-            Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(searchUserName)){
-                param.put("userName",searchUserName);
-                model.addAttribute("searchUserName",searchUserName);
-            }
-            String searchRecognizeeName = getString("searchRecognizeeName");
-            if(StringUtils.isNotBlank(searchRecognizeeName)){
-                param.put("recognizeeName", searchRecognizeeName);
-                model.addAttribute("searchRecognizeeName",searchRecognizeeName);
-            }
-            String searchOrderNo = getString("searchOrderNo");
-            if(StringUtils.isNotBlank(searchOrderNo)){
-            	param.put("orderNo", searchOrderNo);
-            	model.addAttribute("searchOrderNo",searchOrderNo);
-            }
-            String searchMobile = getString("searchMobile");
-            if(StringUtils.isNotBlank(searchMobile)){
-            	param.put("userPhone", searchMobile);
-            	model.addAttribute("searchMobile",searchMobile);
-            }
-            
-            String searchStartTime = getString("searchStartTime");
-            if(StringUtils.isNotBlank(searchStartTime)){
-            	param.put("createTime", searchStartTime);
-            	model.addAttribute("searchStartTime",searchStartTime);
-            }
-            String searchEndTime = getString("searchEndTime");
-            if(StringUtils.isNotBlank(searchEndTime)){
-            	param.put("createTime", searchEndTime);
-            	model.addAttribute("searchEndTime",searchEndTime);
-            }
-			
-            page = ctOrderService.getOrderPage(param, page);
-            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
-            model.addAttribute("statusList", statusList);
-            outPrint(response, JSONObject.toJSON(page));
-        }catch(Exception e){
-            logger.error("查询清单异常",e);
-            throw new BusinessException("系统繁忙，请稍后再试");
-        }
-    }
+    
     
 	@RequestMapping("/listCtOrder")
     public void listCtOrder(PageDo<CtOrder> page,
@@ -134,48 +76,45 @@ public class CtOrderController extends BaseAction{
 
         logger.info("----listCtOrder----");
         try{
-            String searchUserName = getString("searchUserName");
-            Map<String,Object> param = new HashMap<String,Object>();
-            if(StringUtils.isNotBlank(searchUserName)){
-                param.put("userName",searchUserName);
-                model.addAttribute("searchUserName",searchUserName);
-            }
-            String searchRecognizeeName = getString("searchRecognizeeName");
-            if(StringUtils.isNotBlank(searchRecognizeeName)){
-                param.put("recognizeeName", searchRecognizeeName);
-                model.addAttribute("searchRecognizeeName",searchRecognizeeName);
-            }
-            String searchOrderNo = getString("searchOrderNo");
-            if(StringUtils.isNotBlank(searchOrderNo)){
-            	param.put("orderNo", searchOrderNo);
-            	model.addAttribute("searchOrderNo",searchOrderNo);
-            }
-            String searchMobile = getString("searchMobile");
-            if(StringUtils.isNotBlank(searchMobile)){
-            	param.put("userPhone", searchMobile);
-            	model.addAttribute("searchMobile",searchMobile);
-            }
-            
-            String searchStartTime = getString("searchStartTime");
-            if(StringUtils.isNotBlank(searchStartTime)){
-            	param.put("createTime", searchStartTime);
-            	model.addAttribute("searchStartTime",searchStartTime);
-            }
-            String searchEndTime = getString("searchEndTime");
-            if(StringUtils.isNotBlank(searchEndTime)){
-            	param.put("createTime", searchEndTime);
-            	model.addAttribute("searchEndTime",searchEndTime);
-            }
-			
-            page = ctOrderService.getOrderPage(param, page);
-            List<CommonComboxConstants> statusList = CommonComboxConstants.getStatusList();
-            model.addAttribute("statusList", statusList);
+            Map<String, Object> param = buildQueryParameter();
+            param.put("page", page);
+            page = ctOrderService.getOrderPage(param);
             outPrint(response, JSONObject.toJSON(page));
         }catch(Exception e){
             logger.error("查询清单异常",e);
             throw new BusinessException("系统繁忙，请稍后再试");
         }
     }
+
+	private Map<String, Object> buildQueryParameter() {
+		String searchUserName = getString("searchUserName");
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(StringUtils.isNotBlank(searchUserName)){
+		    param.put("userName",searchUserName);
+		}
+		String searchRecognizeeName = getString("searchRecognizeeName");
+		if(StringUtils.isNotBlank(searchRecognizeeName)){
+		    param.put("recognizeeName", searchRecognizeeName);
+		}
+		String searchOrderNo = getString("searchOrderNo");
+		if(StringUtils.isNotBlank(searchOrderNo)){
+			param.put("orderNo", searchOrderNo);
+		}
+		String searchMobile = getString("searchMobile");
+		if(StringUtils.isNotBlank(searchMobile)){
+			param.put("userPhone", searchMobile);
+		}
+		
+		String searchStartTime = getString("searchStartTime");
+		if(StringUtils.isNotBlank(searchStartTime)){
+			param.put("createTime", searchStartTime);
+		}
+		String searchEndTime = getString("searchEndTime");
+		if(StringUtils.isNotBlank(searchEndTime)){
+			param.put("createTime", searchEndTime);
+		}
+		return param;
+	}
 	
 	
 	
@@ -296,20 +235,14 @@ public class CtOrderController extends BaseAction{
     public void export(HttpServletResponse response) throws IOException {
         try {
             Long time = System.currentTimeMillis();
-            CtOrderExample example  = new CtOrderExample();
-            String searchUserName = getString("searchUserName");
-          
-            if(StringUtils.isNotBlank(searchUserName)){
-                example.createCriteria().andUserNameLike(searchUserName);
-            }
-            String searchRecognizeeName = getString("searchRecognizeeName");
-            if(StringUtils.isNotBlank(searchRecognizeeName)){
-            	example.createCriteria().andRecognizeeNameLike(searchRecognizeeName);
-            }
-            List<CtOrder> ctorderLst = ctOrderService.selectCtOrder(example);
+
+            Map<String, Object> param = buildQueryParameter();
+            PageDo page = ctOrderService.getOrderPage(param);
+            List<CtOrder> ctorderLst =page.getDatas();
             
             //导出类型： 保监会、保险协会、保险公司
             String exportType = getString("exportType");
+            String exportTemplate = getString("exportTemplate");
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String fileName = URLEncoder.encode(excelHead + date + ".xls", "utf-8");
@@ -318,18 +251,21 @@ public class CtOrderController extends BaseAction{
             if("bxgs".equals(exportType)){
             	String[]excelData=buildBxgsHeader(excelheaderList); 
             	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
-    		}else if("bxxh1".equals(exportType)){
-    			String[]excelData=buildBxxhHeader1(excelheaderList); 
-            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
-    		}else if("bxxh2".equals(exportType)){
-    			String[]excelData=buildBxxhHeader2(excelheaderList); 
-            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
-    		}else if("bxxh3".equals(exportType)){
-    			String[]excelData=buildBxxhHeader3(excelheaderList); 
-            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    		}else if("bxxh".equals(exportType)){
+    			if("bxxh1".equals(exportTemplate)){
+        			String[]excelData=buildBxxhHeader1(excelheaderList); 
+                	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+        		}else if("bxxh2".equals(exportTemplate)){
+        			String[]excelData=buildBxxhHeader2(excelheaderList); 
+                	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+        		}else if("bxxh3".equals(exportTemplate)){
+        			String[]excelData=buildBxxhHeader3(excelheaderList); 
+                	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+        		}
     		}else if("bj".equals(exportType)){
-    			String[]excelData=buildBJHeader(excelheaderList); 
-            	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    			//String[]excelData=buildBJHeader(excelheaderList); 
+            	//wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
+    			 wb = new HSSFWorkbook(this.getClass().getResourceAsStream("man-template.xls"));
     		}
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);

@@ -26,6 +26,7 @@
 			      <table border="0">
 			        <tr>
 			          <td class="tdfont">查询条件:
+			          	<input type="hidden"  id="exportType" name="exportType">
 			          	<input type="text" size="14" id="searchUserName" name="searchUserName" placeholder="投保人姓名" >
 			          	<input type="text" size="14" id="searchOrderNo" name="searchOrderNo" placeholder="保单号" >
 			          	<input type="text" size="14" id="searchRecognizeeName" name="searchRecognizeeName" placeholder="被保人姓名" >
@@ -42,9 +43,9 @@
 			              <a  href="javascript:void(0)" id="resetButton" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >重置</a>
 				      </td>
 				      <td >
-			              <a  href="javascript:to_export('bj');" id="exportButton_bj" class="easyui-linkbutton" iconCls="icon-search" plain="true">导出保监会</a> 
+			              <a  href="javascript:to_export1('bj');" id="exportButton_bj" class="easyui-linkbutton" iconCls="icon-search" plain="true">导出保监会</a> 
 			              <a  href="javascript:to_export('bxxh');" id="exportButton_bxxh" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险协会</a>
-			              <a  href="javascript:to_export('bxgs');" id="exportButton_bxgs" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险公司</a>
+			              <a  href="javascript:to_export1('bxgs');" id="exportButton_bxgs" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险公司</a>
 				      </td>
 			        </tr>
 			      </table>
@@ -86,15 +87,21 @@
 	  });
 	  
 	  function to_export(exportType) {
+		  $("#exportType").val(exportType);
 		 $( "#exportCtOrderDiv" ).dialog();		 
 	  }
   
-	  function to_export1() {
-		  var exportType = $("#bxxh").val();
+	  function to_export1(exportType) {
+
+		  if(exportType){
+			  $("#exportType").val(exportType);
+		  }
+		  
+		  var exportTemplate = $("#bxxh").val();
 	      var exportIframe = document.createElement('iframe');  
 	      var query = $('#searchctOrderForm').serialize();
 	      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
-	      exportIframe.src =httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType+"&"+query;
+	      exportIframe.src =httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportTemplate="+exportTemplate+"&"+query;
 	      exportIframe.style.display = 'none';
 	      document.body.appendChild(exportIframe);
 	  }

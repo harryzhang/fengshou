@@ -49,7 +49,7 @@ public interface IOrderService{
 	 * @param page
 	 * @return
 	 */
-	public PageDo<CtOrder> getOrderPage(Map<String, Object> param, PageDo<CtOrder> page);
+	public PageDo<CtOrder> getOrderPage(Map<String, Object> param);
 	
 	
 	/**
