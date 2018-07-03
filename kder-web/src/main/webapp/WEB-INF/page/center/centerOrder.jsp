@@ -125,7 +125,7 @@
                                 </tr>   
                             </thead>
                            
-                            <c:forEach items="${ordPage.modelList}" var="order">
+                            <c:forEach items="${ordPage.datas}" var="order">
                             <tbody>
                                 <tr class="meta">
                                     <td colspan="3">
