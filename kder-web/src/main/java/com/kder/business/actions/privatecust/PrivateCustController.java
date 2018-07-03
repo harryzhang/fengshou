@@ -46,6 +46,7 @@ public class PrivateCustController extends BaseController {
     	String userName = getString("userName");
     	String phone = getString("phone");
         String gender = getString("gender");
+        String privateCustType = getString("privateCustType");
         Assert.hasText(userName, "请输入用户名");
         Assert.hasText(phone, "请输入手机号码");
         logger.info("私人订制, userName:" + userName + "; phone:" + phone);
@@ -53,7 +54,8 @@ public class PrivateCustController extends BaseController {
         CtPrivateCust privateCust = new CtPrivateCust();
         privateCust.setUserName(userName);
         privateCust.setPhone(phone);
-        privateCust.setGender(gender);        
+        privateCust.setGender(gender); 
+        privateCust.setPrivateCustType(privateCustType);
         privateCustService.addCtPrivateCust(privateCust);
         
         String token = TokenUtil.getTokenNoSave();

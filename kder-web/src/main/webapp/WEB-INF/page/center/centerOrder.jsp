@@ -35,12 +35,12 @@
             <ul class="header-nav">
                 <li><a target="_self" href="http://test.51dfs.cn/">首 页</a></li>
                 <li><a target="_self" href="http://test.51dfs.cn/ins/view/index.do">全部保险产品</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/claims.html">保险理赔</a></li>
-                <li><a target="_self" href="">企业团险</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/html/1/154/index.html?topNgId=3">保险理赔</a></li>
+                <li><a target="_self" href="http://test.51dfs.cn/html/1/177/index.html?topNgId=4">企业团险</a></li>
                 <li><a class="on" target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
             </ul>
             <div class="header-rnav right">
-<a href="http://test.51dfs.cn/private_custom.html">
+<a href="http://test.51dfs.cn/html/1/155/index.html">
                 <i class="i1"></i>
                 定制
             </a>
