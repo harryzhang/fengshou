@@ -239,7 +239,7 @@
                 return {
                     tabActiveName: tabActiveName,
                     currentPage:parseInt(parseURL().params.currentPage) || 1,
-                    pageSize: ${ordPage.pageSize},
+                    pageSize: ${ordPage.rows},
                     total:${ordPage.totalPage}
                 }
             },
