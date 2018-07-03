@@ -18,7 +18,9 @@ import com.kder.business.common.result.Result;
 import com.kder.business.common.util.DateUtil;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.entity.order.CtOrderExample;
+import com.kder.business.entity.product.TFsInsuranceWithBLOBs;
 import com.kder.business.service.order.IOrderService;
+import com.kder.business.service.product.IFsInsuranceService;
 
 
 @RestController
@@ -28,6 +30,8 @@ public class PolicyController extends BaseController {
 	@Resource
 	IOrderService orderService;
 	
+	@Resource
+	IFsInsuranceService productService;
 	
 	/**
      * 填写保单页面
@@ -190,6 +194,9 @@ public class PolicyController extends BaseController {
     		newCtOrder.setRecognizeeCertNo(idNo);    
     		newCtOrder.setRecognizeeName(name); 
     	}
+    	TFsInsuranceWithBLOBs productDo = productService.getById(Long.valueOf(productId));
+    	newCtOrder.setProductName(productDo.getTitle());
+    	newCtOrder.setOrderAmt(productDo.getStartPrice());
     	return newCtOrder;
 	}
 

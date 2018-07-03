@@ -37,5 +37,6 @@
     <dubbo:reference id="smsService" interface="com.kder.business.service.sms.ISmsService"  />
     <dubbo:reference id="privateCustService" interface="com.kder.business.service.privatecust.IPrivateCustService"  />
     <dubbo:reference id="orderService" interface="com.kder.business.service.order.IOrderService"/>
+    <dubbo:reference  id="productService"  interface="com.kder.business.service.product.IFsInsuranceService"/>
      
 </beans>
