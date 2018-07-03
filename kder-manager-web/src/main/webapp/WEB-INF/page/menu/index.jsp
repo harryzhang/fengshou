@@ -163,7 +163,8 @@
 			${user.nickName } <a href="#" id="editpass">修改密码</a> <a id="loginOut">安全退出</a>
 		</span> 
 		<span style="padding-left: 10px; font-size: 16px;">
-  		&nbsp;<img src="<c:url value='/images/logo.png'/>" width="80px" align="absmiddle">
+  		&nbsp;
+  		<!-- <img src="<c:url value='/images/logo.png'/>" width="80px" align="absmiddle"> -->
   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 丰收经纪业务系统</span>		
 	</div>
 	

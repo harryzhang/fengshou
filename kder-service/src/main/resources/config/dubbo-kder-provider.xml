@@ -42,5 +42,6 @@
     
     <dubbo:service interface="com.kder.business.service.org.IOrgService" ref="orgService" />
     <dubbo:service interface="com.kder.business.service.commission.IOrderCommissionService" ref="orderCommissionService" />
+    <dubbo:service interface="com.kder.business.service.product.IFsInsuranceService" ref="productService" />
     
 </beans>

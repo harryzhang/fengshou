@@ -173,7 +173,7 @@
 	    </div>
 		<br>
 	    <div>    	
-			<font style="color:#FFFFFF;font-size:32px;">丰收经纪业务系统</font>
+			<font style="color:#FFFFFF;font-size:32px;"></font>
 	    </div>
 	</div>
 	
