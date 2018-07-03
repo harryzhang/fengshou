@@ -59,17 +59,33 @@
 </div>
 
   <div id="editCtOrderDiv"></div> 
-  <div id="exportCtOrderDiv"></div> 
+  <div id="exportCtOrderDiv" class="easyui-dialog" style="width:400px;height:300px"
+		data-options="title:'导出对话框',modal:true,
+			toolbar:[{
+				text:'确定',
+				iconCls:'icon-edit',
+				handler:function(){alert('edit')}
+			},{
+				text:'取消',
+				iconCls:'icon-help',
+				handler:function(){ $(this).dialog('close');}
+			}]">
+	Dialog Content.
+</div> 
    
   <script type="text/javascript">
-  function to_export(exportType) {
-      var exportIframe = document.createElement('iframe');  
-      var query = $('#searchctOrderForm').serialize();
-      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
-      exportIframe.src =httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType+"&"+query;
-      exportIframe.style.display = 'none';
-      document.body.appendChild(exportIframe);
-  }
+	  function to_export1(exportType) {
+	     $("#exportCtOrderDiv").dialog('show');
+	  }
+  
+	  function to_export1(exportType) {
+	      var exportIframe = document.createElement('iframe');  
+	      var query = $('#searchctOrderForm').serialize();
+	      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+	      exportIframe.src =httpUrl+"/ctorder/export.html?&rand=" + Math.random()+"&exportType="+exportType+"&"+query;
+	      exportIframe.style.display = 'none';
+	      document.body.appendChild(exportIframe);
+	  }
   </script>
 </body>
 
