@@ -59,26 +59,38 @@
 </div>
 
   <div id="editCtOrderDiv"></div> 
-  <div id="exportCtOrderDiv" class="easyui-dialog" style="width:400px;height:300px"
+  <div id="exportCtOrderDiv" class="easyui-dialog" style="width:400px;height:300px;"
 		data-options="title:'导出对话框',modal:true,
 			toolbar:[{
 				text:'确定',
 				iconCls:'icon-edit',
-				handler:function(){alert('edit')}
+				handler:function(){to_export1();}
 			},{
 				text:'取消',
 				iconCls:'icon-help',
-				handler:function(){ $(this).dialog('close');}
+				handler:function(){ $('#exportCtOrderDiv').dialog('close');}
 			}]">
-	Dialog Content.
+	
+	    <div style="margin:50;"><label>导出模板</label>
+			<select id="bxxh">
+				<option value="bxxh1">非车险</option>
+				<option value="bxxh2">车险</option>
+				<option value="bxxh3">寿险</option>
+			</select>
+		</div>
 </div> 
    
   <script type="text/javascript">
-	  function to_export1(exportType) {
-	     $("#exportCtOrderDiv").dialog('show');
+	  $(document).ready(function(){
+  		$('#exportCtOrderDiv').dialog('close');
+	  });
+	  
+	  function to_export(exportType) {
+		 $( "#exportCtOrderDiv" ).dialog();		 
 	  }
   
-	  function to_export1(exportType) {
+	  function to_export1() {
+		  var exportType = $("#bxxh").val();
 	      var exportIframe = document.createElement('iframe');  
 	      var query = $('#searchctOrderForm').serialize();
 	      query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
@@ -88,5 +100,4 @@
 	  }
   </script>
 </body>
-
 </html>
