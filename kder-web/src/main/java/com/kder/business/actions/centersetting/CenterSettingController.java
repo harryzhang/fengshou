@@ -69,7 +69,8 @@ public class CenterSettingController extends BaseController{
 		PageDo<CtOrder> page = new PageDo();
 		page.setPage(Long.valueOf(currentPage));
 		page.setRows(5L);
-		PageDo<CtOrder> ordPage = 	orderService.getOrderPage(param, page );
+		param.put("page", page);
+		PageDo<CtOrder> ordPage = 	orderService.getOrderPage(param);
 		mav.addObject("ordPage", ordPage);
         mav.addObject("orderStatus", orderStatus);
         return mav;

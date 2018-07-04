@@ -95,7 +95,7 @@ public class PageInterceptor implements Interceptor {
             Object parameterObject = boundSql.getParameterObject();
             
             //有page参数就执行翻页
-            if (parameterObject != null || metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") != null) {
+            if (parameterObject != null && metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") != null) {
             	
                 PageDo page = (PageDo) metaStatementHandler.getValue("delegate.boundSql.parameterObject.page");
 

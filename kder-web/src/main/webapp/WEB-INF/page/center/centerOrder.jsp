@@ -17,10 +17,10 @@
     <div class="top-bar">
         <div class="container clearfix">
             <p class="left">
-                <a href="http://test.51dfs.cn/article_detail.html?typeid=1001">保单验证</a> |
-                <a href="http://test.51dfs.cn/html/1/93/94/index.html?topNgId=5">信息披露</a> |
-                <a href="http://test.51dfs.cn/article_detail.html?typeid=1003">关于我们</a> |
-                <a href="http://test.51dfs.cn/article_detail.html?typeid=1004">联系我们</a>
+                <a href="http://www.fengshou-ins.com/article_detail.html?typeid=1001">保单验证</a> |
+                <a href="http://www.fengshou-ins.com/html/1/93/94/index.html?topNgId=5">信息披露</a> |
+                <a href="http://www.fengshou-ins.com/article_detail.html?typeid=1003">关于我们</a> |
+                <a href="http://www.fengshou-ins.com/article_detail.html?typeid=1004">联系我们</a>
             </p>
             <p class="right">
             <a href="login.html">退出</a>
@@ -30,17 +30,17 @@
     <div class="top-header">
         <div class="container clearfix">
             <a href="index.html" class="logo">
-                <img src="http://test.51dfs.cn/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
+                <img src="http://www.fengshou-ins.com/templets/1/fengshou//images/logo.png" alt="" width="177" height="47" />
             </a>
             <ul class="header-nav">
-                <li><a target="_self" href="http://test.51dfs.cn/">首 页</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/ins/view/index.do">全部保险产品</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/html/1/154/index.html?topNgId=3">保险理赔</a></li>
-                <li><a target="_self" href="http://test.51dfs.cn/html/1/177/index.html?topNgId=4">企业团险</a></li>
-                <li><a class="on" target="_self" href="http://test.51dfs.cn/kder-api/setting/mypolicy.do">我的保单</a></li>
+                <li><a target="_self" href="http://www.fengshou-ins.com/">首 页</a></li>
+                <li><a target="_self" href="http://www.fengshou-ins.com/ins/view/index.do">全部保险产品</a></li>
+                <li><a target="_self" href="http://www.fengshou-ins.com/html/1/154/index.html?topNgId=3">保险理赔</a></li>
+                <li><a target="_self" href="http://www.fengshou-ins.com/html/1/177/index.html?topNgId=4">企业团险</a></li>
+                <li><a class="on" target="_self" href="http://www.fengshou-ins.com/kder-api/setting/mypolicy.do">我的保单</a></li>
             </ul>
             <div class="header-rnav right">
-<a href="http://test.51dfs.cn/html/1/155/index.html">
+<a href="http://www.fengshou-ins.com/html/1/155/index.html">
                 <i class="i1"></i>
                 定制
             </a>
@@ -54,7 +54,7 @@
 <div class="container mt20 clearfix">
     <div class="side-nav">
         <div class="user-info">
-            <img src="http://test.51dfs.cn/templets/1/fengshou//images/user_avator.jpg" height="90" width="90" alt="" />
+            <img src="http://www.fengshou-ins.com/templets/1/fengshou//images/user_avator.jpg" height="90" width="90" alt="" />
             <p>Hi，${sysUserDo.peoplePhone}</p>
         </div>
         <dl>
@@ -62,7 +62,7 @@
                 <i class="i1"></i>
                 我的账户
             </dt>
-            <dd><a href="http://test.51dfs.cn/kder-api/setting/toSetting.do">账户及密码</a></dd>
+            <dd><a href="http://www.fengshou-ins.com/kder-api/setting/toSetting.do">账户及密码</a></dd>
             <!-- 
             <dd><a href="center_contacts.html">常用联系人</a></dd>
              -->
@@ -78,21 +78,21 @@
             		   class="on"
             		</c:when>
             	</c:choose>
-            ><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=5">已完成订单</a></dd>
+            ><a href="http://www.fengshou-ins.com/kder-api/setting/mypolicy.do?orderStatus=5">已完成订单</a></dd>
             <dd
             	<c:choose>
             		<c:when test="${orderStatus eq '1'}">
             		   class="on"
             		</c:when>
             	</c:choose>
-            ><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=1">未完成订单</a></dd>
+            ><a href="http://www.fengshou-ins.com/kder-api/setting/mypolicy.do?orderStatus=1">未完成订单</a></dd>
             <dd
             	<c:choose>
             		<c:when test="${orderStatus eq '1'}">
             		   class="on"
             		</c:when>
             	</c:choose>
-            ><a href="http://test.51dfs.cn/kder-api/setting/mypolicy.do?orderStatus=4">可续保订单</a></dd>
+            ><a href="http://www.fengshou-ins.com/kder-api/setting/mypolicy.do?orderStatus=4">可续保订单</a></dd>
         </dl>
         <!-- 
         <dl>
@@ -157,7 +157,7 @@
 						<c:otherwise>                        
                         <div class="empty-order">
                             <i></i>
-                            <span class="cGray">暂无相关订单，去<a href="http://test.51dfs.cn/" class="cBlue">首页</a>逛逛吧~</span>
+                            <span class="cGray">暂无相关订单，去<a href="http://www.fengshou-ins.com/" class="cBlue">首页</a>逛逛吧~</span>
                         </div>
                         </c:otherwise>
                         </c:choose>
@@ -246,10 +246,10 @@
 
             methods:{
                 currentChange:function(pageIndex){
-                    location.href = 'http://test.51dfs.cn/kder-api/setting/mypolicy.do?currentPage='+pageIndex+'&orderStatus=' + this.tabActiveName;
+                    location.href = 'http://www.fengshou-ins.com/kder-api/setting/mypolicy.do?currentPage='+pageIndex+'&orderStatus=' + this.tabActiveName;
                 },
                 tabHandleClick: function(){
-                    location.href = 'http://test.51dfs.cn/kder-api/setting/mypolicy.do?currentPage=1&orderStatus=' + this.tabActiveName;
+                    location.href = 'http://www.fengshou-ins.com/kder-api/setting/mypolicy.do?currentPage=1&orderStatus=' + this.tabActiveName;
                 }
             },
 

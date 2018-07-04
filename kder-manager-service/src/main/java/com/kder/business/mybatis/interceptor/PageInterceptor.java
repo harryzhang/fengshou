@@ -94,7 +94,7 @@ public class PageInterceptor implements Interceptor {
             BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");
             Object parameterObject = boundSql.getParameterObject();
             
-            if (parameterObject != null || metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") != null) {
+            if (parameterObject != null && metaStatementHandler.getValue("delegate.boundSql.parameterObject.page") != null) {
             	
                 PageDo page = (PageDo) metaStatementHandler.getValue("delegate.boundSql.parameterObject.page");
 
