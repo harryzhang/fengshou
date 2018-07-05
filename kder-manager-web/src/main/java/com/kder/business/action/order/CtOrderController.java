@@ -237,12 +237,24 @@ public class CtOrderController extends BaseAction{
             Long time = System.currentTimeMillis();
 
             Map<String, Object> param = buildQueryParameter();
-            PageDo page = ctOrderService.getOrderPage(param);
-            List<CtOrder> ctorderLst =page.getDatas();
             
             //导出类型： 保监会、保险协会、保险公司
             String exportType = getString("exportType");
             String exportTemplate = getString("exportTemplate");
+            String policyType = "1";
+            if("bxxh1".equals(exportTemplate)){
+            	policyType  = "1";
+    		}else if("bxxh2".equals(exportTemplate)){
+    			policyType  = "2";
+    		}else if("bxxh3".equals(exportTemplate)){
+    			policyType  = "3";
+    		}
+            
+            param.put("policyType", policyType);
+            PageDo page = ctOrderService.getOrderPage(param);
+            List<CtOrder> ctorderLst =page.getDatas();
+            
+            
             String excelHead = "数据导出";
             String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             String fileName = URLEncoder.encode(excelHead + date + ".xls", "utf-8");
@@ -263,8 +275,6 @@ public class CtOrderController extends BaseAction{
                 	wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
         		}
     		}else if("bj".equals(exportType)){
-    			//String[]excelData=buildBJHeader(excelheaderList); 
-            	//wb = ExeclTools.execlExport(excelheaderList, excelData, excelHead, ctorderLst);
     			 wb = new HSSFWorkbook(this.getClass().getResourceAsStream("man-template.xls"));
     		}
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
