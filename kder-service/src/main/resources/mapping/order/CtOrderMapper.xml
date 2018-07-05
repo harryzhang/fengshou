@@ -186,6 +186,9 @@
 			<if test="orderId != null">  
 				AND order_id = #{orderId}
 			</if>
+			<if test="policyType != null">  
+				AND policy_type = #{policyType}
+			</if>
 			<if test="orderNo != null">  
 				AND order_no = #{orderNo}
 			</if>
