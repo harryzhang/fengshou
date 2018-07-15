@@ -84,9 +84,9 @@
                     </mt-button>
                 </div>
 				-->
-                <img v-if="el.orderStatus==5" src="images/order_status_0.png" width="75" height="75" alt="">
-                <img v-else-if="el.orderStatus==1" src="images/order_status_1.png" width="75" height="75" alt="">
-                <img v-else-if="el.orderStatus==4" src="images/order_status_2.png" width="75" height="75" alt="">
+                <img v-if="el.orderStatus==5" src="<c:url value='/images/order_status_0.png'/>" width="75" height="75" alt="">
+                <img v-else-if="el.orderStatus==1" src="<c:url value='/images/order_status_1.png'/>" width="75" height="75" alt="">
+                <img v-else-if="el.orderStatus==4" src="<c:url value='/images/order_status_2.png'/>" width="75" height="75" alt="">
             </div>
         </div>
 		
@@ -198,16 +198,16 @@
                 this.loading = true;
 
                 $.ajax({
-                    url:'http://www.fengshou-ins.com/kder-api/setting/mypolicy.do',
+                    url:'http://www.fengshou-ins.com/kder-api/setting/mypolicyList.do',
                     data: this.params,
                     dataType:'json',
                     success: function(res){
                         // setTimeout(function(){//setTimeout 模拟异步ajax demo 
                             vm.loading = false;
-                            vm.dataList = vm.dataList.concat(res);//数组合并
-                            if(res.length>=vm.params.pageSize){
+                            vm.dataList = vm.dataList.concat(res.data.datas);//数组合并
+                            if(res.data.total>=vm.params.pageSize){
                                 vm.loading = false;
-                            }else if(res.length==0&&vm.params.currentPage==1){
+                            }else if(res.data.total==0&&vm.params.currentPage==1){
                                 vm.loading = -2;//无数据
                             }else{
                                 vm.loading = -1;//没有更多了

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.page.PageDo;
+import com.kder.business.common.result.Result;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.service.order.IOrderService;
 import com.kder.web.util.RequestDeviceUtil;
@@ -43,6 +44,44 @@ public class CenterSettingController extends BaseController{
      * 我的保单页面
      * @param request
      * @param response
+     * @return  json
+     */
+    @RequestMapping(value = "/mypolicyList", method ={ RequestMethod.GET, RequestMethod.POST })
+    public  Result<?>  mypolicyList() {
+    	
+    	
+    	Integer userId = this.getUserId();
+    	if(userId == null){
+    		 return Result.failureResult("未登录");
+    	}
+    	
+    	Map<String, Object> param = new HashMap<String,Object>();
+    	String orderStatus = this.getString("orderStatus");
+    	if(StringUtils.isNotBlank(orderStatus)){
+    		param.put("orderStatus", orderStatus);
+    	}
+    	param.put("userId", userId);
+    	
+    	String currentPage = this.getString("currentPage");
+    	if(StringUtils.isBlank(currentPage)){
+    		currentPage ="1";
+    	}
+    	
+		PageDo<CtOrder> page = new PageDo();
+		page.setPage(Long.valueOf(currentPage));
+		page.setRows(5L);
+		param.put("page", page);
+		PageDo<CtOrder> ordPage = 	orderService.getOrderPage(param);
+		Result<PageDo<CtOrder>> ret= Result.successResult("ok");
+		ret.setData(ordPage);
+		return ret;
+    }
+    
+    
+    /**
+     * 我的保单页面
+     * @param request
+     * @param response
      * @return  
      */
     @RequestMapping(value = "/mypolicy", method ={ RequestMethod.GET, RequestMethod.POST })
@@ -58,17 +97,17 @@ public class CenterSettingController extends BaseController{
          }
          
     	
-    	Integer userId = this.getUserId();
-    	if(userId == null){
-    		 return mav;
-    	}
+//    	Integer userId = this.getUserId();
+//    	if(userId == null){
+//    		 return mav;
+//    	}
     	
     	Map<String, Object> param = new HashMap<String,Object>();
     	String orderStatus = this.getString("orderStatus");
     	if(StringUtils.isNotBlank(orderStatus)){
     		param.put("orderStatus", orderStatus);
     	}
-    	param.put("userId", userId);
+//    	param.put("userId", userId);
     	
     	String currentPage = this.getString("currentPage");
     	if(StringUtils.isBlank(currentPage)){
