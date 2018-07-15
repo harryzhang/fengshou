@@ -1,0 +1,69 @@
+/* Cell Component */
+/* Header Component */
+/* Button Component */
+/* Tab Item Component */
+/* Tabbar Component */
+/* Navbar Component */
+/* Checklist Component */
+/* Radio Component */
+/* z-index */
+.mint-header-fixed {
+    height: 40px;
+}
+.mint-header {
+    -ms-flex-align: center;
+        align-items: center;
+    background-color: #fff;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 14px;
+    height: 40px;
+    line-height: 1;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    border-bottom: 1px solid #DFDFE1;
+}
+.mint-header .mint-button {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    color: inherit;
+    display: inline-block;
+    padding: 0;
+    font-size: inherit
+}
+.mint-header .mint-button::after {
+    content: none;
+}
+.mint-header.is-fixed {
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    z-index: 11;
+}
+.mint-header-button {
+    -ms-flex: .5;
+        flex: .5;
+}
+.mint-header-button > a {
+    color: inherit;
+}
+.mint-header-button.is-right {
+    text-align: right;
+}
+.mint-header-button.is-left {
+    text-align: left;
+}
+.mint-header-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: inherit;
+    font-weight: 400;
+    -ms-flex: 1;
+        flex: 1;
+}

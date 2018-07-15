@@ -1,0 +1,122 @@
+/* Cell Component */
+/* Header Component */
+/* Button Component */
+/* Tab Item Component */
+/* Tabbar Component */
+/* Navbar Component */
+/* Checklist Component */
+/* Radio Component */
+/* z-index */
+.mint-cell {
+    background-color: #fff;
+    box-sizing: border-box;
+    color: inherit;
+    min-height: 48px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+}
+.mint-cell img {
+    vertical-align: middle;
+}
+/* border-top: 1px solid #eee; */
+.mint-cell:first-child .mint-cell-wrapper {
+    background-origin: border-box;
+}
+.mint-cell:last-child {
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+/* border-bottom: 1px solid #eee; */
+.mint-cell:last-child .mint-cell-wrapper {
+    border-bottom: none;
+}
+.mint-cell:active .mint-cell-mask::after {
+    opacity: .1;
+}
+.mint-cell-wrapper {
+    background-size: 120% 1px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-origin: content-box;
+    -ms-flex-align: center;
+        align-items: center;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 14px;
+    line-height: 1;
+    min-height: inherit;
+    overflow: hidden;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #eee;
+    -ms-flex: 1;
+        flex: 1;
+}
+.mint-cell-mask {}
+.mint-cell-mask::after {
+    background-color: #000;
+    content: " ";
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.mint-cell-text {
+    vertical-align: middle;
+}
+.mint-cell-label {
+    color: #888;
+    display: block;
+    font-size: 12px;
+    padding-left: 10px;
+}
+.mint-cell-title {
+    -ms-flex: 1;
+        flex: 1;
+    -ms-flex-align: center;
+        align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+}
+.mint-cell-value {
+    color: #888;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.mint-cell-value.is-link {
+    margin-right: 24px;
+}
+.mint-cell-left {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+}
+.mint-cell-right {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    transform: translate3d(100%, 0, 0);
+}
+.mint-cell-allow-right::after {
+    border: solid 2px #E1E1E1;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    content: " ";
+    top: 50%;
+    right: 20px;
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    transform: translateY(-50%) rotate(45deg);
+}

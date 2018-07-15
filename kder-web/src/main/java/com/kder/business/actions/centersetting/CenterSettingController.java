@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kder.business.actions.common.BaseController;
 import com.kder.business.common.page.PageDo;
-import com.kder.business.common.util.StringUtil;
 import com.kder.business.entity.order.CtOrder;
 import com.kder.business.service.order.IOrderService;
+import com.kder.web.util.RequestDeviceUtil;
 
 
 @RestController
@@ -49,10 +49,19 @@ public class CenterSettingController extends BaseController{
     public  ModelAndView  mypolicy() {
     	
     	ModelAndView mav = new ModelAndView("center/centerOrder");
+    	String requestHeader = this.getRequest().getHeader("user-agent");
+        if(RequestDeviceUtil.isMobileDevice(requestHeader)){
+             logger.debug("使用手机浏览器");
+             mav = new ModelAndView("center/mCenterOrder");
+         }else{
+             logger.debug("使用web浏览器");
+         }
+         
+    	
     	Integer userId = this.getUserId();
-//    	if(userId == null){
-//    		 return mav;
-//    	}
+    	if(userId == null){
+    		 return mav;
+    	}
     	
     	Map<String, Object> param = new HashMap<String,Object>();
     	String orderStatus = this.getString("orderStatus");

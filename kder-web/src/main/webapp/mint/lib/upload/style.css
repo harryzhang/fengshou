@@ -1,0 +1,69 @@
+
+.cube-upload { position: relative
+}
+.cube-upload-def { margin-right: -10px
+}
+.cube-upload-def .cube-upload-btn, .cube-upload-def .cube-upload-file { float: left; margin: 0 10px 10px 0
+}
+.cube-upload-single .cube-upload-file, .cube-upload-single .cube-upload-btn{margin: 0;
+}
+.cube-upload-single .cube-upload-file, .cube-upload-single .cube-upload-btn{position: absolute;left: 0;top: 0;
+}
+.cube-upload-single .cube-upload-btn .cube-upload-btn-def{background: none;
+}
+.cube-upload-single .cube-upload-def{margin: 0;position: relative;width: 80px;height: 80px;
+}
+.cube-upload-success .cube-upload-btn-def>i:after, .cube-upload-success .cube-upload-btn-def>i:before{background: #fff;
+}
+.reupload-tip{display: none;
+}
+.cube-upload-success .reupload-tip{position: absolute;width: 100%;bottom: 0;left: 0;color: #fff;text-align: center;font-size: 12px;height: 20px;line-height: 20px;background: rgba(0, 0, 0, .5);display: block;
+}
+
+.cube-upload-btn { position: relative; overflow: hidden
+}
+.cube-upload-btn:active .cube-upload-btn-def { background-color: rgba(0, 0, 0, .04)
+}
+.cube-upload-input { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; font-size: 0; opacity: 0
+}
+.cube-upload-btn-def { width: 80px; height: 80px; background-color: #fff; box-shadow: 0 0 6px 2px rgba(0, 0, 0, .08); border-radius: 2px; position: relative
+}
+.cube-upload-btn-def, .cube-upload-btn-def:after { box-sizing: border-box
+}
+.cube-upload-btn-def:after { content: ""; pointer-events: none; display: block; position: absolute; left: 0; top: 0; transform-origin: 0 0; border: 2px dashed #ddd; border-radius: 2px; width: 100%; height: 100%
+}
+@media (-webkit-min-device-pixel-ratio:2), (min-resolution:2dppx) {
+.cube-upload-btn-def:after { width: 200%; height: 200%; border-radius: 4px; transform: scale(.5) translateZ(0)
+}
+}
+@media (-webkit-min-device-pixel-ratio:3), (min-resolution:3dppx) {
+.cube-upload-btn-def:after { width: 300%; height: 300%; border-radius: 6px; transform: scale(.333) translateZ(0)
+}
+}
+.cube-upload-btn-def>i:after, .cube-upload-btn-def>i:before { content: ""; position: absolute; top: 50%; left: 50%; width: 20px; height: 2px; transform: translate(-50%, -50%); background-color: #666
+}
+.cube-upload-btn-def>i:after { transform: translate(-50%, -50%) rotate(90deg)
+}  
+
+.cube-upload-file { position: relative
+}
+.cube-upload-file-def { position: relative; width: 80px; height: 80px; box-sizing: border-box; background: #fff no-repeat 50%; background-size: cover; border-radius: 2px
+}
+.cube-upload-file-def>.cubeic-wrong { position: absolute; z-index: 2; top: -2px; right: -2px; color: rgba(0, 0, 0, .8); font-size: 16px; background-color: #fff; border-radius: 50%
+}
+.cube-upload-file-def>.cubeic-wrong:before { display: inline-block; transform: scale(1.625); transform-origin: center
+}
+.cube-upload-file-state { position: relative; width: 100%; height: 100%; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; overflow: hidden; opacity: 0; background-color: rgba(37, 38, 45, .4); border-radius: 2px; transition: opacity .1s
+}
+.cube-upload-file_stat { opacity: 1
+}
+.cube-upload-file-status { position: relative; z-index: 1; font-size: 30px; display: none
+}
+.cube-upload-file-status.cubeic-right { display: block; color: #fc9153
+}
+.cube-upload-file-status.cubeic-warn { display: block; color: #f43530
+}
+.cube-upload-file-status.cubeic-right+.cube-upload-file-progress, .cube-upload-file-status.cubeic-warn+.cube-upload-file-progress { display: none
+}
+.cube-upload-file-progress { color: #fff; font-size: 20px
+}  

@@ -1,0 +1,85 @@
+<template>
+    <div class="mt-step" :class="'mt-step-theme' + theme">
+        <ul class="mt-step-content"
+            :style="{paddingBottom: hasBottom ? '42px' : '10px', paddingTop: hasTop ? '42px' : '10px', color: currentColor}">
+            <slot></slot>
+        </ul>
+    </div>
+</template>
+
+<script>
+    const isColor = function (value) {
+        const colorReg = /^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$/;
+        const rgbaReg = /^[rR][gG][bB][aA]\(\s*((25[0-5]|2[0-4]\d|1?\d{1,2})\s*,\s*){3}\s*(\.|\d+\.)?\d+\s*\)$/;
+        const rgbReg = /^[rR][gG][bB]\(\s*((25[0-5]|2[0-4]\d|1?\d{1,2})\s*,\s*){2}(25[0-5]|2[0-4]\d|1?\d{1,2})\s*\)$/;
+
+        return colorReg.test(value) || rgbaReg.test(value) || rgbReg.test(value);
+    };
+
+    export default {
+        name: 'mt-step',
+        data() {
+            return {
+                hasTop: false,
+                hasBottom: false
+            }
+        },
+        props: {
+            theme: {
+                validator(value) {
+                    return ['1', '2'].indexOf(value) > -1;
+                },
+                default: '1'
+            },
+            current: {
+                validator(val) {
+                    return /^\d*$/.test(val);
+                },
+                default: 0
+            },
+            currentColor: {
+                validator(value) {
+                    return isColor(value);
+                },
+                default: '#A17E41'
+            }
+        },
+        methods: {
+            updateChildStatus(reinit) {
+                const childrens = this.$children.filter(item => item.$options.name === 'mt-step-item');
+                childrens.forEach((item, key) => {
+                    item.stepNumber = key + 1;
+                    if (key + 1 === childrens.length && this.current >= item.stepNumber) {
+                        item.current = item.stepNumber;
+                    } else {
+                        item.current = this.current;
+                    }
+
+                    item.theme = this.theme;
+                    if (!!item.$slots.bottom) {
+                        this.hasBottom = true;
+                    }
+                    if (!!item.$slots.top) {
+                        this.hasTop = true;
+                    }
+                    if (!item.loaded || reinit) {
+                        item.setCurrentClass();
+                        item.loaded = true;
+                    }
+                });
+            }
+        },
+        watch: {
+            current() {
+                this.$nextTick(() => {
+                    this.updateChildStatus(true);
+                });
+            }
+        }
+    }
+</script>
+
+
+<style>
+.mt-step{font-size:13px}.mt-step-content{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.mt-step-item{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;position:relative}.mt-step-item:not(:first-child):before{content:"";height:2px;position:absolute;top:-1px;background-color:#ccc}.mt-step-item>em{border-radius:50%;position:absolute;top:50%;left:50%;background-color:#ccc}.mt-step-item-bottom,.mt-step-item-top{position:absolute;left:0;text-align:center;white-space:nowrap;text-overflow:ellipsis;width:100%;padding:0 4px}.mt-step-item-top-text>span{color:#989898}.mt-step-item-bottom{color:#333}.mt-step-theme1 .mt-step-content{padding:10px 0 42px}.mt-step-theme1 .mt-step-item:not(:first-child):before{width:70%;left:-35%}.mt-step-theme1 .mt-step-item>em{width:20px;height:20px;margin-left:-10px;margin-top:-10px;text-align:center;line-height:20px;font-size:12px}.mt-step-theme1 .mt-step-item>em>i{color:#fff}.mt-step-theme1 .mt-step-item-top{bottom:18px}.mt-step-theme1 .mt-step-item-bottom{top:18px}.mt-step-theme1 .mt-step-item-current:before,.mt-step-theme1 .mt-step-item-current>em{background-color:currentColor}.mt-step-theme1 .mt-step-item-current>em.mt-step-checkmark:after{content:"";position:absolute;top:4px;left:8px;border:1px solid #fff;border-top:0;border-left:0;-webkit-transform:rotate(45deg);transform:rotate(45deg);width:5px;height:10px}.mt-step-theme1 .mt-step-item-current .mt-step-item-bottom{color:currentColor}.mt-step-theme2 .mt-step-content{padding:42px 0}.mt-step-theme2 .mt-step-item:not(:first-child):before{width:80%;left:-40%}.mt-step-theme2 .mt-step-item>em{width:10px;height:10px;margin-left:-5px;margin-top:-5px}.mt-step-theme2 .mt-step-item-top{bottom:15px}.mt-step-theme2 .mt-step-item-bottom{top:15px}.mt-step-theme2 .mt-step-item-current .mt-step-item-top-text{display:inline-block;background-color:currentColor;padding:5px 11px 3px;border-radius:100px;position:relative;z-index:1}.mt-step-theme2 .mt-step-item-current .mt-step-item-top-text>span{color:#fff}.mt-step-theme2 .mt-step-item-current>em{background-color:currentColor}.mt-step-theme2 .mt-step-item-current>em:after{content:"";width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid currentColor;position:absolute;top:-10px;left:50%;margin-left:-6px}
+</style>

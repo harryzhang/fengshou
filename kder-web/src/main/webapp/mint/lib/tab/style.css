@@ -1,0 +1,53 @@
+
+.mt-tab {
+    position: relative;
+    background-color: hsla(0, 0%, 100%, .8);
+    width: 100%;
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #ddd
+}
+.mt-tab.mt-tab-fix-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ccc;
+    border-bottom: none
+}
+.mt-tab.mt-tab-fix-bottom .mt-tab-item {
+    border-bottom: none !important
+}
+.mt-tab .mt-tab-list {
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    padding: 5px 10px 0;
+    min-width: 100%
+}
+.mt-tab .mt-tab-list .mt-tab-item {
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 5px
+}
+.mt-tab .mt-tab-list .mt-tab-item:not(:first-child) {
+    margin-left: 15px
+}
+.mt-tab-item {
+    text-decoration: none;
+    text-align: center
+}
+.mt-tab-item .mt-tab-item-icon {
+    margin: 0 auto 5px
+}
+.mt-tab-item .mt-tab-item-label {
+    margin: 0 auto 10px;
+    line-height: 18px
+}
