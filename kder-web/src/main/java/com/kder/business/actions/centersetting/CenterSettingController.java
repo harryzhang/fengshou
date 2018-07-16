@@ -97,10 +97,10 @@ public class CenterSettingController extends BaseController{
          }
          
     	
-//    	Integer userId = this.getUserId();
-//    	if(userId == null){
-//    		 return mav;
-//    	}
+    	Integer userId = this.getUserId();
+    	if(userId == null){
+    		 return mav;
+    	}
     	
     	Map<String, Object> param = new HashMap<String,Object>();
     	String orderStatus = this.getString("orderStatus");
