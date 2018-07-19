@@ -8,6 +8,7 @@
 package com.kder.business.action.order;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,15 +23,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kder.business.action.BaseAction;
-import com.kder.business.common.CommonComboxConstants;
 import com.kder.business.common.exception.BusinessException;
 import com.kder.business.common.page.PageDo;
 import com.kder.business.common.result.Result;
@@ -227,6 +233,71 @@ public class CtOrderController extends BaseAction{
         }
         logger.info("----end saveCtOrder--------");
     }
+    
+    
+    
+	/**
+     * 导入表页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toImport")
+    public String toImport(Model model){
+        return "ctorder/importOrder";
+    }
+    
+    
+	/**
+     * 导入表页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/submitImport")
+    @ResponseBody
+    public void submitImport(Model model,
+    						 @RequestParam MultipartFile importFile,
+    						 HttpServletRequest request, 
+    						 HttpServletResponse response){
+    	
+         
+    	 logger.info("----submitImport------");
+         try{
+        	 String importFileName = importFile.getOriginalFilename();
+        	 String importType = request.getParameter("importType");
+        	 processExcell(importFile.getInputStream(),importFileName,importType);
+        	 outPrint(response, this.toJSONString(Result.successResult("sucess")));
+         }catch(Exception e){
+             logger.error("保存更新失败",e);
+             outPrint(response, this.toJSONString(Result.failureResult("error")));
+         }
+         logger.info("----end submitImport--------");
+    }
+    
+	
+	private void processExcell(InputStream input,String importFileName,String importType) throws IOException{
+		Workbook wb = null;
+		if(importFileName.contains("xlsx")){
+			wb = new XSSFWorkbook(input);
+		}else{
+			wb = new HSSFWorkbook(input);
+		}
+		Sheet sheet =  wb.getSheetAt(0);
+		int lastRow = sheet.getLastRowNum();
+		List<Map<String,Object>> sheetRows = new ArrayList<Map<String,Object>>();
+		for(int rowIdx = 1 ; rowIdx <=lastRow; rowIdx++){
+			
+			Row row = sheet.getRow(rowIdx);
+			short cells = row.getLastCellNum();
+			Map<String,Object> parameterMap = new HashMap<String,Object>();
+			for(short oneCell = 0 ; oneCell<cells ; oneCell++){
+				String cellVal =  ExeclTools.processCellValue(row, oneCell);
+				parameterMap.put("Column_"+(oneCell+1), cellVal);
+			}
+			sheetRows.add(parameterMap);
+		}
+		
+		ctOrderService.importOrder(sheetRows,importFileName,importType,this.getUserId());			
+	}
     
 	/**
      * 导出数据

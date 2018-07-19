@@ -1215,4 +1215,77 @@
       create_by = #{createBy,jdbcType=BIGINT}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
+  
+  <insert id="insertImportLog" parameterType="map">
+  	INSERT INTO `import_log` 
+	(`import_id`, 
+	`file_name`, 
+	`user_id`, 
+	`import_type`,
+	`create_time`, 
+	`update_time`
+	)
+	VALUES
+	(#{importId}, 
+	#{fileName}, 
+	#{userId},
+	#{importType}, 
+	now(), 
+	now()
+	);
+  </insert>
+  
+  <insert id="importOrder" parameterType="map">
+  	  INSERT INTO `t_fs_temp` 
+	(`Column_0`, 
+	`Column_1`, 
+	`Column_2`, 
+	`Column_3`, 
+	`Column_4`, 
+	`Column_5`, 
+	`Column_6`, 
+	`Column_7`, 
+	`Column_8`, 
+	`Column_9`, 
+	`Column_10`, 
+	`Column_11`, 
+	`Column_12`, 
+	`Column_13`, 
+	`Column_14`, 
+	`Column_15`, 
+	`Column_16`, 
+	`Column_17`, 
+	`Column_18`, 
+	`Column_19`, 
+	`Column_20`, 
+	`Column_21`, 
+	`Column_22`
+	)
+	VALUES(
+	#{Column_0}, 
+    #{Column_1}, 
+	#{Column_2}, 
+	#{Column_3}, 
+	#{Column_4}, 
+	#{Column_5}, 
+	#{Column_6}, 
+	#{Column_7}, 
+	#{Column_8}, 
+	#{Column_9}, 
+	#{Column_10}, 
+	#{Column_11}, 
+	#{Column_12}, 
+	#{Column_13}, 
+	#{Column_14}, 
+	#{Column_15}, 
+	#{Column_16}, 
+	#{Column_17}, 
+	#{Column_18}, 
+	#{Column_19}, 
+	#{Column_20}, 
+	#{Column_21}, 
+	#{Column_22}
+	);
+  </insert>
+  
 </mapper>

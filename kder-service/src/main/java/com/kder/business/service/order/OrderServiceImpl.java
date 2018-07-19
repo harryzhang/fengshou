@@ -7,9 +7,11 @@
 package com.kder.business.service.order;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.kder.business.common.constant.Constants;
 import com.kder.business.common.page.PageDo;
@@ -116,6 +119,30 @@ public class OrderServiceImpl implements IOrderService {
 	public int deleteById(Long id){
 		logger.debug("deleteByIdCtOrder:"+id);
 		return  ctOrderDao.deleteByPrimaryKey(id);		
+	}
+
+	/**
+	 * 订单导入
+	 */
+	@Override
+	public void importOrder(List<Map<String, Object>> sheetRows,
+							String importFileName,
+							String importType,
+							Integer operatorId) {
+		Assert.notEmpty(sheetRows, "不要导入空的excel");
+		//导入记录
+		Map<String,Object> importLog = new HashMap<String,Object>();
+		String importId = UUID.randomUUID().toString();
+		importLog.put("importId", importId);//导入批次号
+		importLog.put("fileName", importFileName);
+		importLog.put("userId", operatorId);//操作用户id
+		importLog.put("importType", importType);//操作用户id
+		ctOrderDao.insertImportLog(importLog);
+		//导入明细
+		for(Map<String,Object> oneRow : sheetRows){
+			oneRow.put("Column_0", importId);
+			ctOrderDao.importOrder(oneRow);
+		}
 	}
 
 }

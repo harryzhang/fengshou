@@ -46,6 +46,7 @@
 			              <a  href="javascript:to_export1('bj');" id="exportButton_bj" class="easyui-linkbutton" iconCls="icon-search" plain="true">导出保监会</a> 
 			              <a  href="javascript:to_export('bxxh');" id="exportButton_bxxh" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险协会</a>
 			              <a  href="javascript:to_export1('bxgs');" id="exportButton_bxgs" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导出保险公司</a>
+			              <a  href="javascript:to_import('bxgs');" id="importButton" class="easyui-linkbutton" iconCls="icon-reset" plain="true" >导入</a>
 				      </td>
 			        </tr>
 			      </table>
@@ -85,6 +86,13 @@
 	  $(document).ready(function(){
   		$('#exportCtOrderDiv').dialog('close');
 	  });
+	  
+	  function to_import(){
+		  var iTop = (window.screen.availHeight - 20 - 200) / 2; 
+           //获得窗口的水平位置 
+           var iLeft = (window.screen.availWidth - 30 - 300) / 2; 
+		  window.open("<c:url value='/ctorder/toImport.html'/>","导入","width=800,height=300,top="+iTop+",left="+iLeft,"_blank");  
+	  }
 	  
 	  function to_export(exportType) {
 		  $("#exportType").val(exportType);

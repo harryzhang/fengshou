@@ -56,4 +56,10 @@ public interface IOrderService{
 	 * 删除
 	 */
 	public int deleteById(Long id);
+
+	/**
+	 * 导入
+	 * @param sheetRows
+	 */
+	public void importOrder(List<Map<String, Object>> sheetRows,String importFileName,String importType,Integer operatorId);
 }

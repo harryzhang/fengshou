@@ -84,4 +84,16 @@ public interface CtOrderMapper {
 	 * @return
 	 */
 	List<CtOrder> queryListPage(Map<String, Object> param);
+
+	/**
+	 * 导入明细
+	 * @param oneRow
+	 */
+	void importOrder(Map<String, Object> oneRow);
+
+	/**
+	 * 导入主表
+	 * @param importLog
+	 */
+	void insertImportLog(Map<String, Object> importLog);
 }

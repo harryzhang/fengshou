@@ -21,6 +21,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
@@ -735,9 +736,9 @@ public class ExeclTools {
      * @return
      * @throws NullPointerException
      */
-    public static String processCellValue(HSSFRow row, int cell)
+    public static String processCellValue(Row row, int cell)
             throws NullPointerException {
-        HSSFCell headCell = row.getCell(cell);
+        Cell headCell = row.getCell(cell);
 
         if (null == headCell) {
             return "";
