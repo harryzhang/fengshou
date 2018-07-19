@@ -122,6 +122,9 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	/**
+	 * <option value="2">非车险</option>
+	 * <option value="1">车险</option>
+	 * <option value="3">寿险</option>
 	 * 订单导入
 	 */
 	@Override
@@ -143,6 +146,36 @@ public class OrderServiceImpl implements IOrderService {
 			oneRow.put("Column_0", importId);
 			ctOrderDao.importOrder(oneRow);
 		}
+		
+		//处理没有维护的主数据
+		if("1".equalsIgnoreCase(importType)){
+			
+		}else if("2".equalsIgnoreCase(importType)){
+			
+		}else if("3".equalsIgnoreCase(importType)){
+			
+		}
+		
+		//写正式表
+		if("1".equalsIgnoreCase(importType)){
+			insertOrderTabBybxxh1(importId,importType);
+		}else if("2".equalsIgnoreCase(importType)){
+			insertOrderTabBybxxh2(importId,importType);
+		}else if("3".equalsIgnoreCase(importType)){
+			insertOrderTabBybxxh3(importId,importType);
+		}
+	}
+
+	private void insertOrderTabBybxxh3(String importId,String importType) {
+		ctOrderDao.insertOrderTabBybxxh3(importId,importType);
+	}
+
+	private void insertOrderTabBybxxh2(String importId,String importType) {
+		ctOrderDao.insertOrderTabBybxxh2(importId,importType);
+	}
+
+	private void insertOrderTabBybxxh1(String importId,String importType) {
+		ctOrderDao.insertOrderTabBybxxh1(importId,importType);
 	}
 
 }

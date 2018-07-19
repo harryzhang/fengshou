@@ -27,9 +27,9 @@
 			        <tr>
 			          <td class="tdfont">请告诉我你导入的模板:
 						 <select id="importType" name="importType">
-								<option value="bxxh1">非车险</option>
-								<option value="bxxh2">车险</option>
-								<option value="bxxh3">寿险</option>
+								<option value="2">非车险</option>
+								<option value="1">车险</option>
+								<option value="3">寿险</option>
 						</select>			          	
 			          </td>
 			          <td>

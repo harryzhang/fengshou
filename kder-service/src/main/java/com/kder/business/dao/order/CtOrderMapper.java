@@ -96,4 +96,10 @@ public interface CtOrderMapper {
 	 * @param importLog
 	 */
 	void insertImportLog(Map<String, Object> importLog);
+
+	void insertOrderTabBybxxh3(@Param("importId")String importId,@Param("importType")String importType);
+
+	void insertOrderTabBybxxh2(@Param("importId")String importId,@Param("importType")String importType);
+
+	void insertOrderTabBybxxh1(@Param("importId")String importId,@Param("importType")String importType);
 }
