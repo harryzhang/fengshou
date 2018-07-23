@@ -128,6 +128,7 @@ public class OrderServiceImpl implements IOrderService {
 	 * 订单导入
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void importOrder(List<Map<String, Object>> sheetRows,
 							String importFileName,
 							String importType,

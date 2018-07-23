@@ -97,9 +97,9 @@ public interface CtOrderMapper {
 	 */
 	void insertImportLog(Map<String, Object> importLog);
 
-	void insertOrderTabBybxxh3(@Param("importId")String importId,@Param("importType")String importType);
+	void insertOrderTabBybxxh3(@Param("importId")String importId,@Param("policyType")String policyType);
 
-	void insertOrderTabBybxxh2(@Param("importId")String importId,@Param("importType")String importType);
+	void insertOrderTabBybxxh2(@Param("importId")String importId,@Param("policyType")String policyType);
 
-	void insertOrderTabBybxxh1(@Param("importId")String importId,@Param("importType")String importType);
+	void insertOrderTabBybxxh1(@Param("importId")String importId,@Param("policyType")String policyType);
 }
