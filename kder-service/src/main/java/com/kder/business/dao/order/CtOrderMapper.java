@@ -102,4 +102,14 @@ public interface CtOrderMapper {
 	void insertOrderTabBybxxh2(@Param("importId")String importId,@Param("policyType")String policyType);
 
 	void insertOrderTabBybxxh1(@Param("importId")String importId,@Param("policyType")String policyType);
+
+	/**
+	 * 把临时表的主数据写各个主数据的表
+	 * @param importId
+	 */
+	void processBxxh1(@Param("importId")String importId);
+
+	void processBxxh2(@Param("importId")String importId);
+
+	void processBxxh3(@Param("importId")String importId);
 }

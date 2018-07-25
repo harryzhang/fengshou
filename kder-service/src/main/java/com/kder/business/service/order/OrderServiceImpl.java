@@ -150,11 +150,11 @@ public class OrderServiceImpl implements IOrderService {
 		
 		//处理没有维护的主数据
 		if("1".equalsIgnoreCase(importType)){
-			
+			ctOrderDao.processBxxh1(importId);
 		}else if("2".equalsIgnoreCase(importType)){
-			
+			ctOrderDao.processBxxh2(importId);
 		}else if("3".equalsIgnoreCase(importType)){
-			
+			ctOrderDao.processBxxh3(importId);
 		}
 		
 		//写正式表

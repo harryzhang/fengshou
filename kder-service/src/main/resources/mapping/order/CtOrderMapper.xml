@@ -1381,7 +1381,7 @@ from t_fs_temp a left join t_fs_insurance b on a.column_2 = b.title
                  left join managers m on a.column_19  = m.nickname
                  left join t_fs_insurance_company ic  on a.column_1 = ic.company_name
                  left join t_org o on a.column_4 = o.org_name
-                 left join t_policy_type pt on a.column_2  = pt.id
+                 left join t_policy_type pt on a.column_2  = pt.`name`
 where a.column_0 = #{importId}    
   </insert>
   
@@ -1478,7 +1478,7 @@ from t_fs_temp a left join t_fs_insurance b on a.column_12 = b.title
                  left join managers m on a.column_8  = m.nickname
                  left join t_fs_insurance_company ic  on a.column_1 = ic.company_name
                  left join t_org o on a.column_2 = o.org_name
-                 left join t_policy_type pt on a.column_3  = pt.id
+                 left join t_policy_type pt on a.column_3  = pt.`name`
 where a.column_0 = #{importId}    
   </insert>
   
@@ -1575,8 +1575,218 @@ from t_fs_temp a left join t_fs_insurance b on a.column_8 = b.title
                  left join managers m on a.column_5  = m.nickname
                  left join t_fs_insurance_company ic  on a.column_1 = ic.company_name
                  left join t_org o on a.column_2 = o.org_name
-                 left join t_policy_type pt on a.column_8  = pt.id
+                 left join t_policy_type pt on a.column_8  = pt.`name`
 where a.column_0 = #{importId}    
+  </insert>
+  
+  <insert id="processBxxh3" parameterType="map">
+  	INSERT INTO t_fs_insurance(title)
+	SELECT DISTINCT `title` FROM (
+	SELECT  
+	      b.ins_id AS id,
+	      a.column_2 AS `title` 
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance b ON a.column_2 = b.title
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL; 
+	
+	INSERT INTO managers(
+	  `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator`)
+	SELECT DISTINCT `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator` FROM (
+	SELECT  
+	      m.id AS id,
+	      a.column_19 AS `username`, 
+	      a.column_19 AS `nickname`,
+	      a.column_19 AS `password`,
+	      'aaabbbccc' AS `salt`,
+	      1 AS `enabled` ,
+	      1 AS `operator`
+	FROM t_fs_temp a LEFT JOIN managers m ON a.column_19  = m.nickname
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	
+	INSERT INTO t_fs_insurance_company(
+	  `company_name`,`del_Flag`)
+	SELECT DISTINCT `company_name`,`del_Flag` FROM (
+	SELECT  
+	      ic.company_id AS id,
+	      a.column_1 AS `company_name`,
+	      0 AS `del_Flag`
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance_company ic  ON a.column_1 = ic.company_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	
+	INSERT INTO t_org(
+	  `org_name`,`status`)
+	SELECT DISTINCT `org_name`,`status` FROM (
+	SELECT  
+	      o.id AS id,
+	      a.column_4 AS `org_name`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_org o ON a.column_4 = o.org_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	                
+	INSERT INTO t_policy_type(
+	  `name`,`code`,`status`)
+	SELECT DISTINCT `name`,`code`,`status` FROM (
+	SELECT  
+	      pt.id AS id,
+	      a.column_2 AS `name`,
+	      a.column_2 AS `code`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_policy_type pt ON a.column_2  = pt.`name`
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+  	
+  </insert>
+  
+  <insert id="processBxxh2" parameterType="map">
+  	INSERT INTO t_fs_insurance(title)
+	SELECT DISTINCT `title` FROM (
+	SELECT  
+	      b.ins_id AS id,
+	      a.column_12 AS `title` 
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance b ON a.column_12 = b.title
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL; 
+	                 
+	INSERT INTO managers(
+	  `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator`)
+	SELECT DISTINCT `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator` FROM (
+	SELECT  
+	      m.id AS id,
+	      a.column_8 AS `username`, 
+	      a.column_8 AS `nickname`,
+	      a.column_8 AS `password`,
+	      'aaabbbccc' AS `salt`,
+	      1 AS `enabled` ,
+	      1 AS `operator`
+	FROM t_fs_temp a LEFT JOIN managers m ON a.column_8  = m.nickname
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	
+	INSERT INTO t_fs_insurance_company(
+	  `company_name`,`del_Flag`)
+	SELECT DISTINCT `company_name`,`del_Flag` FROM (
+	SELECT  
+	      ic.company_id AS id,
+	      a.column_1 AS `company_name`,
+	      0 AS `del_Flag`
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance_company ic  ON a.column_1 = ic.company_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL; 
+	
+	INSERT INTO t_org(
+	  `org_name`,`status`)
+	SELECT DISTINCT `org_name`,`status` FROM (
+	SELECT  
+	      o.id AS id,
+	      a.column_2 AS `org_name`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_org o ON a.column_2 = o.org_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	                
+	INSERT INTO t_policy_type(
+	  `name`,`code`,`status`)
+	SELECT DISTINCT `name`,`code`,`status` FROM (
+	SELECT  
+	      pt.id AS id,
+	      a.column_3 AS `name`,
+	      a.column_3 AS `code`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_policy_type pt ON a.column_3  = pt.`name`
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;  	
+  </insert>
+  
+  <insert id="processBxxh1" parameterType="map">
+  	INSERT INTO t_fs_insurance(title)
+	SELECT DISTINCT `title` FROM (
+	SELECT  
+	      b.ins_id AS id,
+	      a.column_8 AS `title` 
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance b ON a.column_8 = b.title
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	INSERT INTO managers(
+	  `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator`)
+	SELECT DISTINCT `username` ,
+	  `nickname` ,
+	  `password` ,
+	  `salt` ,
+	  `enabled` ,
+	  `operator` FROM (
+	SELECT  
+	      m.id AS id,
+	      a.column_5 AS `username`, 
+	      a.column_5 AS `nickname`,
+	      a.column_5 AS `password`,
+	      'aaabbbccc' AS `salt`,
+	      1 AS `enabled` ,
+	      1 AS `operator`
+	FROM t_fs_temp a LEFT JOIN managers m ON a.column_5  = m.nickname
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	
+	INSERT INTO t_fs_insurance_company(
+	  `company_name`,`del_Flag`)
+	SELECT DISTINCT `company_name`,`del_Flag` FROM (
+	SELECT  
+	      ic.company_id AS id,
+	      a.column_1 AS `company_name`,
+	      0 AS `del_Flag`
+	FROM t_fs_temp a LEFT JOIN t_fs_insurance_company ic  ON a.column_1 = ic.company_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL; 
+	
+	INSERT INTO t_org(
+	  `org_name`,`status`)
+	SELECT DISTINCT `org_name`,`status` FROM (
+	SELECT  
+	      o.id AS id,
+	      a.column_2 AS `org_name`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_org o ON a.column_2 = o.org_name
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
+	                
+	INSERT INTO t_policy_type(
+	  `name`,`code`,`status`)
+	SELECT DISTINCT `name`,`code`,`status` FROM (
+	SELECT  
+	      pt.id AS id,
+	      a.column_8 AS `name`,
+	      a.column_8 AS `code`,
+	      'T' AS `status`
+	FROM t_fs_temp a LEFT JOIN t_policy_type pt ON a.column_8  = pt.`name`
+	WHERE a.column_0 = #{importId} 
+	)dd  WHERE dd.id IS NULL;
   </insert>
   
 </mapper>
